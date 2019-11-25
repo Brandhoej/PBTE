@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "FileHandler.h"
-#include "Graph.h"
 
 int readFile(char *fileName) {
     graph graph;
@@ -21,8 +20,4 @@ int writeFile(char *fileName, graph graph) {
     fwrite(&graph, sizeof(graph), 1, DBFile);
     fclose(DBFile);
     return EXIT_SUCCESS;
-}
-
-int readVehicle(char *fileName) {
-    
 }

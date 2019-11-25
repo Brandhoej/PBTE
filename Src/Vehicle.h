@@ -1,3 +1,5 @@
+#pragma once
+
 typedef struct vehicle {
     int inventory;
     int capacity;

@@ -1,3 +1,5 @@
+#pragma once
+
 typedef struct hub {
     unsigned int inventory;
     unsigned int capacity;

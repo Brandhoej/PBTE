@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Hub.h"
 #include "Edge.h"
 
