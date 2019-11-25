@@ -1,5 +1,5 @@
 #include "Vehicle.h"
 
-int availableCapacity(Vehicle *vehicle) {
+int availableCapacity(vehicle *vehicle) {
     return vehicle->capacity - vehicle->inventory;
 }
