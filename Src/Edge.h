@@ -1,0 +1,3 @@
+struct edge {
+	int distance;
+}
