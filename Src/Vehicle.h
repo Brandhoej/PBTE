@@ -3,4 +3,5 @@ typedef struct Vehicle {
     int capacity;
 } Vehicle;
 
+typedef enum VehicleType {TRUCK, BICYCLE} VehicleType; 
 int availableCapacity(Vehicle *vehicle);

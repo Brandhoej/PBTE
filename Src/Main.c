@@ -4,8 +4,6 @@
 
 int main(void) {
     Hub *hubs;
-    Vehicle vehicle;
-    char *vehicleName = "Bike";
 
     return EXIT_SUCCESS;
 }
