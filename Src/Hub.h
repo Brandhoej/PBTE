@@ -1,6 +1,6 @@
 typedef struct Hub {
-    int inventory;
-    int capacity;
+    unsigned int inventory;
+    unsigned int capacity;
     int balance;
     double weight;
 } Hub;
