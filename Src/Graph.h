@@ -4,6 +4,8 @@
 #include "Edge.h"
 
 typedef struct graph {
-	hub *h;
-	edge **e;
+	hub *hubs;
+	edge **edges;
 } graph;
+
+void initGraph(graph *g, hub *hubs, unsigned int hubAmount);
