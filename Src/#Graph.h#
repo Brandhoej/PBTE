@@ -1,0 +1,16 @@
+#pragma once
+
+#include "Hub.h"
+#include "Edge.h"
+
+typedef struct graph {
+	unsigned int hubAmount;
+	hub *hubs;
+	edge **edges;
+} graph;
+
+void initGraph(graph *graph, hub *hubs, unsigned int hubAmount);
+void addEdge(graph *graph, int h1, int h2, edge *edge);
+/* getEdge(graph *graph, int h1, int h2, edge *edge); 
+ * int getEdges(graph *graph, int h, edge *edges); 
+*/

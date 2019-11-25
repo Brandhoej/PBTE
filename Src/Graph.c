@@ -1,18 +1,18 @@
 #include <stdlib.h>
 #include "Graph.h"
 
-void initGraph(graph *g, hub *hubs, unsigned int hubAmount) {
+void initGraph(graph *graph, hub *hubs, unsigned int hubAmount) {
     int e;
-    g->hubAmount = hubAmount;
-    g->hubs = hubs;
-    g->edges = calloc(hubAmount, sizeof(edge*));
+    graph->hubAmount = hubAmount;
+    graph->hubs = hubs;
+    graph->edges = calloc(hubAmount, sizeof(edge*));
     for (e = 0; e < hubAmount; ++e) {
-        g->edges[e] = calloc(hubAmount, sizeof(edge));
+        graph->edges[e] = calloc(hubAmount, sizeof(edge));
     }
 }
 
-void addEdge(graph *g, int from, int to, edge *edge) {
-    g->edges[from][to] = *edge;
-    g->edges[to][from] = *edge;
+void addEdge(graph *graph, int from, int to, edge *edge) {
+    graph->edges[from][to] = *edge;
+    graph->edges[to][from] = *edge;
 }
 
