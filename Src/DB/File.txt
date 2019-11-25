@@ -1,0 +1,7 @@
+Vehicles:
+    Truck:
+        struct vehicle
+        
+Hubs: [amount]
+    Hub_n:
+        struct hub
