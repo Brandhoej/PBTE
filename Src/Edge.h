@@ -1,3 +1,3 @@
-struct edge {
+typedef struct edge {
 	int distance;
-}
+} edge;
