@@ -5,6 +5,5 @@ typedef struct Hub {
     double weight;
 } Hub;
 
-void calcBalance(Hub *hub) {
-    hub->balance = hub->capacity/2;
-}
+void calcBalance(Hub *hub);
+void calcWeight(Hub *hub);
