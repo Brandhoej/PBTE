@@ -4,7 +4,7 @@
 #include "Graph.h"
 
 int readFile(char *fileName) {
-    Graph graph;
+    graph graph;
     FILE *DBFile = fopen(fileName, "r");
     if(DBFile == NULL)
         return EXIT_FAILURE;
@@ -14,7 +14,7 @@ int readFile(char *fileName) {
     return EXIT_SUCCESS;
 }
 
-int writeFile(char *fileName, Graph graph) {
+int writeFile(char *fileName, graph graph) {
     FILE *DBFile = fopen(fileName, "w");
     if(DBFile == NULL)
         return EXIT_FAILURE;

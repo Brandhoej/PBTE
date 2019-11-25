@@ -1,7 +1,7 @@
 #include "Hub.h"
 #include "Edge.h"
 
-struct graph {
+typedef struct graph {
 	hub *h;
 	edge **e;
-};
+} graph;

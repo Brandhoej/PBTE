@@ -1,7 +1,7 @@
-typedef struct Vehicle {
+typedef struct vehicle {
     int inventory;
     int capacity;
-} Vehicle;
+} vehicle;
 
-typedef enum VehicleType {TRUCK, BICYCLE} VehicleType; 
-int availableCapacity(Vehicle *vehicle);
+typedef enum vehicleType {TRUCK, BICYCLE} vehicleType; 
+int availableCapacity(vehicle *v);

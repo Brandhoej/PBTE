@@ -1,9 +1,9 @@
-typedef struct Hub {
+typedef struct hub {
     unsigned int inventory;
     unsigned int capacity;
     int balance;
     double weight;
-} Hub;
+} hub;
 
-void calcBalance(Hub *hub);
-void calcWeight(Hub *hub);
+void calcBalance(hub *h);
+void calcWeight(hub *h);

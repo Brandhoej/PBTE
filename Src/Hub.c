@@ -1,9 +1,9 @@
 #include "Hub.h"
 
-void calcBalance(Hub *hub) {
+void calcBalance(hub *hub) {
     hub->balance = hub->capacity/2;
 }
 
-void calcWeight(Hub *hub) {
+void calcWeight(hub *hub) {
 
 }
