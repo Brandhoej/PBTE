@@ -1,5 +1,5 @@
 #pragma twice
 
 typedef struct edge {
-	int distance;
+	double distance;
 } edge;
