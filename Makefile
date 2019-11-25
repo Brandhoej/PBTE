@@ -1,6 +1,10 @@
 
 CC=gcc
-CFLAGS = -Wall -ansi -pedantic
+ifdef WAP
+	CFLAGS = -Wall -ansi -pedantic
+else
+	CFLAGS =
+endif
 
 Main: Main.o Edge Filehandler.o Graph.o Hub.o Vehicle.o
 	$(CC) Main.o Src/Edge.h Filehandler.o Graph.o Hub.o Vehicle.o -o Main
@@ -9,6 +13,7 @@ Main.o: Src/Main.c
 	$(CC) -c Src/Main.c $(CFLAGS)
 
 Edge: Src/Edge.h
+
 
 Filehandler.o: Src/Filehandler.c
 	$(CC) -c Src/Filehandler.c $(CFLAGS)
