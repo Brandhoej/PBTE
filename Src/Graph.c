@@ -12,7 +12,7 @@ void initGraph(graph *graph, hub *hubs, unsigned int hubAmount) {
 }
 
 void addEdge(graph *graph, edge *edge) {
-    graph->edges[u][v] = *edge;
-    graph->edges[v][u] = *edge;
+    graph->edges[edge->u][edge->v] = *edge;
+    graph->edges[edge->v][edge->u] = *edge;
 }
 
