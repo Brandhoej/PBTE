@@ -2,7 +2,7 @@
 
 #include "Hub.h"
 #include "Edge.h"
-'
+
 /**
  * \struct This struct contains the nessecary members to have a functional undirected graph
 */
