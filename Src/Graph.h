@@ -2,6 +2,10 @@
 
 #include "Hub.h"
 #include "Edge.h"
+<<<<<<< HEAD
+=======
+
+>>>>>>> c7822c5f5834e63de3ab7cbe57a2c2342c1e2bf2
 /**
  * \struct This struct contains the nessecary members to have a functional undirected graph
 */
@@ -33,6 +37,7 @@ typedef struct {
  * @param hubAmount an unsigned amount of hubs in the hubs
 */
 void initGraph(graph *graph, hub *hubs, unsigned int hubAmount);
+<<<<<<< HEAD
 
 /**
  * Function prototype, adds edge to the graph using parameters
@@ -42,3 +47,6 @@ void initGraph(graph *graph, hub *hubs, unsigned int hubAmount);
  * @ edge struct containing the connections between hubs
  */
 void addEdge(graph *graph, int from, int to, edge *edge);
+=======
+void addEdge(graph *ggraph, int u, int v, edge *edge);
+>>>>>>> c7822c5f5834e63de3ab7cbe57a2c2342c1e2bf2
