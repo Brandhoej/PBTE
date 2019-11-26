@@ -40,4 +40,4 @@ void initGraph(graph *graph, hub *hubs, unsigned int hubAmount);
  * @param graph is pointer to a graph, where edge are added
  * @param edge struct containing the connections between hubs
  */
-void addEdge(graph *graph, int from, int to, edge *edge);
+void addEdge(graph *graph, edge *edge);
