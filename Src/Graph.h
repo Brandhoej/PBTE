@@ -2,7 +2,6 @@
 
 #include "Hub.h"
 #include "Edge.h"
-'
 /**
  * \struct This struct contains the nessecary members to have a functional undirected graph
 */
@@ -30,8 +29,16 @@ typedef struct {
 /**
  * This function initializes a graph with hubs and creates the adjacency matrix
  * @param g is the graph pointer that will be initialized by this function
- * @param hubs is an array of the ubs this graph should contain
+ * @param hubs is an array of the hubs this graph should contain
  * @param hubAmount an unsigned amount of hubs in the hubs
 */
-void initGraph(graph *g, hub *hubs, unsigned int hubAmount);
-void addEdge(graph *g, int from, int to, edge *edge);
+void initGraph(graph *graph, hub *hubs, unsigned int hubAmount);
+
+/**
+ * Function prototype, adds edge to the graph using parameters
+ * @ graph pointer of the type 
+ * @ array from
+ * @ array to
+ * @ edge struct containing the connections between hubs
+ */
+void addEdge(graph *graph, int from, int to, edge *edge);
