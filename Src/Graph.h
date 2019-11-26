@@ -33,5 +33,5 @@ typedef struct {
  * @param hubs is an array of the ubs this graph should contain
  * @param hubAmount an unsigned amount of hubs in the hubs
 */
-void initGraph(graph *g, hub *hubs, unsigned int hubAmount);
-void addEdge(graph *g, int from, int to, edge *edge);
+void initGraph(graph *graph, hub *hubs, unsigned int hubAmount);
+void addEdge(graph *ggraph, int u, int v, edge *edge);

@@ -11,8 +11,8 @@ void initGraph(graph *graph, hub *hubs, unsigned int hubAmount) {
     }
 }
 
-void addEdge(graph *graph, int from, int to, edge *edge) {
-    graph->edges[from][to] = *edge;
-    graph->edges[to][from] = *edge;
+void addEdge(graph *graph, int u, int v, edge *edge) {
+    graph->edges[u][v] = *edge;
+    graph->edges[v][u] = *edge;
 }
 
