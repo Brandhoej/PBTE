@@ -1,9 +1,0 @@
-Vehicles:
-    Truck:
-        struct vehicle
-    Bicycle:
-        struct vehicle
-        
-Hubs: [amount]
-    Hub_n:
-        struct hub

@@ -18,6 +18,8 @@ int main(void) {
     printf("0->1:%lf\n", graph->edges[0][1].distance);
     printf("1->0:%lf\n", graph->edges[1][0].distance);
     printf("0->0:%lf\n", graph->edges[0][0].distance);
+
+    writeFile("DB/File.txt", *graph);
     
     return EXIT_SUCCESS;
 }

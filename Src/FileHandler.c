@@ -7,7 +7,6 @@ int readFile(char *fileName) {
     FILE *DBFile = fopen(fileName, "r");
     if(DBFile == NULL)
         return EXIT_FAILURE;
-    
     fread(&graph, sizeof(graph), 1, DBFile);
     fclose(DBFile);
     return EXIT_SUCCESS;

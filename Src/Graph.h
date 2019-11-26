@@ -14,7 +14,7 @@ typedef struct {
 	unsigned int hubAmount;
 
     /**
-     * The hub array. Which is a colelction of the verticies in this graph
+     * The hub array. Which is a collection of the verticies in this graph
     */
 	hub *hubs;
 
