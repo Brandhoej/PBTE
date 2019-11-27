@@ -1,6 +1,10 @@
+#pragma once
+
 #ifndef CU_TEST_H
 #define CU_TEST_H
 
+#include <stdio.h>
+#include <stdlib.h>
 #include <assert.h>
 #include <string.h>
 #include <math.h>
