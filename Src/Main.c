@@ -3,13 +3,12 @@
 #include "FileHandler.h"
 
 void addEdgeTest(graph *graph, int u, int v, double distance){
-  printf("T1\n");
-    edge *edge = malloc(sizeof(edge));
-  printf("T2\n");
-    edge->distance = distance;
-  printf("T3\n");
-    addEdge(graph, edge);
-  printf("T4\n");
+	struct edge *e = malloc(8);
+	printf("test2 %i\n", 8);
+	e->distance = distance;
+	printf("test3\n");
+	addEdge(graph, u, v, e);
+	printf("test4\n");
 }
 
 void createGraphTest(graph *graph){
@@ -27,6 +26,9 @@ void createGraphTest(graph *graph){
 
     initGraph(graph, hubs, 9);
 
+	printf("H1 = %i, H2 = %i, edgeindex = %i\n", 2, 4, getEdgeIndex(2,4));
+
+
     addEdgeTest(graph, 0, 1, 1);
     addEdgeTest(graph, 0, 2, 2);
     addEdgeTest(graph, 0, 3, 1);
@@ -35,7 +37,7 @@ void createGraphTest(graph *graph){
     addEdgeTest(graph, 0, 6, 2);
     addEdgeTest(graph, 0, 7, 3);
     addEdgeTest(graph, 0, 8, 4);
-    
+    printf("test\n");
     addEdgeTest(graph, 1, 2, 1);
     addEdgeTest(graph, 1, 3, 2);
     addEdgeTest(graph, 1, 4, 1);
@@ -91,15 +93,13 @@ int main(void) {
     printf("0->0:%lf\n", graph->edges[0][0].distance);
    */
     graph *graph = malloc(sizeof(graph));
-    printf("1\n");
     createGraphTest(graph);
-    printf("2\n");
+	printf("3\n");
     edge *edge = NULL;
-    printf("3\n");
+	printf("1\n");
     getEdge(graph, 0, 3, edge);
-    printf("4\n");
+	printf("2\n");
     printf("%s\n", (edge==NULL)?"NULL":"YEAA");
     printf("From H1->H4 er der %lf\n", edge->distance);
-    printf("5\n");
     return EXIT_SUCCESS;
 }

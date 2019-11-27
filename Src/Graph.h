@@ -27,6 +27,8 @@ typedef struct {
 	edge *edges;
 } graph;
 
+int edgeAmount(int n);
+int getEdgeIndex(int u, int v);
 /**
  * This function initializes a graph with hubs and creates the adjacency matrix
  * @param g is the graph pointer that will be initialized by this function
