@@ -12,8 +12,8 @@ else
 	TFLAGS = Main.o
 endif
 
-Main: $(TFLAGS) Edge Filehandler.o Graph.o Hub.o Vehicle.o
-	$(CC) $(TFLAGS) Src/Edge.h Filehandler.o Graph.o Hub.o Vehicle.o -o Main
+Main: Main.o Edge Filehandler.o Graph.o Hub.o Vehicle.o
+	$(CC) Main.o Src/Edge.h Filehandler.o Graph.o Hub.o Vehicle.o -o Main
 
 Main.o: Src/Main.c
 	$(CC) -c Src/Main.c $(CFLAGS)
