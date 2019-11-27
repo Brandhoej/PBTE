@@ -13,9 +13,9 @@ void calcWeight(CuTest *tc) {
 }
 
 
-CuSuite *HubSuite(){
+CuSuite *HubSuite() {
     CuSuite *suite = CuSuiteNew();
     SUITE_ADD_TEST(suite, calcWeight);
 
     return suite;
-    }
+}
