@@ -6,14 +6,8 @@ else
 	CFLAGS =
 endif
 
-ifdef TEST
-	TFLAGS = AllTests.o CuTest.o
-else 
-	TFLAGS = Main.o
-endif
-
-Main: $(TEST) Edge Filehandler.o Graph.o Hub.o Vehicle.o
-	$(CC) $(TEST) Src/Edge.h Filehandler.o Graph.o Hub.o Vehicle.o -o Main
+Main: Main.o Edge Filehandler.o Graph.o Hub.o Vehicle.o
+	$(CC) Main.o Src/Edge.h Filehandler.o Graph.o Hub.o Vehicle.o -o Main
 
 Main.o: Src/Main.c
 	$(CC) -c Src/Main.c $(CFLAGS)
@@ -32,13 +26,6 @@ Hub.o: Src/Hub.c
 
 Vehicle.o: Src/Vehicle.c
 	$(CC) -c Src/Vehicle.c $(CFLAGS)
-
-AllTests.o: Src/AllTests.c
-	$(CC) -c Src/AllTests.c $(CFLAGS)
-
-CuTest.o: Src/CuTest.c
-	$(CC) -c Src/CuTest.c $(CFLAGS)
-
 
 clean:
 	rm *.o Main.exe
