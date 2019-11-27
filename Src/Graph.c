@@ -21,17 +21,16 @@ int getEdgeIndex(int u, int v){
 
 
 void initGraph(graph *graph, hub *hubs, unsigned int hubAmount) {
-  int e = 0;
-  graph->hubAmount = hubAmount;
-  graph->hubs = hubs;
-  graph->edges = calloc(edgeAmount(hubAmount), sizeof(edge));
-  printf("hub amount = %i, edge amount = %i\n", hubAmount, edgeAmount(hubAmount));
+    graph->hubAmount = hubAmount;
+    graph->hubs = hubs;
+    graph->edges = calloc(edgeAmount(hubAmount), sizeof(edge*));
+    printf("hub amount = %i, edge amount = %i\n", hubAmount, edgeAmount(hubAmount));
 }
 
 void addEdge(graph *graph, int u, int v, edge *edge) {
-	graph->edges[getEdgeIndex(u, v)] = *edge;
+    graph->edges[getEdgeIndex(u, v)] = edge;
 }
 
-void getEdge(graph *graph, int u, int v, edge *edge){
-	edge = &(graph->edges[getEdgeIndex(u, v)]);
+edge *getEdge(graph *graph, int u, int v){
+        return graph->edges[getEdgeIndex(u, v)];
 }
