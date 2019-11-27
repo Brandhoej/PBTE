@@ -4,4 +4,4 @@
 #include "Graph.h"
 
 int readFile(char *fileName);
-int writeFile(char *fileName, graph graph);
+int writeFile(char *fileName, graph *graph);

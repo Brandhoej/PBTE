@@ -6,7 +6,7 @@
 /**
  * \struct This struct contains the nessecary members to have a functional undirected graph
 */
-typedef struct {
+typedef struct graph {
     /**
      * The amount of hubs in this graph
      * @TODO make more generic
