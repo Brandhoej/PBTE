@@ -10,7 +10,7 @@ endif
 
 ifdef TEST
 	TFLAGS = AllTests.o CuTest.o
-else 
+else
 	TFLAGS = Main.o
 endif
 

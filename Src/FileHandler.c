@@ -4,7 +4,6 @@
 
 int readFile(char *fileName) {
     graph graph;
-    char *string;
     FILE *DBFile = fopen(fileName, "r");
     if(DBFile == NULL)
         return EXIT_FAILURE;

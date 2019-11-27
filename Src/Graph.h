@@ -23,8 +23,19 @@ typedef struct graph {
 	edge **edges;
 } graph;
 
+/**
+ * This function calculates the total amount of edges
+ * @param n is the number of hubs
+*/
 int edgeAmount(int n);
+
+/**
+ * This function gets the index in the graph array for the edge between two hubs (vertices)
+ * @param u is one of the vertices
+ * @param v is one of the vertices
+*/
 int getEdgeIndex(int u, int v);
+
 /**
  * This function initializes a graph with hubs and creates the adjacency matrix
  * @param g is the graph pointer that will be initialized by this function
