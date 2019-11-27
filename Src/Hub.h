@@ -1,4 +1,5 @@
 #pragma once
+#include "CuTest.h"
 
 typedef struct hub {
     unsigned int inventory;
@@ -8,4 +9,5 @@ typedef struct hub {
 } hub;
 
 void calcBalance(hub *h);
-void calcWeight(hub *h);
+void calcWeight(hub *hub, CuTest *tc, int i);
+
