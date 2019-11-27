@@ -9,10 +9,6 @@ int readFile(char *fileName) {
     if(DBFile == NULL)
         return EXIT_FAILURE;
     fgets(string, 30, DBFile);
-<<<<<<< HEAD
-    string[0];
-=======
->>>>>>> f19c7d32dfcba746742fa53839cecfd90852120e
 
     fclose(DBFile);
     return EXIT_SUCCESS;
