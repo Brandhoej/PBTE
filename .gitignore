@@ -2,3 +2,4 @@
 Src/.vs/Src/v16/Browse.VC.opendb
 *.o
 *.c#
+*.exe
