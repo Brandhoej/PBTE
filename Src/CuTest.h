@@ -1,6 +1,9 @@
 #ifndef CU_TEST_H
 #define CU_TEST_H
 
+#include <assert.h>
+#include <string.h>
+#include <math.h>
 #include <setjmp.h>
 #include <stdarg.h>
 
