@@ -1,4 +1,3 @@
-
 CC=gcc
 DEPS=Filehandler.o Graph.o Hub.o Vehicle.o
 APPFLAGS=Main.o
@@ -16,6 +15,9 @@ Test: $(TFLAGS) $(DEPS)
 	$(CC) $? $(CFLAGS) -o Test
 
 All: Test App
+
+Test: $(TFLAGS) $(DEPS)
+	$(CC) $(TFLAGS) $(DEPS) -o Test
 
 Main.o: Src/Main.c
 	$(CC) -c $? $(CFLAGS)
