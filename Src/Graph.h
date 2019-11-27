@@ -19,16 +19,23 @@ typedef struct graph {
 	hub *hubs;
 
     /**
-     * The edges in this graph. This is an adjacency matrix.
-     * Where edges[0] returns an array of size hubAmount with all the edges.
-     * Fx. edges[0][1] is the edge between vertex 0 and vertex 1.
-     * @TODO this supports directed graphs but we are using undirected.
     */
-	edge *edges;
+	edge **edges;
 } graph;
 
+/**
+ * This function calculates the total amount of edges
+ * @param n is the number of hubs
+*/
 int edgeAmount(int n);
+
+/**
+ * This function gets the index in the graph array for the edge between two hubs (vertices)
+ * @param u is one of the vertices
+ * @param v is one of the vertices
+*/
 int getEdgeIndex(int u, int v);
+
 /**
  * This function initializes a graph with hubs and creates the adjacency matrix
  * @param g is the graph pointer that will be initialized by this function
@@ -52,4 +59,4 @@ void addEdge(graph *graph, int u, int v, edge *edge);
  * @param v is one of the verticies
  * @param edge output
  */
-void getEdge(graph *graph, int u, int v, edge *edge);
+edge *getEdge(graph *graph, int u, int v);
