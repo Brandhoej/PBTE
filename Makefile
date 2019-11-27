@@ -1,30 +1,23 @@
 
 CC=gcc
-UN=Edge Filehandler.o Graph.o Hub.o Vehicle.o
-UM=Src/Edge.h Filehandler.o Graph.o Hub.o Vehicle.o
+DEPS=Src/Edge.h Filehandler.o Graph.o Hub.o Vehicle.o
+APPFLAGS=Main.o
+TFLAGS=AllTests.o CuTest.o
+
 ifdef WAP
 	CFLAGS = -Wall -ansi -pedantic
 else
 	CFLAGS =
 endif
 
-ifdef TEST
-	TFLAGS = AllTests.o CuTest.o
-else
-	TFLAGS = Main.o
-endif
+Test: $(TFLAGS) $(DEPS)
+	$(CC) $(TFLAGS) $(DEPS) -o Test
 
-#Main: Main.o Edge Filehandler.o Graph.o Hub.o Vehicle.o
-#	$(CC) Main.o Src/Edge.h Filehandler.o Graph.o Hub.o Vehicle.o -o Main
-
-App: Main.o $(UN)
-	$(CC) Main.o $(UM) -o Main
+App: $(APPFLAGS) $(DEPS)
+	$(CC) $(APPFLAGS) $(DEPS) -o App
 
 Main.o: Src/Main.c
 	$(CC) -c Src/Main.c $(CFLAGS)
-
-Edge: Src/Edge.h
-
 
 Filehandler.o: Src/Filehandler.c
 	$(CC) -c Src/Filehandler.c $(CFLAGS)
