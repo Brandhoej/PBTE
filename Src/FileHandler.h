@@ -3,5 +3,9 @@
 #include "Vehicle.h"
 #include "Graph.h"
 
-int readFile(char *fileName);
-int writeFile(char *fileName, graph *graph);
+/**
+ * Checks if it is possible to read a file.
+ * @param path is the path to the file
+ * @return returns 0 if failed 1 if succes 
+ */
+int readFile(char *path);
