@@ -3,13 +3,17 @@
 #include "Graph.h"
 
 int edgeAmount(int n){
-    /* This is the gauss sum formula */
-    return n * (n - 1) / 2;
+    int amount = -1;
+    if(n > 0){
+        /* This is the gauss sum formula */
+        amount = n * (n - 1) / 2;
+    }
+    return amount;
 }
 
 int getEdgeIndex(int u, int v){
 	int index = -1;
-	if(u != v){
+	if(u != v && u >= 0 && v >= 0){
         int min, max;
         if (u > v){
             min = v;
