@@ -3,8 +3,6 @@
 #	action
 #The target can be dependencies at other targets.
 
-#
-
 #How to use/build the application:
 
 #App
