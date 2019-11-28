@@ -3,43 +3,44 @@
 
 CuSuite* HubSuite();
 
+/* Runs all the CuTest suites */
 void RunAllTests(void);
 
-void calcWeight(CuTest *tc) ;
-CuSuite *HubSuite();
-
 /* Hubs */
-void calcWeight(CuTest *tc);
 CuSuite *HubSuite();
+void hubTestCalcWeight(CuTest *tc);
 
 int main(void)
 {
-	RunAllTests();
-	return 0;
+    RunAllTests();
+    return 0;
 }
 
 void RunAllTests(void)
 {
-	CuString *output = CuStringNew();
-	CuSuite* suite = CuSuiteNew();
+    CuString *output = CuStringNew();
+    CuSuite* suite = CuSuiteNew();
 
-	CuSuiteAddSuite(suite, HubSuite());
+    CuSuiteAddSuite(suite, HubSuite());
 
-	CuSuiteRun(suite);
-	CuSuiteSummary(suite, output);
-	CuSuiteDetails(suite, output);
-	printf("%s\n", output->buffer);
-}
-
-void calcWeight(CuTest *tc) {
-    int actual = 4;
-    int expected = 10;
-    CuAssertIntEquals(tc, expected, actual);
+    CuSuiteRun(suite);
+    CuSuiteSummary(suite, output);
+    CuSuiteDetails(suite, output);
+    printf("%s\n", output->buffer);
 }
 
 CuSuite *HubSuite() {
     CuSuite *suite = CuSuiteNew();
-    SUITE_ADD_TEST(suite, calcWeight);
-
+    SUITE_ADD_TEST(suite, hubTestCalcWeight);
     return suite;
+}
+
+void hubTestCalcWeight(CuTest *tc) {
+    unsigned int 
+        expected = 5, 
+        inventory = 5, 
+        capacity = 10;
+    hub h = {inventory, capacity, 0};
+    calcBalance(&h);
+    CuAssertIntEquals(tc, expected, h.balance);
 }

@@ -46,35 +46,35 @@ CFLAGS += $(ADDCFLAGS) #Add optinal input from user
 
 #Builds (App, Test and All which is both in one)
 App: $(APPFLAGS) $(DEPS)
-	$(CC) $? $(CFLAGS) -o App
+	$(CC) $^ $(CFLAGS) -o App
 
 Test: $(TFLAGS) $(DEPS)
-	$(CC) $? $(CFLAGS) -o Test
+	$(CC) $^ $(CFLAGS) -o Test
 
 All: Test App
 
 
 #Compile targets
 Main.o: Src/Main.c
-	$(CC) -c $? $(CFLAGS)
+	$(CC) -c $^ $(CFLAGS)
 
 Filehandler.o: Src/Filehandler.c
-	$(CC) -c $? $(CFLAGS)
+	$(CC) -c $^ $(CFLAGS)
 
 Graph.o: Src/Graph.c
-	$(CC) -c $? $(CFLAGS)
+	$(CC) -c $^ $(CFLAGS)
 
 Hub.o: Src/Hub.c
-	$(CC) -c $? $(CFLAGS)
+	$(CC) -c $^ $(CFLAGS)
 
 Vehicle.o: Src/Vehicle.c
-	$(CC) -c $? $(CFLAGS)
+	$(CC) -c $^ $(CFLAGS)
 
 AllTests.o: Src/AllTests.c
-	$(CC) -c $? $(CFLAGS)
+	$(CC) -c $^ $(CFLAGS)
 
 CuTest.o: Src/CuTest.c
-	$(CC) -c $? $(CFLAGS)
+	$(CC) -c $^ $(CFLAGS)
 
 clean:
 	rm -f *.o *.exe

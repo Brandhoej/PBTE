@@ -3,13 +3,11 @@
 #include "FileHandler.h"
 
 void addEdgeTest(graph *graph, int u, int v, double distance){
-    edge *e = malloc(sizeof(edge));
-    e->distance = distance;
-    addEdge(graph, u, v, e);
+    edge e = {distance, 0};
+    addEdge(graph, u, v, &e);
 }
 
 void createGraphTest(graph *graph){
-      
     hub *hubs = calloc(9, sizeof(hub));
     hubs[0].balance = 0;
     hubs[1].balance = 2;
@@ -31,7 +29,7 @@ void createGraphTest(graph *graph){
     addEdgeTest(graph, 0, 6, 2);
     addEdgeTest(graph, 0, 7, 3);
     addEdgeTest(graph, 0, 8, 4);
-    printf("test\n");
+
     addEdgeTest(graph, 1, 2, 1);
     addEdgeTest(graph, 1, 3, 2);
     addEdgeTest(graph, 1, 4, 1);
@@ -70,14 +68,19 @@ void createGraphTest(graph *graph){
 
 int main(void) {
     graph *graph = malloc(sizeof(graph));
+    printf("T1\n");
     createGraphTest(graph);
-
-    int x, y;
-    for(x = 0; x < 8; ++x){
-      for(y = 1; y < 9; ++y){
-	edge *e = getEdge(graph, x, y);
-	printf("Distance at index %i is %lf\n", getEdgeIndex(x, y), e->distance);
-      }
-    }
+    printf("T2\n");
+    printf("%i %i edge index is %i\n",0 , 0, getEdgeIndex(0 ,0));
+    printf("%i %i edge index is %i\n",0 , 1, getEdgeIndex(0 ,1));
+    printf("%i %i edge index is %i\n",0 , 2, getEdgeIndex(0 ,2));
+    printf("%i %i edge index is %i\n",0 , 3, getEdgeIndex(0 ,3));
+    printf("%i %i edge index is %i\n",2 , 1, getEdgeIndex(2 ,1));
+    printf("%i %i edge index is %i\n",2 , 4, getEdgeIndex(2 ,4));
+    printf("%i %i edge index is %i\n",1 , 1, getEdgeIndex(1 ,1));
+    printf("%i %i edge index is %i\n",2 , 2, getEdgeIndex(2 ,2));
+    
+    free(graph->hubs);
+    free(graph);
     return EXIT_SUCCESS;
 }

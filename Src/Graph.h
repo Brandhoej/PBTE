@@ -4,23 +4,26 @@
 #include "Edge.h"
 
 /**
- * \struct This struct contains the nessecary members to have a functional undirected graph
+ * \struct graph
+ * this struct contains the nessecary members to have a functional undirected graph
 */
 typedef struct graph {
     /**
      * The amount of hubs in this graph
      * @TODO make more generic
     */
-	unsigned int hubAmount;
+    unsigned int hubAmount;
 
     /**
      * The hub array. Which is a collection of the verticies in this graph
     */
-	hub *hubs;
+    hub *hubs;
 
     /**
+     * This is the 1d hub array with hub pointers.
+     * The size of this array is equal to hubAmount.
     */
-	edge **edges;
+    edge **edges;
 } graph;
 
 /**
