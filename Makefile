@@ -55,9 +55,6 @@ All: Test App
 
 
 #Compile targets
-Test: $(TFLAGS) $(DEPS)
-	$(CC) $(TFLAGS) $(DEPS) -o Test
-
 Main.o: Src/Main.c
 	$(CC) -c $? $(CFLAGS)
 
@@ -80,4 +77,4 @@ CuTest.o: Src/CuTest.c
 	$(CC) -c $? $(CFLAGS)
 
 clean:
-	rm -f *.o Main.exe
+	rm -f *.o *.exe

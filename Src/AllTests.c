@@ -1,6 +1,19 @@
 #include "CuTest.h"
+#include "Hub.h"
 
 CuSuite* HubSuite();
+
+void RunAllTests(void);
+
+/* Hubs */
+void calcWeight(CuTest *tc);
+CuSuite *HubSuite();
+
+int main(void)
+{
+	RunAllTests();
+	return 0;
+}
 
 void RunAllTests(void)
 {
@@ -15,7 +28,15 @@ void RunAllTests(void)
 	printf("%s\n", output->buffer);
 }
 
-int main(void)
-{
-	RunAllTests();
+void calcWeight(CuTest *tc) {
+    int actual = 4;
+    int expected = 10;
+    CuAssertIntEquals(tc, expected, actual);
+}
+
+CuSuite *HubSuite() {
+    CuSuite *suite = CuSuiteNew();
+    SUITE_ADD_TEST(suite, calcWeight);
+
+    return suite;
 }
