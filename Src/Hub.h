@@ -10,5 +10,5 @@ typedef struct hub {
 } hub;
 
 void calcBalance(hub *h);
-void calcWeight(CuTest *tc);
+/* void calcWeight(CuTest *tc); */
 

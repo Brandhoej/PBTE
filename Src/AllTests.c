@@ -5,6 +5,9 @@ CuSuite* HubSuite();
 
 void RunAllTests(void);
 
+void calcWeight(CuTest *tc) ;
+CuSuite *HubSuite();
+
 /* Hubs */
 void calcWeight(CuTest *tc);
 CuSuite *HubSuite();

@@ -3,7 +3,7 @@
 #	action
 #The target can be dependencies at other targets.
 
-#'$?' is the name of the file to be made
+#
 
 #How to use/build the application:
 
