@@ -12,8 +12,8 @@ int edgeAmount(int n){
 }
 
 int getEdgeIndex(int u, int v){
-	int index = -1;
-	if(u != v && u >= 0 && v >= 0){
+    int index = -1;
+    if(u != v && u >= 0 && v >= 0){
         int min, max;
         if (u > v){
             min = v;

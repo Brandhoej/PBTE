@@ -49,12 +49,12 @@ typedef void (*TestFunction)(CuTest *);
 
 struct CuTest
 {
-	char* name;
-	TestFunction function;
-	int failed;
-	int ran;
-	const char* message;
-	jmp_buf *jumpBuf;
+    char* name;
+    TestFunction function;
+    int failed;
+    int ran;
+    const char* message;
+    jmp_buf *jumpBuf;
 };
 
 void CuTestInit(CuTest* t, const char* name, TestFunction function);
@@ -66,17 +66,17 @@ void CuTestDelete(CuTest *t);
 void CuFail_Line(CuTest* tc, const char* file, int line, const char* message2, const char* message);
 void CuAssert_Line(CuTest* tc, const char* file, int line, const char* message, int condition);
 void CuAssertStrEquals_LineMsg(CuTest* tc, 
-	const char* file, int line, const char* message, 
-	const char* expected, const char* actual);
+    const char* file, int line, const char* message, 
+    const char* expected, const char* actual);
 void CuAssertIntEquals_LineMsg(CuTest* tc, 
-	const char* file, int line, const char* message, 
-	int expected, int actual);
+    const char* file, int line, const char* message, 
+    int expected, int actual);
 void CuAssertDblEquals_LineMsg(CuTest* tc, 
-	const char* file, int line, const char* message, 
-	double expected, double actual, double delta);
+    const char* file, int line, const char* message, 
+    double expected, double actual, double delta);
 void CuAssertPtrEquals_LineMsg(CuTest* tc, 
-	const char* file, int line, const char* message, 
-	void* expected, void* actual);
+    const char* file, int line, const char* message, 
+    void* expected, void* actual);
 
 /* public assert functions */
 
@@ -104,9 +104,9 @@ void CuAssertPtrEquals_LineMsg(CuTest* tc,
 
 typedef struct
 {
-	int count;
-	CuTest* list[MAX_TEST_CASES];
-	int failCount;
+    int count;
+    CuTest* list[MAX_TEST_CASES];
+    int failCount;
 
 } CuSuite;
 

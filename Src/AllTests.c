@@ -62,29 +62,29 @@ CuSuite *GraphSuite(){
 
 void graphTestInitGraph(CuTest *ct){
     graph *graph = malloc(sizeof(graph));
-	hub *hubs = calloc(5, sizeof(hub));
-	hubs[0].inventory = 0; hubs[0].capacity =  0;
-	hubs[1].inventory = 1; hubs[1].capacity =  2;
-	hubs[2].inventory = 2; hubs[2].capacity =  3;
-	hubs[3].inventory = 3; hubs[3].capacity =  9;
-	hubs[4].inventory = 4; hubs[4].capacity = 10;
-	calcBalance(&hubs[0]);
-	calcBalance(&hubs[1]);
-	calcBalance(&hubs[2]);
-	calcBalance(&hubs[3]);
-	calcBalance(&hubs[4]);
-	
+    hub *hubs = calloc(5, sizeof(hub));
+    hubs[0].inventory = 0; hubs[0].capacity =  0;
+    hubs[1].inventory = 1; hubs[1].capacity =  2;
+    hubs[2].inventory = 2; hubs[2].capacity =  3;
+    hubs[3].inventory = 3; hubs[3].capacity =  9;
+    hubs[4].inventory = 4; hubs[4].capacity = 10;
+    calcBalance(&hubs[0]);
+    calcBalance(&hubs[1]);
+    calcBalance(&hubs[2]);
+    calcBalance(&hubs[3]);
+    calcBalance(&hubs[4]);
+
     CuAssertIntEquals(ct, 10, edgeAmount(5));
-	initGraph(graph, hubs, 5);
+    initGraph(graph, hubs, 5);
     
     CuAssertIntEquals(ct, 0, graph->hubs[0].inventory);
     CuAssertIntEquals(ct, 1, graph->hubs[1].inventory);
-	
+
     CuAssertIntEquals(ct, 2, graph->hubs[1].capacity);
     CuAssertIntEquals(ct, 10, graph->hubs[4].capacity);
-	
-	free(graph);
-	free(hubs);
+
+    free(graph);
+    free(hubs);
 }
 
 void graphTestGetEdgeIndex(CuTest *ct){
