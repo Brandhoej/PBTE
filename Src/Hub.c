@@ -12,7 +12,6 @@ void calcWeight(CuTest *tc) {
     CuAssertIntEquals(tc, expected, actual);
 }
 
-
 CuSuite *HubSuite() {
     CuSuite *suite = CuSuiteNew();
     SUITE_ADD_TEST(suite, calcWeight);
