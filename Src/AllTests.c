@@ -122,4 +122,7 @@ void graphTestTotalAmountBicycle(CuTest *ct){
     initGraph(graph, hubs, 5);
 
     CuAssertIntEquals(ct, expected, totalAmountBicycle(graph));
+
+    free(graph);
+    free(hubs);
 }
