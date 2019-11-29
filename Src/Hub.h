@@ -1,8 +1,6 @@
 /** @file */
 #pragma once
 
-#include "CuTest.h"
-
 /**
  * @struct hub
  * this is a data strcture for a hub used in the HCM
@@ -20,7 +18,7 @@ typedef struct Hub {
     unsigned int capacity;
 
     /**
-     * This is the invenory that this hub need to be in balance
+     * This is the inventory that this hub need to be in balance
      */
     unsigned int targetInventory;
 } Hub;

@@ -130,7 +130,6 @@ void graphTestTotalAmountBicycle(CuTest *ct){
 }
 
 void graphTestCalcAllBalance(CuTest *ct){
-
     Graph *graph = malloc(sizeof(Graph));
     Hub *hubs = calloc(5, sizeof(Hub));
     int expected = 1;

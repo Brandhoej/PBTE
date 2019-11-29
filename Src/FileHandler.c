@@ -3,7 +3,7 @@
 #include <string.h>
 #include "FileHandler.h"
 
-int readFile(char *path, vehicle *vehicles, graph *graph) {
+int readFile(char *path, Vehicle *vehicles, Graph *graph) {
     int succes = 0;
 	
     FILE *DBFile = fopen(path, "r");
@@ -18,13 +18,13 @@ int readFile(char *path, vehicle *vehicles, graph *graph) {
     return succes;
 }
 
-void analyzeFile(FILE *DBFile, vehicle *vehicles, graph *graph) {
+void analyzeFile(FILE *DBFile, Vehicle *vehicles, Graph *graph) {
 	int vehicleAmount = amountInCategory("Vehicles", DBFile);
 	int hubAmount = amountInCategory("Hubs", DBFile);
 
-	vehicles = calloc(vehicleAmount, sizeof(vehicle));
-	graph->edges = calloc(edgeAmount(hubAmount), sizeof(edge));
-	graph->hubs = calloc(hubAmount, sizeof(hub));
+	vehicles = calloc(vehicleAmount, sizeof(Vehicle));
+	graph->edges = calloc(edgeAmount(hubAmount), sizeof(Edge));
+	graph->hubs = calloc(hubAmount, sizeof(Hub));
 	graph->hubAmount = hubAmount;
 	
 	valueInCategory("Vehicles", DBFile, vehicles, graph);
@@ -46,9 +46,9 @@ int amountInCategory(char *category, FILE *DBFile) {
 	return amountCount;
 }
 
-int valueInCategory(char *category, FILE *DBFile, vehicle *vehicles, graph *graph) {
+int valueInCategory(char *category, FILE *DBFile, Vehicle *vehicles, Graph *graph) {
 	int returnState = 1, indx = 0;
-	edge edge;
+	Edge edge;
 	int edgeU, edgeV;
 	char name[10];
 	char lineInFile[30];
