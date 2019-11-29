@@ -1,3 +1,4 @@
+/** @file */ 
 #pragma once
 
 #include "CuTest.h"
@@ -26,6 +27,7 @@ typedef struct hub {
 } hub;
 
 /**
+ * @file
  * sets the balance amount of a hub.
  * @param *h the hub pointer to the hub which needs to have the balance calculated and set
  * @TODO this should also depend on the graph and not just the information from the hub
