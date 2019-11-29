@@ -3,23 +3,23 @@
 #include "FileHandler.h"
 
 void addEdgeTest(graph *graph, int u, int v, double distance){
-    edge e = {distance, 0};
+    edge e = {0, 0};
+    e.distance = distance;
     addEdge(graph, u, v, &e);
 }
 
 void createGraphTest(graph *graph){
     hub *hubs = calloc(9, sizeof(hub));
-    /*hubs[0].balance = 0;
-    hubs[1].balance = 2;
-    hubs[2].balance = 1;
-    hubs[3].balance = -4;
-    hubs[4].balance = 0;
-    hubs[5].balance = 5;
-    hubs[6].balance = 2;
-    hubs[7].balance = 3;
-    hubs[8].balance = -9;*/
+    hubs[0].inventory = 4;  hubs[0].capacity = 8;  hubs[0].targetInventory = 4;
+    hubs[1].inventory = 1;  hubs[1].capacity = 6;  hubs[1].targetInventory = 3;
+    hubs[2].inventory = 0;  hubs[2].capacity = 2;  hubs[2].targetInventory = 1;
+    hubs[3].inventory = 8;  hubs[3].capacity = 8;  hubs[3].targetInventory = 4;
+    hubs[4].inventory = 2;  hubs[4].capacity = 4;  hubs[4].targetInventory = 2;
+    hubs[5].inventory = 10; hubs[5].capacity = 10; hubs[5].targetInventory = 5;
+    hubs[6].inventory = 5;  hubs[6].capacity = 6;  hubs[6].targetInventory = 3;
+    hubs[7].inventory = 6;  hubs[7].capacity = 6;  hubs[7].targetInventory = 3;
+    hubs[8].inventory = 0;  hubs[8].capacity = 18; hubs[8].targetInventory = 9;
     
-
     initGraph(graph, hubs, 9);
 
     addEdgeTest(graph, 0, 1, 1);
@@ -69,17 +69,17 @@ void createGraphTest(graph *graph){
 
 int main(void) {
     graph *graph = malloc(sizeof(graph));
-    printf("T1\n");
+    
     createGraphTest(graph);
-    printf("T2\n");
-    printf("%i %i edge index is %i\n",0 , 0, getEdgeIndex(0 ,0));
-    printf("%i %i edge index is %i\n",0 , 1, getEdgeIndex(0 ,1));
-    printf("%i %i edge index is %i\n",0 , 2, getEdgeIndex(0 ,2));
-    printf("%i %i edge index is %i\n",0 , 3, getEdgeIndex(0 ,3));
-    printf("%i %i edge index is %i\n",2 , 1, getEdgeIndex(2 ,1));
-    printf("%i %i edge index is %i\n",2 , 4, getEdgeIndex(2 ,4));
-    printf("%i %i edge index is %i\n",1 , 1, getEdgeIndex(1 ,1));
-    printf("%i %i edge index is %i\n",2 , 2, getEdgeIndex(2 ,2));
+    
+    printf("%i %i edge index is %i\n", 0, 0, getEdgeIndex(0 ,0));
+    printf("%i %i edge index is %i\n", 0, 1, getEdgeIndex(0 ,1));
+    printf("%i %i edge index is %i\n", 0, 2, getEdgeIndex(0 ,2));
+    printf("%i %i edge index is %i\n", 0, 3, getEdgeIndex(0 ,3));
+    printf("%i %i edge index is %i\n", 2, 1, getEdgeIndex(2 ,1));
+    printf("%i %i edge index is %i\n", 2, 4, getEdgeIndex(2 ,4));
+    printf("%i %i edge index is %i\n", 1, 1, getEdgeIndex(1 ,1));
+    printf("%i %i edge index is %i\n", 2, 2, getEdgeIndex(2 ,2));
     
     free(graph->hubs);
     free(graph);

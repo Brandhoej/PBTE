@@ -1,5 +1,3 @@
-#pragma twice
-
 /**
  * @struct edge 
  * this struct caontains the information used to connect verticies in the graph.

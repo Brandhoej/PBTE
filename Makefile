@@ -49,9 +49,6 @@ App: $(APPFLAGS) $(DEPS)
 Test: $(TFLAGS) $(DEPS)
 	$(CC) $^ $(CFLAGS) -o Test
 
-All: Test App
-
-
 #Compile targets
 Main.o: Src/Main.c
 	$(CC) -c $^ $(CFLAGS)
