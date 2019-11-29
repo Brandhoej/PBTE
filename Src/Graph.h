@@ -24,6 +24,7 @@ typedef struct graph {
      * The size of this array is equal to hubAmount.
     */
     edge **edges;
+
 } graph;
 
 /**
@@ -63,3 +64,8 @@ void addEdge(graph *graph, int u, int v, edge *edge);
  * @param edge output
  */
 edge *getEdge(graph *graph, int u, int v);
+
+ /**
+ * Returns total amount of bicycles in the graph
+ */
+unsigned int totalAmountBicycle(graph *graph);

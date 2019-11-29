@@ -41,3 +41,13 @@ void addEdge(graph *graph, int u, int v, edge *edge) {
 edge *getEdge(graph *graph, int u, int v){
     return graph->edges[getEdgeIndex(u, v)];
 }
+
+unsigned int totalAmountBicycle(graph *graph){
+    int n;
+    unsigned int totalAmount = 0;
+
+    for(n = 0; n < graph->hubAmount; ++n){
+        totalAmount += graph->hubs[n].inventory;
+    }
+    return totalAmount;
+}
