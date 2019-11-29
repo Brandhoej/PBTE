@@ -3,7 +3,8 @@
 #include "FileHandler.h"
 
 void addEdgeTest(graph *graph, int u, int v, double distance){
-    edge e = {distance, 0};
+    edge e = {0, 0};
+    e.distance = distance;
     addEdge(graph, u, v, &e);
 }
 
@@ -69,9 +70,9 @@ void createGraphTest(graph *graph){
 
 int main(void) {
     graph *graph = malloc(sizeof(graph));
-    printf("T1\n");
+    
     createGraphTest(graph);
-    printf("T2\n");
+    
     printf("%i %i edge index is %i\n",0 , 0, getEdgeIndex(0 ,0));
     printf("%i %i edge index is %i\n",0 , 1, getEdgeIndex(0 ,1));
     printf("%i %i edge index is %i\n",0 , 2, getEdgeIndex(0 ,2));

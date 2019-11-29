@@ -47,9 +47,11 @@ void hubTestCalcTargetInventory(CuTest *ct) {
         expected = 5, 
         inventory = 5, 
         capacity = 10;
-    hub h = {inventory, capacity, 0};
-    calcTargetInventory(&h);
-    CuAssertIntEquals(ct, expected, h.targetInventory);
+    hub hub = {0, 0, 0};
+    hub.inventory = inventory;
+    hub.capacity = capacity;
+    calcTargetInventory(&hub);
+    CuAssertIntEquals(ct, expected, hub.targetInventory);
 }
 
 CuSuite *GraphSuite(){
@@ -70,7 +72,7 @@ void graphTestInitGraph(CuTest *ct){
     hubs[3].inventory = 3; hubs[3].capacity =  9;
     hubs[4].inventory = 4; hubs[4].capacity = 10;
     
-    calcTargetInventory(&hubs[0]);
+    calcTargetInventory(&hubs[8]);
     calcTargetInventory(&hubs[1]);
     calcTargetInventory(&hubs[2]);
     calcTargetInventory(&hubs[3]);
@@ -79,7 +81,7 @@ void graphTestInitGraph(CuTest *ct){
     CuAssertIntEquals(ct, 10, edgeAmount(5));
     initGraph(graph, hubs, 5);
     
-    CuAssertIntEquals(ct, 0, graph->hubs[0].inventory);
+    CuAssertIntEquals(ct, 0, hubs[0].inventory);
     CuAssertIntEquals(ct, 1, graph->hubs[1].inventory);
 
     CuAssertIntEquals(ct, 2, graph->hubs[1].capacity);

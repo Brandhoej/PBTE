@@ -4,7 +4,7 @@
 
 int readFile(char *fileName) {
     int succes = 0;
-    graph graph;
+    /*graph graph;*/
     FILE *DBFile = fopen(fileName, "r");
     if(DBFile != NULL)
         succes = 1;
