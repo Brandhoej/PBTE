@@ -3,22 +3,12 @@
 #include "FileHandler.h"
 
 int readFile(char *fileName) {
+    int succes = 0;
     graph graph;
-    char *string;
     FILE *DBFile = fopen(fileName, "r");
-    if(DBFile == NULL)
-        return EXIT_FAILURE;
-    fgets(string, 30, DBFile);
+    if(DBFile != NULL)
+        succes = 1;
 
     fclose(DBFile);
-    return EXIT_SUCCESS;
-}
-
-int writeFile(char *fileName, graph *graph) {
-    FILE *DBFile = fopen(fileName, "w");
-    if(DBFile == NULL)
-        return EXIT_FAILURE;
-    fwrite(graph, sizeof(struct graph), 1, DBFile);
-    fclose(DBFile);
-    return EXIT_SUCCESS;
+    return succes;
 }

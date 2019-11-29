@@ -1,6 +1,17 @@
-Graph=[size]
-    H0:3,10
-    H1:2,8
-    H2:5,8
-
-
+Vehicles
+    Bicycle (cap:)10
+    Truck 20
+Graph=[hubAmount]
+    (name:)Name1 (inv:)3 (cap:)10
+    Name2 2 8
+    Name3 5 8
+Edges
+    0: 
+     |1 (dist:)10 
+     |2 20 
+     |3 9
+    1: 
+     |2 8  
+     |3 3
+    2: 
+     |3 9
