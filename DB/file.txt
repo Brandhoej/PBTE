@@ -1,7 +1,7 @@
 Vehicles
     Bicycle (cap:)10
     Truck 20
-Graph=[hubAmount]
+Hubs
     (name:)Name1 (inv:)3 (cap:)10
     Name2 2 8
     Name3 5 8
