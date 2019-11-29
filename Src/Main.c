@@ -68,9 +68,13 @@ void createGraphTest(Graph *graph){
 }
 
 int main(void) {
-    Graph *graph = malloc(sizeof(Graph));
+    /*Graph *graph = malloc(sizeof(Graph));*/
+	Vehicle *vehicles;
+	Graph graph;
+
+	readFile("DB/file.txt", vehicles, &graph);
     
-    createGraphTest(graph);
+    /*createGraphTest(graph);
     
     printf("%i %i edge index is %i\n", 0, 0, getEdgeIndex(0 ,0));
     printf("%i %i edge index is %i\n", 0, 1, getEdgeIndex(0 ,1));
@@ -80,8 +84,8 @@ int main(void) {
     printf("%i %i edge index is %i\n", 2, 4, getEdgeIndex(2 ,4));
     printf("%i %i edge index is %i\n", 1, 1, getEdgeIndex(1 ,1));
     printf("%i %i edge index is %i\n", 2, 2, getEdgeIndex(2 ,2));
-    
-    free(graph->hubs);
-    free(graph);
+    */
+    free(graph.hubs);
+    /*free(graph);*/
     return EXIT_SUCCESS;
 }
