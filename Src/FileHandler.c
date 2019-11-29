@@ -11,7 +11,6 @@ int readFile(char *path, Vehicle *vehicles, Graph *graph) {
 		succes = 1;
 
 		analyzeFile(DBFile, vehicles, graph);
-
 	}
 
     fclose(DBFile);
@@ -21,11 +20,10 @@ int readFile(char *path, Vehicle *vehicles, Graph *graph) {
 void analyzeFile(FILE *DBFile, Vehicle *vehicles, Graph *graph) {
 	int vehicleAmount = amountInCategory("Vehicles", DBFile);
 	int hubAmount = amountInCategory("Hubs", DBFile);
+	Hub *hubs = calloc(hubAmount, sizeof(Hub));
 
 	vehicles = calloc(vehicleAmount, sizeof(Vehicle));
-	graph->edges = calloc(edgeAmount(hubAmount), sizeof(Edge));
-	graph->hubs = calloc(hubAmount, sizeof(Hub));
-	graph->hubAmount = hubAmount;
+	initGraph(graph, hubs, hubAmount);
 	
 	valueInCategory("Vehicles", DBFile, vehicles, graph);
 	valueInCategory("Hubs", DBFile, vehicles, graph);
@@ -48,8 +46,7 @@ int amountInCategory(char *category, FILE *DBFile) {
 
 int valueInCategory(char *category, FILE *DBFile, Vehicle *vehicles, Graph *graph) {
 	int returnState = 1, indx = 0;
-	Edge edge;
-	int edgeU, edgeV;
+	int hubU, hubV;
 	char name[10];
 	char lineInFile[30];
 	Category cat = -1;
@@ -67,15 +64,15 @@ int valueInCategory(char *category, FILE *DBFile, Vehicle *vehicles, Graph *grap
 		while(keepReading(&lineInFile[0], DBFile)) {
 			switch(cat) {
 				case VEHICLES:
-					sscanf(lineInFile, " %s %d", &name[0], vehicles[indx].capacity);
+					sscanf(lineInFile, " %s %ui", &name[0], &vehicles[indx].capacity);
 					/* Name is not used (Will be added) */
 					break;
 				case HUBS:
-					sscanf(lineInFile, " %s %d %d", &name[0], graph->hubs[indx].inventory, graph->hubs[indx].capacity);
+					sscanf(lineInFile, " %s %ui %ui", &name[0], &graph->hubs[indx].inventory, &graph->hubs[indx].capacity);
 					/* Name is not used (Will be added) */
 					break;
 				case EDGES:
-					sscanf(lineInFile, " %d %d %d", &edgeU, &edgeV, getEdge(graph, edgeU, edgeV)->distance);
+					sscanf(lineInFile, " %d %d %lf", &hubU, &hubV, &getEdge(graph, hubU, hubV)->distance);
 
 					break;
 				case ERROR:

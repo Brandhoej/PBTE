@@ -1,12 +1,12 @@
 Vehicles
-    Bicycle (cap:)10
+    Bicycle 10
     Truck 20
 Hubs
-    (name:)Name1 (inv:)3 (cap:)10
+    Name1 3 10
     Name2 2 8
-    Name3 5 8
+    Name3 5 8 
 Edges
-    0 1 (dist:)10 
+    0 1 10 
     0 2 20 
     0 3 9
     1 2 8  
