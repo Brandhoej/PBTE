@@ -8,4 +8,4 @@ This project was created as a P1 solution at AAU.
 
 ## How to compile
 
-A detailed desription can be found in (#MakeFile).
+A detailed desription can be found in in the MakeFile.
