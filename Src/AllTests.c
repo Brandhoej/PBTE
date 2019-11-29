@@ -62,6 +62,7 @@ CuSuite *GraphSuite(){
     SUITE_ADD_TEST(suite, graphTestGetEdgeIndex);
     SUITE_ADD_TEST(suite, graphTestEdgeAmount);
     SUITE_ADD_TEST(suite, graphTestTotalAmountBicycle);
+    SUITE_ADD_TEST(suite, graphTestCalcAllBalance);
     return suite;
 }
 
@@ -132,13 +133,13 @@ void graphTestCalcAllBalance(CuTest *ct){
 
     Graph *graph = malloc(sizeof(Graph));
     Hub *hubs = calloc(5, sizeof(Hub));
-    int expected = 6
+    int expected = 1;
 
-    hubs[0].inventory = 9; hubs[0].capacity =  5;
+    hubs[0].inventory = 2; hubs[0].capacity =  4;
     hubs[1].inventory = 1; hubs[1].capacity =  2;
-    hubs[2].inventory = 2; hubs[2].capacity =  3;
-    hubs[3].inventory = 3; hubs[3].capacity =  9;
-    hubs[4].inventory = 4; hubs[4].capacity = 10;
+    hubs[2].inventory = 6; hubs[2].capacity =  12;
+    hubs[3].inventory = 2; hubs[3].capacity =  4;
+    hubs[4].inventory = 7; hubs[4].capacity = 14;
 
     initGraph(graph, hubs, 5);
 

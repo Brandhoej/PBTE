@@ -61,14 +61,20 @@ void addEdge(Graph *graph, int u, int v, Edge *edge);
  * Returns the edge connecting these verticies in an undirected graph.
  * @param u is one of the verticies
  * @param v is one of the verticies
- * @param edge output
+ * @return edge output
  */
 Edge *getEdge(Graph *graph, int u, int v);
 
  /**
  * Returns the total amount of bicycles in the graph
  * @param  graph points to graph where our values for hub and inventory are stored, used to calculate the amount.
+ * @return returnes the total amount af bicycles
  */
 unsigned int totalAmountBicycle(Graph *graph);
 
+/**
+ * Checks the balance for hubs and stops when not balance 
+ * @param graph point to the graph to get the values from hubs and the amount of hubs
+ * @return returns 1 when balance and 0 when not balance 
+*/
 int CalcAllBalance(Graph *graph);
