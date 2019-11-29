@@ -8,7 +8,7 @@ void RunAllTests(void);
 
 /* Hubs */
 CuSuite *HubSuite();
-void hubTestCalcWeight(CuTest *ct);
+void hubTestCalcTargetInventory(CuTest *ct);
 
 /* Graph */
 CuSuite *GraphSuite();
@@ -38,18 +38,18 @@ void RunAllTests(void)
 
 CuSuite *HubSuite() {
     CuSuite *suite = CuSuiteNew();
-    SUITE_ADD_TEST(suite, hubTestCalcWeight);
+    SUITE_ADD_TEST(suite, hubTestCalcTargetInventory);
     return suite;
 }
 
-void hubTestCalcWeight(CuTest *ct) {
+void hubTestCalcTargetInventory(CuTest *ct) {
     unsigned int 
         expected = 5, 
         inventory = 5, 
         capacity = 10;
     hub h = {inventory, capacity, 0};
-    calcBalance(&h);
-    CuAssertIntEquals(ct, expected, h.balance);
+    calcTargetInventory(&h);
+    CuAssertIntEquals(ct, expected, h.targetInventory);
 }
 
 CuSuite *GraphSuite(){
@@ -68,11 +68,11 @@ void graphTestInitGraph(CuTest *ct){
     hubs[2].inventory = 2; hubs[2].capacity =  3;
     hubs[3].inventory = 3; hubs[3].capacity =  9;
     hubs[4].inventory = 4; hubs[4].capacity = 10;
-    calcBalance(&hubs[0]);
-    calcBalance(&hubs[1]);
-    calcBalance(&hubs[2]);
-    calcBalance(&hubs[3]);
-    calcBalance(&hubs[4]);
+    calcTargetInventory(&hubs[0]);
+    calcTargetInventory(&hubs[1]);
+    calcTargetInventory(&hubs[2]);
+    calcTargetInventory(&hubs[3]);
+    calcTargetInventory(&hubs[4]); 
 
     CuAssertIntEquals(ct, 10, edgeAmount(5));
     initGraph(graph, hubs, 5);

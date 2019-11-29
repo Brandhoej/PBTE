@@ -9,7 +9,7 @@ void addEdgeTest(graph *graph, int u, int v, double distance){
 
 void createGraphTest(graph *graph){
     hub *hubs = calloc(9, sizeof(hub));
-    hubs[0].balance = 0;
+    /*hubs[0].balance = 0;
     hubs[1].balance = 2;
     hubs[2].balance = 1;
     hubs[3].balance = -4;
@@ -17,7 +17,8 @@ void createGraphTest(graph *graph){
     hubs[5].balance = 5;
     hubs[6].balance = 2;
     hubs[7].balance = 3;
-    hubs[8].balance = -9;
+    hubs[8].balance = -9;*/
+    
 
     initGraph(graph, hubs, 9);
 
