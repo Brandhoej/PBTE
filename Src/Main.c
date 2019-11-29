@@ -2,14 +2,14 @@
 #include <stdlib.h>
 #include "FileHandler.h"
 
-void addEdgeTest(graph *graph, int u, int v, double distance){
-    edge e = {0, 0};
+void addEdgeTest(Graph *graph, int u, int v, double distance){
+    Edge e = {0, 0};
     e.distance = distance;
     addEdge(graph, u, v, &e);
 }
 
-void createGraphTest(graph *graph){
-    hub *hubs = calloc(9, sizeof(hub));
+void createGraphTest(Graph *graph){
+    Hub *hubs = calloc(9, sizeof(Hub));
     hubs[0].inventory = 4;  hubs[0].capacity = 8;  hubs[0].targetInventory = 4;
     hubs[1].inventory = 1;  hubs[1].capacity = 6;  hubs[1].targetInventory = 3;
     hubs[2].inventory = 0;  hubs[2].capacity = 2;  hubs[2].targetInventory = 1;
@@ -68,7 +68,7 @@ void createGraphTest(graph *graph){
 }
 
 int main(void) {
-    graph *graph = malloc(sizeof(graph));
+    Graph *graph = malloc(sizeof(Graph));
     
     createGraphTest(graph);
     

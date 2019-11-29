@@ -7,7 +7,7 @@
  * @struct hub
  * this is a data strcture for a hub used in the HCM
  */
-typedef struct hub {
+typedef struct Hub {
 
     /**
      * This is the current inventory of the hub
@@ -23,18 +23,18 @@ typedef struct hub {
      * This is the invenory that this hub need to be in balance
      */
     unsigned int targetInventory;
-} hub;
+} Hub;
 
 /**
  * sets the target inventory of a hub.
  * @param *hub the hub pointer to the hub which needs to have the target inventory calculated and set
  * @TODO this should also depend on the graph and not just the information from the hub
  */
-void calcTargetInventory(hub *hub);
+void calcTargetInventory(Hub *hub);
 
 /**
  * calculates the balance within the hub.
  * @param *hub points the hub to needed elements for calculating the balance
  * @return If 0, there is balance in the hub. Negative, too few. Positive, too many bikes.
  */
-int getBalance(hub *hub);
+int getBalance(Hub *hub);

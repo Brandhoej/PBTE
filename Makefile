@@ -4,7 +4,6 @@
 #The target can be dependencies at other targets.
 
 #How to use/build the application:
-
 #App
 #if you want the release App with WAP then
 #"make"
