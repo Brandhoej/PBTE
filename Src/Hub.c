@@ -1,5 +1,9 @@
 #include "Hub.h"
 
-void calcBalance(hub *hub) {
-    hub->balance = hub->capacity / 2;
+void calcTargetInventory(Hub *hub){
+    hub->targetInventory = hub->capacity / 2;
+}
+
+int getBalance(Hub *hub){
+    return hub->inventory - hub->targetInventory;
 }

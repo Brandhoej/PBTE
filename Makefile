@@ -4,7 +4,6 @@
 #The target can be dependencies at other targets.
 
 #How to use/build the application:
-
 #App
 #if you want the release App with WAP then
 #"make"
@@ -48,9 +47,6 @@ App: $(APPFLAGS) $(DEPS)
 
 Test: $(TFLAGS) $(DEPS)
 	$(CC) $^ $(CFLAGS) -o Test
-
-All: Test App
-
 
 #Compile targets
 Main.o: Src/Main.c

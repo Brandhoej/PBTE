@@ -28,16 +28,36 @@ int getEdgeIndex(int u, int v){
     return index;
 }
 
-void initGraph(graph *graph, hub *hubs, unsigned int hubAmount) {
+void initGraph(Graph *graph, Hub *hubs, unsigned int hubAmount) {
     graph->hubAmount = hubAmount;
     graph->hubs = hubs;
-    graph->edges = calloc(edgeAmount(hubAmount), sizeof(edge*));
+    graph->edges = calloc(edgeAmount(hubAmount), sizeof(Edge*));
 }
 
-void addEdge(graph *graph, int u, int v, edge *edge) {
+void addEdge(Graph *graph, int u, int v, Edge *edge) {
     graph->edges[getEdgeIndex(u, v)] = edge;
 }
 
-edge *getEdge(graph *graph, int u, int v){
+Edge *getEdge(Graph *graph, int u, int v){
     return graph->edges[getEdgeIndex(u, v)];
+}
+
+unsigned int totalAmountBicycle(Graph *graph){
+    int n;
+    unsigned int totalAmount = 0;
+
+    for(n = 0; n < graph->hubAmount; ++n){
+        totalAmount += graph->hubs[n].inventory;
+    }
+    return totalAmount;
+}
+
+int CalcAllBalance(Graph *graph){
+    int n = 0, balance = 0;
+
+    while((balance = getBalance(&graph->hubs[n])) == 0 && n < graph->hubAmount){
+        ++n;
+    }
+
+    return balance == 0;
 }

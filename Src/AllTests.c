@@ -8,13 +8,15 @@ void RunAllTests(void);
 
 /* Hubs */
 CuSuite *HubSuite();
-void hubTestCalcWeight(CuTest *ct);
+void hubTestCalcTargetInventory(CuTest *ct);
 
 /* Graph */
 CuSuite *GraphSuite();
 void graphTestInitGraph(CuTest *ct);
 void graphTestGetEdgeIndex(CuTest *ct);
 void graphTestEdgeAmount(CuTest *ct);
+void graphTestTotalAmountBicycle(CuTest *ct);
+void graphTestCalcAllBalance(CuTest *ct);
 
 int main(void)
 {
@@ -38,18 +40,20 @@ void RunAllTests(void)
 
 CuSuite *HubSuite() {
     CuSuite *suite = CuSuiteNew();
-    SUITE_ADD_TEST(suite, hubTestCalcWeight);
+    SUITE_ADD_TEST(suite, hubTestCalcTargetInventory);
     return suite;
 }
 
-void hubTestCalcWeight(CuTest *ct) {
+void hubTestCalcTargetInventory(CuTest *ct) {
     unsigned int 
         expected = 5, 
         inventory = 5, 
         capacity = 10;
-    hub h = {inventory, capacity, 0};
-    calcBalance(&h);
-    CuAssertIntEquals(ct, expected, h.balance);
+    Hub hub = {0, 0, 0};
+    hub.inventory = inventory;
+    hub.capacity = capacity;
+    calcTargetInventory(&hub);
+    CuAssertIntEquals(ct, expected, hub.targetInventory);
 }
 
 CuSuite *GraphSuite(){
@@ -57,27 +61,31 @@ CuSuite *GraphSuite(){
     SUITE_ADD_TEST(suite, graphTestInitGraph);
     SUITE_ADD_TEST(suite, graphTestGetEdgeIndex);
     SUITE_ADD_TEST(suite, graphTestEdgeAmount);
+    SUITE_ADD_TEST(suite, graphTestTotalAmountBicycle);
+    SUITE_ADD_TEST(suite, graphTestCalcAllBalance);
     return suite;
 }
 
 void graphTestInitGraph(CuTest *ct){
-    graph *graph = malloc(sizeof(graph));
-    hub *hubs = calloc(5, sizeof(hub));
-    hubs[0].inventory = 0; hubs[0].capacity =  0;
+    Graph *graph = malloc(sizeof(Graph));
+    Hub *hubs = calloc(5, sizeof(Hub));
+
+    hubs[0].inventory = 9; hubs[0].capacity =  5;
     hubs[1].inventory = 1; hubs[1].capacity =  2;
     hubs[2].inventory = 2; hubs[2].capacity =  3;
     hubs[3].inventory = 3; hubs[3].capacity =  9;
     hubs[4].inventory = 4; hubs[4].capacity = 10;
-    calcBalance(&hubs[0]);
-    calcBalance(&hubs[1]);
-    calcBalance(&hubs[2]);
-    calcBalance(&hubs[3]);
-    calcBalance(&hubs[4]);
+    
+    calcTargetInventory(&hubs[0]);
+    calcTargetInventory(&hubs[1]);
+    calcTargetInventory(&hubs[2]);
+    calcTargetInventory(&hubs[3]);
+    calcTargetInventory(&hubs[4]); 
 
     CuAssertIntEquals(ct, 10, edgeAmount(5));
     initGraph(graph, hubs, 5);
     
-    CuAssertIntEquals(ct, 0, graph->hubs[0].inventory);
+    CuAssertIntEquals(ct, 9, graph->hubs[0].inventory);
     CuAssertIntEquals(ct, 1, graph->hubs[1].inventory);
 
     CuAssertIntEquals(ct, 2, graph->hubs[1].capacity);
@@ -100,4 +108,49 @@ void graphTestEdgeAmount(CuTest *ct){
     CuAssertIntEquals(ct, 0, edgeAmount(1));
     CuAssertIntEquals(ct, 10, edgeAmount(5));
     CuAssertIntEquals(ct, 36, edgeAmount(9));
+}
+
+void graphTestTotalAmountBicycle(CuTest *ct){
+    Graph *graph = malloc(sizeof(Graph));
+    Hub *hubs = calloc(5, sizeof(Hub));
+    unsigned int expected = 19;
+
+    hubs[0].inventory = 9; hubs[0].capacity =  5;
+    hubs[1].inventory = 1; hubs[1].capacity =  2;
+    hubs[2].inventory = 2; hubs[2].capacity =  3;
+    hubs[3].inventory = 3; hubs[3].capacity =  9;
+    hubs[4].inventory = 4; hubs[4].capacity = 10;
+
+    initGraph(graph, hubs, 5);
+
+    CuAssertIntEquals(ct, expected, totalAmountBicycle(graph));
+
+    free(graph);
+    free(hubs);
+}
+
+void graphTestCalcAllBalance(CuTest *ct){
+
+    Graph *graph = malloc(sizeof(Graph));
+    Hub *hubs = calloc(5, sizeof(Hub));
+    int expected = 1;
+
+    hubs[0].inventory = 2; hubs[0].capacity =  4;
+    hubs[1].inventory = 1; hubs[1].capacity =  2;
+    hubs[2].inventory = 6; hubs[2].capacity =  12;
+    hubs[3].inventory = 2; hubs[3].capacity =  4;
+    hubs[4].inventory = 7; hubs[4].capacity = 14;
+
+    initGraph(graph, hubs, 5);
+
+    calcTargetInventory(&hubs[0]);
+    calcTargetInventory(&hubs[1]);
+    calcTargetInventory(&hubs[2]);
+    calcTargetInventory(&hubs[3]);
+    calcTargetInventory(&hubs[4]);
+
+    CuAssertIntEquals(ct, expected, CalcAllBalance(graph));
+
+    free(graph);
+    free(hubs);
 }
