@@ -111,9 +111,7 @@ void graphTestEdgeAmount(CuTest *ct){
 void graphTestTotalAmountBicycle(CuTest *ct){
     graph *graph = malloc(sizeof(graph));
     hub *hubs = calloc(5, sizeof(hub));
-
-    unsigned int 
-        expected = 19;
+    unsigned int expected = 19;
 
     hubs[0].inventory = 9; hubs[0].capacity =  5;
     hubs[1].inventory = 1; hubs[1].capacity =  2;
@@ -123,5 +121,5 @@ void graphTestTotalAmountBicycle(CuTest *ct){
 
     initGraph(graph, hubs, 5);
 
-    CuAssertIntEquals(ct, 19, totalAmountBicycle(graph));
+    CuAssertIntEquals(ct, expected, totalAmountBicycle(graph));
 }
