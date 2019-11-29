@@ -70,3 +70,5 @@ edge *getEdge(graph *graph, int u, int v);
  * @param  graph points to graph where our values for hub and inventory are stored, used to calculate the amount.
  */
 unsigned int totalAmountBicycle(graph *graph);
+
+int CalcAllBalance(graph *graph);

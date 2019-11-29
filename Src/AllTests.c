@@ -16,6 +16,7 @@ void graphTestInitGraph(CuTest *ct);
 void graphTestGetEdgeIndex(CuTest *ct);
 void graphTestEdgeAmount(CuTest *ct);
 void graphTestTotalAmountBicycle(CuTest *ct);
+void graphTestCalcAllBalance(CuTest *ct);
 
 int main(void)
 {
@@ -122,6 +123,32 @@ void graphTestTotalAmountBicycle(CuTest *ct){
     initGraph(graph, hubs, 5);
 
     CuAssertIntEquals(ct, expected, totalAmountBicycle(graph));
+
+    free(graph);
+    free(hubs);
+}
+
+void graphTestCalcAllBalance(CuTest *ct){
+
+    graph *graph = malloc(sizeof(graph));
+    hub *hubs = calloc(5, sizeof(hub));
+    int expected = 6
+
+    hubs[0].inventory = 9; hubs[0].capacity =  5;
+    hubs[1].inventory = 1; hubs[1].capacity =  2;
+    hubs[2].inventory = 2; hubs[2].capacity =  3;
+    hubs[3].inventory = 3; hubs[3].capacity =  9;
+    hubs[4].inventory = 4; hubs[4].capacity = 10;
+
+    initGraph(graph, hubs, 5);
+
+    calcTargetInventory(&hubs[0]);
+    calcTargetInventory(&hubs[1]);
+    calcTargetInventory(&hubs[2]);
+    calcTargetInventory(&hubs[3]);
+    calcTargetInventory(&hubs[4]);
+
+    CuAssertIntEquals(ct, expected, CalcAllBalance(graph));
 
     free(graph);
     free(hubs);

@@ -51,3 +51,14 @@ unsigned int totalAmountBicycle(graph *graph){
     }
     return totalAmount;
 }
+
+int totalAmountBicycle(graph *graph){
+    int n = 0, balance = 0;
+
+    while(balance == 0 && n < graph->hubAmount){
+        ++n;
+        balance += getBalance(&graph->hubs[n]);
+    }
+
+    return balance;
+}
