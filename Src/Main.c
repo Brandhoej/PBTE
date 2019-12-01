@@ -4,10 +4,23 @@
 #include "Vehicle.h"
 #include "float.h"
 
-void addEdgeTest(Graph *graph, int u, int v, double distance){
-    Edge e = {0, 0};
-    e.distance = distance;
-    addEdge(graph, u, v, &e);
+void addEdgeTest(Graph *graph, int u, int v, double distance);
+void createGraphTest(Graph *graph);
+int *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex);
+void calcEdgeWeights(Graph *graph, Vehicle *vehicle, int from);
+double calcEdgeWeight(Graph *graph, Vehicle *vehicle, int from, int to);
+
+int main(void) {
+    Graph *graph = malloc(sizeof(Graph));
+    Vehicle *vehicles;
+    /*createGraphTest(graph);*/
+
+
+    readFile("DB/file.txt", &vehicles, graph);
+    
+    free(graph->hubs);
+    free(graph);
+    return EXIT_SUCCESS;
 }
 
 void createGraphTest(Graph *graph){
@@ -69,17 +82,10 @@ void createGraphTest(Graph *graph){
     addEdgeTest(graph, 7, 8, 1);
 }
 
-int *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex);
-void calcEdgeWeights(Graph *graph, Vehicle *vehicle, int from);
-double CalcEdgeWeight(Graph *graph, Vehicle *vehicle, int from, int to);
-
-int main(void) {
-    Graph *graph = malloc(sizeof(Graph));
-    createGraphTest(graph);
-    
-    free(graph->hubs);
-    free(&graph);
-    return EXIT_SUCCESS;
+void addEdgeTest(Graph *graph, int u, int v, double distance){
+    Edge e = {0, 0};
+    e.distance = distance;
+    addEdge(graph, u, v, &e);
 }
 
 int *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex){

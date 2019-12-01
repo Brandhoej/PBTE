@@ -4,7 +4,8 @@ Vehicles
 Hubs
     Name1 3 10
     Name2 2 8
-    Name3 5 8 
+    Name3 5 8
+    Name4 4 7
 Edges
     0 1 10 
     0 2 20 

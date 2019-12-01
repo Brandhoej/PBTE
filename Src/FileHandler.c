@@ -3,9 +3,9 @@
 #include <string.h>
 #include "FileHandler.h"
 
-int readFile(char *path, Vehicle *vehicles, Graph *graph) {
+int readFile(char *path, Vehicle **vehicles, Graph *graph) {
     int succes = 0;
-	
+
     FILE *DBFile = fopen(path, "r");
     if(DBFile != NULL) {
 		succes = 1;
@@ -17,17 +17,17 @@ int readFile(char *path, Vehicle *vehicles, Graph *graph) {
     return succes;
 }
 
-void analyzeFile(FILE *DBFile, Vehicle *vehicles, Graph *graph) {
+void analyzeFile(FILE *DBFile, Vehicle **vehicles, Graph *graph) {
 	int vehicleAmount = amountInCategory("Vehicles", DBFile);
 	int hubAmount = amountInCategory("Hubs", DBFile);
-	Hub *hubs = calloc(hubAmount, sizeof(Hub));
 
-	vehicles = calloc(vehicleAmount, sizeof(Vehicle));
+	Hub *hubs = calloc(hubAmount, sizeof(Hub));
+	*vehicles = calloc(vehicleAmount, sizeof(Vehicle));
+
 	initGraph(graph, hubs, hubAmount);
-	
-	valueInCategory("Vehicles", DBFile, vehicles, graph);
-	valueInCategory("Hubs", DBFile, vehicles, graph);
-	valueInCategory("Edges", DBFile, vehicles, graph);
+	valueInCategory("Vehicles", DBFile, *vehicles, graph);
+	valueInCategory("Hubs", DBFile, *vehicles, graph);
+	valueInCategory("Edges", DBFile, *vehicles, graph);
 }
 
 int amountInCategory(char *category, FILE *DBFile) {
@@ -38,9 +38,8 @@ int amountInCategory(char *category, FILE *DBFile) {
 		while (keepReading(&lineInFile[0], DBFile))
 			++amountCount;
 	}
-	else 
+	else
 		amountCount = -1;
-
 	return amountCount;
 }
 
@@ -49,6 +48,7 @@ int valueInCategory(char *category, FILE *DBFile, Vehicle *vehicles, Graph *grap
 	int hubU, hubV;
 	char name[10];
 	char lineInFile[30];
+	double edgeDistance;
 	Category cat = -1;
 	
 	if (strcmp(category, "Vehicles") == 0)
@@ -64,16 +64,16 @@ int valueInCategory(char *category, FILE *DBFile, Vehicle *vehicles, Graph *grap
 		while(keepReading(&lineInFile[0], DBFile)) {
 			switch(cat) {
 				case VEHICLES:
-					sscanf(lineInFile, " %s %ui", &name[0], &vehicles[indx].capacity);
+					sscanf(lineInFile, " %s %d", &name[0], &vehicles[indx].capacity);
 					/* Name is not used (Will be added) */
 					break;
 				case HUBS:
-					sscanf(lineInFile, " %s %ui %ui", &name[0], &graph->hubs[indx].inventory, &graph->hubs[indx].capacity);
+					sscanf(lineInFile, " %s %d %d", &name[0], &graph->hubs[indx].inventory, &graph->hubs[indx].capacity);
 					/* Name is not used (Will be added) */
 					break;
 				case EDGES:
-					sscanf(lineInFile, " %d %d %lf", &hubU, &hubV, &getEdge(graph, hubU, hubV)->distance);
-
+					sscanf(lineInFile, " %d %d %lf", &hubU, &hubV, &edgeDistance);
+					getEdge(graph, hubU, hubV)->distance = edgeDistance;
 					break;
 				case ERROR:
 					printf("ERROR\n");
@@ -93,9 +93,10 @@ int keepReading(char *lineInFile, FILE *DBFile) {
 	char firstChar, secondChar;
 	int returnState = 1;
 
-	if (readNextLine(lineInFile, DBFile))
+	if (readNextLine(lineInFile, DBFile) == NULL)
 		returnState = 0;
-	sscanf(lineInFile, "%c%c", &firstChar, &secondChar);
+	else
+		sscanf(lineInFile, "%c%c", &firstChar, &secondChar);
 
 	return returnState ? (firstChar == ' ' && secondChar == ' ') : returnState;
 }
@@ -108,15 +109,17 @@ int getLine(char *category, FILE *DBFile) {
 	rewind(DBFile);
 
 	do {
-		if (readNextLine(&lineInFile[0], DBFile) == NULL)
+		if (readNextLine(lineInFile, DBFile) == NULL) {
 			returnState = 0;
-		else
+		}
+		else {
 			sscanf(lineInFile, " %s", firstString);	
+		}
 	} while (strcmp(firstString, category) != 0 && returnState);
 
 	return returnState;
 }
 
 char* readNextLine(char *lineInFile, FILE *DBFile) {
-	return fgets(&lineInFile[0], 30, DBFile);
+	return fgets(lineInFile, 30, DBFile);
 }
