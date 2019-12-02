@@ -1,11 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "FileHandler.h"
+#include "Vehicle.h"
+#include "float.h"
 
-void addEdgeTest(Graph *graph, int u, int v, double distance){
-    Edge e = {0, 0};
-    e.distance = distance;
-    addEdge(graph, u, v, &e);
+void addEdgeTest(Graph *graph, int u, int v, double distance);
+void createGraphTest(Graph *graph);
+int *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex);
+void calcEdgeWeights(Graph *graph, Vehicle *vehicle, int from);
+double calcEdgeWeight(Graph *graph, Vehicle *vehicle, int from, int to);
+
+int main(void) {
+    Graph *graph = malloc(sizeof(Graph));
+    Vehicle *vehicles;
+    /*createGraphTest(graph);*/
+
+
+    readFile("DB/file.txt", &vehicles, graph);
+    
+    free(graph->hubs);
+    free(graph);
+    return EXIT_SUCCESS;
 }
 
 void createGraphTest(Graph *graph){
@@ -67,25 +82,68 @@ void createGraphTest(Graph *graph){
     addEdgeTest(graph, 7, 8, 1);
 }
 
-int main(void) {
-    /*Graph *graph = malloc(sizeof(Graph));*/
-	Vehicle *vehicles;
-	Graph graph;
+void addEdgeTest(Graph *graph, int u, int v, double distance){
+    Edge e = {0, 0};
+    e.distance = distance;
+    addEdge(graph, u, v, &e);
+}
 
-	readFile("DB/file.txt", vehicles, &graph);
+int *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex){
+    int *seq = calloc(graph->hubAmount, sizeof(int));
+    int location = startHubIndex;
+    while(CalcAllBalance(graph) == 0){
+        /* Weight edges */
+        calcEdgeWeights(graph, vehicle, location);
+        /* Go to best edge */
+        
+        /* Add hub index to seq*/
+        
+    }
+    return seq;
+}
+
+void calcEdgeWeights(Graph *graph, Vehicle *vehicle, int from){
+    int hIndex = 0;
+    for(hIndex = 0; hIndex < graph->hubAmount; ++hIndex){
+        if(hIndex != from){
+            getEdge(graph, from, hIndex)->weight = calcEdgeWeight(graph, vehicle, from, hIndex);
+        }
+    }
+}
+
+double calcEdgeWeight(Graph *graph, Vehicle *vehicle, int from, int to){
+    double weight = 0;
+    Hub 
+        *fromHub = &graph->hubs[from],
+        *toHub = &graph->hubs[to];
+    Edge *edge = getEdge(graph, from, to);
     
-    /*createGraphTest(graph);
+    if(getBalance(toHub) != 0){
+        if(availableCapacity(vehicle) == 0){
+            if(getBalance(toHub) < 0){
+                weight += ((getBalance(toHub) > availableCapacity(vehicle)) ? availableCapacity(vehicle) : getBalance(toHub)) / edge->distance;
+                weight += ((getBalance(toHub) <= vehicle->inventory) ? 1 : 0);
+            }
+            else if(getBalance(toHub) > 0){
+                weight = -1000000;
+            }
+        }
+        else if(availableCapacity(vehicle) != 0){
+            /*
+            if(getBalance(toHub) > 0){
+                weight += ((getBalance(toHub) < availableCapacity(vehicle)) ? availableCapacity(vehicle) : getBalance(toHub)) / edge->distance;
+                weight += ((getBalance(toHub) >= vehicle->inventory) ? 1 : 0);
+            }
+            else if(getBalance(toHub) < 0){
+                weight = -1000000;
+            }
+            */
+        }
+    }
+    else{
+        /*FIXME*/
+        weight = -1000000;
+    }
     
-    printf("%i %i edge index is %i\n", 0, 0, getEdgeIndex(0 ,0));
-    printf("%i %i edge index is %i\n", 0, 1, getEdgeIndex(0 ,1));
-    printf("%i %i edge index is %i\n", 0, 2, getEdgeIndex(0 ,2));
-    printf("%i %i edge index is %i\n", 0, 3, getEdgeIndex(0 ,3));
-    printf("%i %i edge index is %i\n", 2, 1, getEdgeIndex(2 ,1));
-    printf("%i %i edge index is %i\n", 2, 4, getEdgeIndex(2 ,4));
-    printf("%i %i edge index is %i\n", 1, 1, getEdgeIndex(1 ,1));
-    printf("%i %i edge index is %i\n", 2, 2, getEdgeIndex(2 ,2));
-    */
-    free(graph.hubs);
-    /*free(graph);*/
-    return EXIT_SUCCESS;
+    return weight;
 }
