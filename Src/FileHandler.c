@@ -69,6 +69,7 @@ int valueInCategory(char *category, FILE *DBFile, Vehicle *vehicles, Graph *grap
 					break;
 				case HUBS:
 					sscanf(lineInFile, " %s %d %d", &name[0], &graph->hubs[indx].inventory, &graph->hubs[indx].capacity);
+					calcTargetInventory(&graph->hubs[indx]);
 					/* Name is not used (Will be added) */
 					break;
 				case EDGES:

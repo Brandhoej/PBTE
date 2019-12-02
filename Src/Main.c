@@ -13,11 +13,10 @@ double calcEdgeWeight(Graph *graph, Vehicle *vehicle, int from, int to);
 int main(void) {
     Graph *graph = malloc(sizeof(Graph));
     Vehicle *vehicles;
-    
+    readFile("DB/file.txt", &vehicles, graph);
     /*createGraphTest(graph);*/
 
-
-    readFile("DB/file.txt", &vehicles, graph);
+    vehicles[0].inventory = 0;
     printf("%lf\n", calcEdgeWeight(graph, vehicles, 0, 1));
     free(graph->hubs);
     free(graph);
@@ -119,7 +118,7 @@ double calcEdgeWeight(Graph *graph, Vehicle *vehicle, int from, int to){
         *toHub = &graph->hubs[to];
     Edge *edge = getEdge(graph, from, to);
 
-    if(getBalance(toHub) < 0 && vehicle->inventory + getBalance(toHub) >= 0){
+    if(getBalance(toHub) < 0 && vehicle->inventory + getBalance(toHub) >= 0) {        
         weight += 1;
     }
 
@@ -128,11 +127,12 @@ double calcEdgeWeight(Graph *graph, Vehicle *vehicle, int from, int to){
     }
 
     else{
+        
         weight = 0;
     }
     
     weight /= (edge->distance/10);
-    weight /= abs(vehicle->capacity/2 - (vehicle->inventory + getBalance(toHub)));
+    weight /= abs(vehicle->capacity/2 - (vehicle->inventory + abs(getBalance(toHub))));
 
     return weight;
 }
