@@ -13,11 +13,12 @@ double calcEdgeWeight(Graph *graph, Vehicle *vehicle, int from, int to);
 int main(void) {
     Graph *graph = malloc(sizeof(Graph));
     Vehicle *vehicles;
+    
     /*createGraphTest(graph);*/
 
 
     readFile("DB/file.txt", &vehicles, graph);
-    
+    printf("%lf\n", calcEdgeWeight(graph, vehicles, 0, 1));
     free(graph->hubs);
     free(graph);
     return EXIT_SUCCESS;
@@ -117,33 +118,21 @@ double calcEdgeWeight(Graph *graph, Vehicle *vehicle, int from, int to){
         *fromHub = &graph->hubs[from],
         *toHub = &graph->hubs[to];
     Edge *edge = getEdge(graph, from, to);
-    
-    if(getBalance(toHub) != 0){
-        if(availableCapacity(vehicle) == 0){
-            if(getBalance(toHub) < 0){
-                weight += ((getBalance(toHub) > availableCapacity(vehicle)) ? availableCapacity(vehicle) : getBalance(toHub)) / edge->distance;
-                weight += ((getBalance(toHub) <= vehicle->inventory) ? 1 : 0);
-            }
-            else if(getBalance(toHub) > 0){
-                weight = -1000000;
-            }
-        }
-        else if(availableCapacity(vehicle) != 0){
-            /*
-            if(getBalance(toHub) > 0){
-                weight += ((getBalance(toHub) < availableCapacity(vehicle)) ? availableCapacity(vehicle) : getBalance(toHub)) / edge->distance;
-                weight += ((getBalance(toHub) >= vehicle->inventory) ? 1 : 0);
-            }
-            else if(getBalance(toHub) < 0){
-                weight = -1000000;
-            }
-            */
-        }
+
+    if(getBalance(toHub) < 0 && vehicle->inventory + getBalance(toHub) >= 0){
+        weight += 1;
     }
+
+    else if(getBalance(toHub) > 0 && availableCapacity(vehicle) - getBalance(toHub) >= 0){
+        weight += 1;
+    }
+
     else{
-        /*FIXME*/
-        weight = -1000000;
+        weight = 0;
     }
     
+    weight /= (edge->distance/10);
+    weight /= abs(vehicle->capacity/2 - (vehicle->inventory + getBalance(toHub)));
+
     return weight;
 }
