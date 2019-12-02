@@ -18,7 +18,7 @@ int main(void) {
 
 
     readFile("DB/file.txt", &vehicles, graph);
-    printf("%lf\n", calcEdgeWeight(graph, vehicles, 0, 1));
+    printf("%lf\n", calcEdgeWeight(graph, &vehicles[0], 0, 1));
     free(graph->hubs);
     free(graph);
     return EXIT_SUCCESS;
