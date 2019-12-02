@@ -4,10 +4,23 @@
 #include "Vehicle.h"
 #include "float.h"
 
-void addEdgeTest(Graph *graph, int u, int v, double distance){
-    Edge e = {0, 0};
-    e.distance = distance;
-    addEdge(graph, u, v, &e);
+void addEdgeTest(Graph *graph, int u, int v, double distance);
+void createGraphTest(Graph *graph);
+int *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex);
+void calcEdgeWeights(Graph *graph, Vehicle *vehicle, int from);
+double calcEdgeWeight(Graph *graph, Vehicle *vehicle, int from, int to);
+
+int main(void) {
+    Graph *graph = malloc(sizeof(Graph));
+    Vehicle *vehicles;
+    readFile("DB/file.txt", &vehicles, graph);
+    /*createGraphTest(graph);*/
+
+    vehicles[0].inventory = 0;
+    printf("%lf\n", calcEdgeWeight(graph, vehicles, 0, 1));
+    free(graph->hubs);
+    free(graph);
+    return EXIT_SUCCESS;
 }
 
 void createGraphTest(Graph *graph){
@@ -69,17 +82,10 @@ void createGraphTest(Graph *graph){
     addEdgeTest(graph, 7, 8, 1);
 }
 
-int *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex);
-void calcEdgeWeights(Graph *graph, Vehicle *vehicle, int from);
-double CalcEdgeWeight(Graph *graph, Vehicle *vehicle, int from, int to);
-
-int main(void) {
-    Graph *graph = malloc(sizeof(Graph));
-    createGraphTest(graph);
-    
-    free(graph->hubs);
-    free(&graph);
-    return EXIT_SUCCESS;
+void addEdgeTest(Graph *graph, int u, int v, double distance){
+    Edge e = {0, 0};
+    e.distance = distance;
+    addEdge(graph, u, v, &e);
 }
 
 int *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex){
@@ -111,36 +117,22 @@ double calcEdgeWeight(Graph *graph, Vehicle *vehicle, int from, int to){
         *fromHub = &graph->hubs[from],
         *toHub = &graph->hubs[to];
     Edge *edge = getEdge(graph, from, to);
-    
-    if(getBalance(toHub) != 0){
-        if(availableCapacity(vehicle) == 0){
-            if(getBalance(toHub) < 0){
-                weight += ((getBalance(toHub) > availableCapacity(vehicle)) ? availableCapacity(vehicle) : getBalance(toHub)) / edge->distance;
-                weight += ((getBalance(toHub) <= vehicle->inventory) ? 1 : 0);
-            }
-            else if(getBalance(toHub) > 0){
-                weight = -1000000;
-            }
-        }
-        else if(vehicle->inventory == 0){
-            /*
-            if(getBalance(toHub) > 0){
-                weight += ((getBalance(toHub) < availableCapacity(vehicle)) ? availableCapacity(vehicle) : getBalance(toHub)) / edge->distance;
-                weight += ((getBalance(toHub) >= vehicle->inventory) ? 1 : 0);
-            }
-            else if(getBalance(toHub) < 0){
-                weight = -1000000;
-            }
-            */
-        }
-        else if(availableCapacity(vehicle) != 0){
-            
-        }
+
+    if(getBalance(toHub) < 0 && vehicle->inventory + getBalance(toHub) >= 0) {        
+        weight += 1;
     }
+
+    else if(getBalance(toHub) > 0 && availableCapacity(vehicle) - getBalance(toHub) >= 0){
+        weight += 1;
+    }
+
     else{
-        /*FIXME*/
-        weight = -1000000;
+        
+        weight = 0;
     }
     
+    weight /= (edge->distance/10);
+    weight /= abs(vehicle->capacity/2 - (vehicle->inventory + abs(getBalance(toHub))));
+
     return weight;
 }

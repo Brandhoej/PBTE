@@ -9,12 +9,12 @@ typedef struct Vehicle {
     /**
      * The current inventory of the vehicle
      */
-    unsigned int inventory;
+    int inventory;
     
     /**
      * The maximum capacity of the vehicle (inclusive)
      */
-    unsigned int capacity;
+    int capacity;
 } Vehicle;
 
 /**
@@ -22,4 +22,4 @@ typedef struct Vehicle {
  * @param the vehicle to calculate the available capacity for
  * @return the available capacity for the vehicle
  */
-unsigned int availableCapacity(Vehicle *v);
+int availableCapacity(Vehicle *v);
