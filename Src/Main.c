@@ -122,7 +122,7 @@ double calcEdgeWeight(Graph *graph, Vehicle *vehicle, int from, int to){
                 weight = -1000000;
             }
         }
-        else if(availableCapacity(vehicle) != 0){
+        else if(vehicle->inventory == 0){
             /*
             if(getBalance(toHub) > 0){
                 weight += ((getBalance(toHub) < availableCapacity(vehicle)) ? availableCapacity(vehicle) : getBalance(toHub)) / edge->distance;
@@ -132,6 +132,9 @@ double calcEdgeWeight(Graph *graph, Vehicle *vehicle, int from, int to){
                 weight = -1000000;
             }
             */
+        }
+        else if(availableCapacity(vehicle) != 0){
+            
         }
     }
     else{
