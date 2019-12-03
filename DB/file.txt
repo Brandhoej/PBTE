@@ -1,5 +1,5 @@
 Vehicles
-    Bicycle 2
+    Bicycle 10
     Truck 20
 Hubs
     Name1 0 6

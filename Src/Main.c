@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "FileHandler.h"
 #include "Vehicle.h"
+#include "VehicleAction.h"
 
 /**
  * This function is ued by the algorithm to calculate all the edge weights.
@@ -23,7 +24,7 @@ typedef double (getEdgeWeight)(Graph *graph, Vehicle *vehicle, int from, int to)
  * @param getEdgeWeight is the function used by the algorithm to calculate the edge weights
  * @returns the sequence of hubs to visit with the vehicle
  */
-int *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, int *seqLength, getEdgeWeight getWedgeWeights);
+VehicleAction *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, int *seqLength, getEdgeWeight getWedgeWeights);
 
 /**
  * Calculates the weight from a point in a graph to all the neighbours using the getEdgeWeight function.
@@ -44,13 +45,19 @@ int main(void) {
     
     /* Make variables fot the sequence returned by the algorithm */
     int seqLength = 0;
-    int *seq = NULL;
+    VehicleAction *seq = NULL;
     
     /* Read file.txt data */
     readFile("DB/file.txt", &vehicles, graph);
     
     /* Get the sequence from the algorithm */
     seq = PBTE412(graph, &vehicles[0], 0, &seqLength, calcEdgeWeight2);
+    
+    printf("%i :: ", seqLength);
+    for(int i = 0; i < seqLength; ++i){
+        printf("%i(%i)  ", seq[i].hubIndex, seq[i].action);
+    }
+    printf("\n");
     
     /* Clean up */
     free(graph->hubs);
@@ -59,8 +66,8 @@ int main(void) {
     return EXIT_SUCCESS;
 }
 
-int *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, int *seqLength, getEdgeWeight getEdgeWeight){
-    int *seq = calloc(1000, sizeof(int));
+VehicleAction *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, int *seqLength, getEdgeWeight getEdgeWeight){
+    VehicleAction *seq = calloc(1000, sizeof(VehicleAction));
     int location = startHubIndex, nextLocation;
     (*seqLength) = 1; /* We count the starting location */
     
@@ -72,11 +79,15 @@ int *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, int *seqLength, 
         nextLocation = getBestHubIndex(graph, location);
         
         /* Go to best hub */
-        seq[(*seqLength)++] = location;
         location = nextLocation;
         
         /* Choose action at hub */
         int action = doVehicleActionAtHub(&graph->hubs[location], vehicle);
+        
+        /* Save action and location */
+        seq[*seqLength].action = action;
+        seq[*seqLength].hubIndex = location;
+        (*seqLength)++;
     }
     
     return seq;
