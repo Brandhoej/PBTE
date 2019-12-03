@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Hub.h"
+
 /**
  * @struct vehicle
  * This is the data structure for a vehicle which can be used as a rebalancing vehicle
@@ -9,12 +11,12 @@ typedef struct Vehicle {
     /**
      * The current inventory of the vehicle
      */
-    int inventory;
+    unsigned int inventory;
     
     /**
      * The maximum capacity of the vehicle (inclusive)
      */
-    int capacity;
+    unsigned int capacity;
 } Vehicle;
 
 /**
@@ -22,4 +24,13 @@ typedef struct Vehicle {
  * @param the vehicle to calculate the available capacity for
  * @return the available capacity for the vehicle
  */
-int availableCapacity(Vehicle *v);
+unsigned int availableCapacity(Vehicle *v);
+
+/**
+ * @returns a negative number if the vehicle must deliver at the hub. If positive the vehicle takes inventory from the hub.
+ */
+int getVehicleActionAtHub(Hub *hub, Vehicle *vehicle);
+
+/**
+ */
+int doVehicleActionAtHub(Hub *hub, Vehicle *vehicle);

@@ -65,6 +65,10 @@ void addEdge(Graph *graph, int u, int v, Edge *edge);
  */
 Edge *getEdge(Graph *graph, int u, int v);
 
+/**
+ */
+int getBestHubIndex(Graph *graph, int from);
+
  /**
  * Returns the total amount of bicycles in the graph
  * @param  graph points to graph where our values for hub and inventory are stored, used to calculate the amount.
