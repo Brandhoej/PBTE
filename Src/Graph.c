@@ -31,21 +31,17 @@ int getEdgeIndex(int u, int v){
 void initGraph(Graph *graph, Hub *hubs, unsigned int hubAmount) {
     int eAmount, i;
 
-    eAmount = edgeAmount(hubAmount);
     graph->hubAmount = hubAmount;
     graph->hubs = hubs;
-    graph->edges = calloc(eAmount, sizeof(Edge*));
-    for (i = 0; i < eAmount; ++i) {
-        graph->edges[i] = calloc(1, sizeof(Edge));
-    }
+    graph->edges = calloc(edgeAmount(hubAmount), sizeof(Edge));
 }
 
 void addEdge(Graph *graph, int u, int v, Edge *edge) {
-    graph->edges[getEdgeIndex(u, v)] = edge;
+    graph->edges[getEdgeIndex(u, v)].distance = edge->distance;
 }
 
-Edge *getEdge(Graph *graph, int u, int v){
-    return graph->edges[getEdgeIndex(u, v)];
+Edge *getEdge(Graph *graph, int u, int v) {
+    return &graph->edges[getEdgeIndex(u, v)];
 }
 
 int getBestHubIndex(Graph *graph, int from){

@@ -17,10 +17,8 @@ int main(void) {
     /*createGraphTest(graph);*/
 
     vehicles[0].inventory = 0;
-    /*
     printf("%lf\n", calcEdgeWeight(graph, vehicles, 0, 1));
     free(graph->hubs);
-    */
    
     free(graph);
     return EXIT_SUCCESS;

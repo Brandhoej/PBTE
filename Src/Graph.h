@@ -23,7 +23,7 @@ typedef struct Graph {
      * This is the 1d hub array with hub pointers.
      * The size of this array is equal to hubAmount.
     */
-    Edge **edges;
+    Edge *edges;
 
 } Graph;
 
