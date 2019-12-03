@@ -13,6 +13,11 @@ typedef enum Category {VEHICLES,HUBS,EDGES,ERROR} Category;
  */
 int readFile(char *path, Vehicle **vehicles, Graph *graph);
 
+/**
+ * @param DBfile
+ * @param vehicles
+ * @param graph
+ */
 void analyzeFile(FILE *DBFile, Vehicle **vehicles, Graph *graph);
 int amountInCategory(char *category, FILE *DBFile);
 int valueInCategory(char *category, FILE *DBFile, Vehicle *vehicles, Graph *graph);
