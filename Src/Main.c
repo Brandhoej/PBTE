@@ -44,7 +44,7 @@ int main(void) {
     Vehicle *vehicles;
     
     /* Make variables fot the sequence returned by the algorithm */
-    int seqLength = 0;
+    int seqLength = 0, i;
     VehicleAction *seq = NULL;
     
     /* Read file.txt data */
@@ -54,7 +54,7 @@ int main(void) {
     seq = PBTE412(graph, &vehicles[0], 0, &seqLength, calcEdgeWeight2);
     
     printf("%i :: ", seqLength);
-    for(int i = 0; i < seqLength; ++i){
+    for(i = 0; i < seqLength; ++i){
         printf("%i(%i)  ", seq[i].hubIndex, seq[i].action);
     }
     printf("\n");
@@ -68,7 +68,7 @@ int main(void) {
 
 VehicleAction *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, int *seqLength, getEdgeWeight getEdgeWeight){
     VehicleAction *seq = calloc(1000, sizeof(VehicleAction));
-    int location = startHubIndex, nextLocation;
+    int location = startHubIndex, nextLocation, action;
     (*seqLength) = 1; /* We count the starting location */
     
     while(CalcAllBalance(graph) == 0){
@@ -82,7 +82,7 @@ VehicleAction *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, int *s
         location = nextLocation;
         
         /* Choose action at hub */
-        int action = doVehicleActionAtHub(&graph->hubs[location], vehicle);
+        action = doVehicleActionAtHub(&graph->hubs[location], vehicle);
         
         /* Save action and location */
         seq[*seqLength].action = action;
@@ -103,7 +103,6 @@ void calcEdgeWeights(Graph *graph, Vehicle *vehicle, int from, getEdgeWeight get
 double calcEdgeWeight1(Graph *graph, Vehicle *vehicle, int from, int to){
     double weight = 0;
     Hub 
-        *fromHub = &graph->hubs[from],
         *toHub = &graph->hubs[to];
     Edge *edge = getEdge(graph, from, to);
     

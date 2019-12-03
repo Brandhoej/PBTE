@@ -10,6 +10,7 @@ char *CategoryToStr(Category category){
 		case(EDGES):    return "Edges"; break;
 		case(ERROR):    return "Errors"; break;
 	}
+	return "";
 }
 
 int readFile(char *path, Vehicle **vehicles, Graph *graph) {
