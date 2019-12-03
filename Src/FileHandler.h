@@ -6,6 +6,12 @@
 typedef enum Category {VEHICLES,HUBS,EDGES,ERROR} Category;
 
 /**
+ * @param category is the enum which will be converted
+ * @returns a string representation of the category enum. 
+ */
+char *CategoryToStr(Category category);
+
+/**
  * @param path is the path to the file
  * @param vehicles is the array of vehicles read from the file
  * @param graph is the graph containing data from the file

@@ -3,6 +3,15 @@
 #include <string.h>
 #include "FileHandler.h"
 
+char *CategoryToStr(Category category){
+	switch(category){
+		case(VEHICLES): return "Vehicles"; break;
+		case(HUBS):     return "Hubs"; break;
+		case(EDGES):    return "Edges"; break;
+		case(ERROR):    return "Errors"; break;
+	}
+}
+
 int readFile(char *path, Vehicle **vehicles, Graph *graph) {
     int succes = 0;
 
@@ -18,16 +27,16 @@ int readFile(char *path, Vehicle **vehicles, Graph *graph) {
 }
 
 void analyzeFile(FILE *DBFile, Vehicle **vehicles, Graph *graph) {
-	int vehicleAmount = amountInCategory("Vehicles", DBFile);
-	int hubAmount = amountInCategory("Hubs", DBFile);
+	int vehicleAmount = amountInCategory(CategoryToStr(VEHICLES), DBFile);
+	int hubAmount = amountInCategory(CategoryToStr(HUBS), DBFile);
 
 	Hub *hubs = calloc(hubAmount, sizeof(Hub));
 	*vehicles = calloc(vehicleAmount, sizeof(Vehicle));
 
 	initGraph(graph, hubs, hubAmount);
-	valueInCategory("Vehicles", DBFile, *vehicles, graph);
-	valueInCategory("Hubs", DBFile, *vehicles, graph);
-	valueInCategory("Edges", DBFile, *vehicles, graph);
+	valueInCategory(CategoryToStr(VEHICLES), DBFile, *vehicles, graph);
+	valueInCategory(CategoryToStr(HUBS), DBFile, *vehicles, graph);
+	valueInCategory(CategoryToStr(EDGES), DBFile, *vehicles, graph);
 }
 
 int amountInCategory(char *category, FILE *DBFile) {
@@ -52,11 +61,11 @@ int valueInCategory(char *category, FILE *DBFile, Vehicle *vehicles, Graph *grap
 	Category cat = -1;
 	Edge edge;
 	
-	if (strcmp(category, "Vehicles") == 0)
+	if (strcmp(category, CategoryToStr(VEHICLES)) == 0)
 		cat = VEHICLES;
-	else if (strcmp(category, "Hubs") == 0)
+	else if (strcmp(category, CategoryToStr(HUBS)) == 0)
 		cat = HUBS;
-	else if (strcmp(category, "Edges") == 0)
+	else if (strcmp(category, CategoryToStr(EDGES)) == 0)
 		cat = EDGES;
 	else
 		cat = ERROR;
@@ -80,7 +89,6 @@ int valueInCategory(char *category, FILE *DBFile, Vehicle *vehicles, Graph *grap
 					break;
 				case ERROR:
 					printf("ERROR\n");
-					
 					break;
 			}
 			++indx;
