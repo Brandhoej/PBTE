@@ -14,13 +14,45 @@ typedef enum Category {VEHICLES,HUBS,EDGES,ERROR} Category;
 int readFile(char *path, Vehicle **vehicles, Graph *graph);
 
 /**
- * @param DBfile 
- * @param vehicles
- * @param graph
+ * @param DBfile the file containing all the graph and vehicle information
+ * @param vehicles stores information about the different vehicles
+ * @param graph stores information about the graph
  */
 void analyzeFile(FILE *DBFile, Vehicle **vehicles, Graph *graph);
+
+/**
+ * @param category the category containing information (Vehicles, Hubs, Edges)
+ * @param DBFile the file containing all the graph and vehicle information
+ * @return returns the amount of lines belonging to @param category
+ */
 int amountInCategory(char *category, FILE *DBFile);
+
+/**
+ * @param category the category containing information (Vehicles, Hubs, Edges)
+ * @param DBFile the file containing all the graph and vehicle information
+ * @param vehicles stores information about the different vehicles
+ * @param graph stores information about the graph
+ * @return returns the amount of lines belonging to @param category
+ */
 int valueInCategory(char *category, FILE *DBFile, Vehicle *vehicles, Graph *graph);
+
+/**
+ * @param lineInFile the current line that is read from function: getLine
+ * @param DBFile the file containing all the graph and vehicle information
+ * @return returns 1 if the line belongs to the category, otherwise returns 0
+ */
 int keepReading(char *lineInFile, FILE *DBFile);
+
+/**
+ * @param category the category containing information (Vehicles, Hubs, Edges)
+ * @param DBFile the file "cursor" is positioned at where the @param category is
+ * @return returns 1 if the @param category was found in the file, otherwise returns 0
+ */
 int getLine(char *category, FILE *DBFile);
+
+/**
+ * @param lineInFile the current line that is read from function: getLine
+ * @param DBFile the file containing all the graph and vehicle information
+ * @return returns the line that was read
+ */
 char* readNextLine(char *lineInFile, FILE *DBFile);
