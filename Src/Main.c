@@ -44,7 +44,7 @@ int main(void) {
     Vehicle *vehicles;
     
     /* Make variables fot the sequence returned by the algorithm */
-    int seqLength = 0, i;
+    int seqLength = 0;
     VehicleAction *seq = NULL;
     
     /* Read file.txt data */
@@ -54,6 +54,7 @@ int main(void) {
     
     /* Get the sequence from the algorithm */
     seq = PBTE412(graph, &vehicles[0], 0, &seqLength, calcEdgeWeight2);
+    printf("Length: %i   Dist:???\n", seqLength);
     printVehicleActions(seq, seqLength);
     
     /* Clean up */
@@ -137,14 +138,30 @@ double calcEdgeWeight1(Graph *graph, Vehicle *vehicle, int from, int to){
 }
 
 double calcEdgeWeight2(Graph *graph, Vehicle *vehicle, int from, int to){
+    /* TODO: Maybe prioritize getting rid of the complete inventory of the vehicle if it is possible near by
+     * and to fill the inventory to the capacity if close by higher */
     int bestActionAtHub = getVehicleActionAtHub(&graph->hubs[to], vehicle);
     double weight = 0;
     /* If zero the hub is either in balance or the vehicle cant perform an action 
-     * at the hub such as delivering and picking up inventory */
+     * at the hub such as delivering and picking up inventory. If positive the vehicle picks up inventory */
     if(bestActionAtHub != 0)
     {
-        weight = abs(bestActionAtHub);
-        /* Value the amount of work per distance unit */
+        weight += abs(bestActionAtHub);
+        
+        /* Best action is to pick up */
+        if(bestActionAtHub > 0){
+            /* Weight creating balance at the hub higher */
+            if(availableCapacity(vehicle) >= abs(getBalance(&graph->hubs[to]))){
+               weight += abs(bestActionAtHub);
+            }
+        }
+        /* Best action is to deliver */
+        else{
+            /* Weight creating balance at the hub higher */
+            if(vehicle->inventory >= abs(getBalance(&graph->hubs[to]))){
+               weight += abs(bestActionAtHub);
+            }
+        }
         weight /= getEdge(graph, from, to)->distance;
     }
     return weight;
