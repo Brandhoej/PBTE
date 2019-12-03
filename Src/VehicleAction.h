@@ -15,3 +15,6 @@ typedef struct VehicleAction
      */
     int hubIndex;
 } VehicleAction;
+
+void printVehicleActions(VehicleAction *action, int amount);
+void printVehicleAction(VehicleAction *action);

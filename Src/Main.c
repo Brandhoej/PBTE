@@ -50,14 +50,11 @@ int main(void) {
     /* Read file.txt data */
     readFile("DB/file.txt", &vehicles, graph);
     
+    /* Ask user for vehicle type */
+    
     /* Get the sequence from the algorithm */
     seq = PBTE412(graph, &vehicles[0], 0, &seqLength, calcEdgeWeight2);
-    
-    printf("%i :: ", seqLength);
-    for(i = 0; i < seqLength; ++i){
-        printf("%i(%i)  ", seq[i].hubIndex, seq[i].action);
-    }
-    printf("\n");
+    printVehicleActions(seq, seqLength);
     
     /* Clean up */
     free(graph->hubs);
@@ -147,6 +144,7 @@ double calcEdgeWeight2(Graph *graph, Vehicle *vehicle, int from, int to){
     if(bestActionAtHub != 0)
     {
         weight = abs(bestActionAtHub);
+        /* Value the amount of work per distance unit */
         weight /= getEdge(graph, from, to)->distance;
     }
     return weight;
