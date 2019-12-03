@@ -17,8 +17,11 @@ int main(void) {
     /*createGraphTest(graph);*/
 
     vehicles[0].inventory = 0;
+    /*
     printf("%lf\n", calcEdgeWeight(graph, vehicles, 0, 1));
     free(graph->hubs);
+    */
+   
     free(graph);
     return EXIT_SUCCESS;
 }
@@ -90,13 +93,25 @@ void addEdgeTest(Graph *graph, int u, int v, double distance){
 
 int *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex){
     int *seq = calloc(graph->hubAmount, sizeof(int));
-    int location = startHubIndex;
+    int location = startHubIndex, destination = startHubIndex;
     while(CalcAllBalance(graph) == 0){
+        /* Choose action at hub */
+        if(getBalance(&graph->hubs[location]) > 0){
+            
+        }
+        else
+        
         /* Weight edges */
         calcEdgeWeights(graph, vehicle, location);
-        /* Go to best edge */
+        
+        /* Find most optimal hub */
+        destination = getBestHubIndex(graph, location);
+        
+        /* Go to best hub */
+        
         
         /* Add hub index to seq*/
+        /* If the size of the hub array is too small then resize it. Else just add it. */
         
     }
     return seq;
@@ -105,9 +120,7 @@ int *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex){
 void calcEdgeWeights(Graph *graph, Vehicle *vehicle, int from){
     int hIndex = 0;
     for(hIndex = 0; hIndex < graph->hubAmount; ++hIndex){
-        if(hIndex != from){
-            getEdge(graph, from, hIndex)->weight = calcEdgeWeight(graph, vehicle, from, hIndex);
-        }
+        getEdge(graph, from, hIndex)->weight = calcEdgeWeight(graph, vehicle, from, hIndex);
     }
 }
 
@@ -117,22 +130,25 @@ double calcEdgeWeight(Graph *graph, Vehicle *vehicle, int from, int to){
         *fromHub = &graph->hubs[from],
         *toHub = &graph->hubs[to];
     Edge *edge = getEdge(graph, from, to);
-
-    if(getBalance(toHub) < 0 && vehicle->inventory + getBalance(toHub) >= 0) {        
-        weight += 1;
-    }
-
-    else if(getBalance(toHub) > 0 && availableCapacity(vehicle) - getBalance(toHub) >= 0){
-        weight += 1;
-    }
-
-    else{
-        
+    
+    if(from == to){
         weight = 0;
     }
-    
-    weight /= (edge->distance/10);
-    weight /= abs(vehicle->capacity/2 - (vehicle->inventory + abs(getBalance(toHub))));
+    else{
+        if(getBalance(toHub) < 0 && vehicle->inventory + getBalance(toHub) >= 0) {        
+            weight += 1;
+        }
+        else if(getBalance(toHub) > 0 && availableCapacity(vehicle) - getBalance(toHub) >= 0){
+            weight += 1;
+        }
+        else{
+            
+            weight = 0;
+        }
+        
+        weight /= (edge->distance/10);
+        weight /= abs(((double)vehicle->capacity) / 2.0 - (((double)vehicle->inventory) + abs(getBalance(toHub))));        
+    }
 
     return weight;
 }

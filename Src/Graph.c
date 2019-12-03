@@ -48,6 +48,17 @@ Edge *getEdge(Graph *graph, int u, int v){
     return graph->edges[getEdgeIndex(u, v)];
 }
 
+int getBestHubIndex(Graph *graph, int from){
+    int hIndex, hBestIndex;
+    double eBestWeight = -1000.0;
+    for(hIndex = 0; hIndex < graph->hubAmount; ++hIndex){
+        if(hIndex != from && getEdge(graph, from, hIndex)->weight > eBestWeight){
+            hBestIndex = hIndex;
+        }
+    }
+    return hBestIndex;
+}
+
 unsigned int totalAmountBicycle(Graph *graph){
     int n;
     unsigned int totalAmount = 0;
