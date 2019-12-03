@@ -29,8 +29,6 @@ int getEdgeIndex(int u, int v){
 }
 
 void initGraph(Graph *graph, Hub *hubs, unsigned int hubAmount) {
-    int eAmount, i;
-
     graph->hubAmount = hubAmount;
     graph->hubs = hubs;
     graph->edges = calloc(edgeAmount(hubAmount), sizeof(Edge));

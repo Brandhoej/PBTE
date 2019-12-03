@@ -14,7 +14,7 @@ typedef enum Category {VEHICLES,HUBS,EDGES,ERROR} Category;
 int readFile(char *path, Vehicle **vehicles, Graph *graph);
 
 /**
- * @param DBfile
+ * @param DBfile 
  * @param vehicles
  * @param graph
  */

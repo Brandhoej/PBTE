@@ -2,6 +2,7 @@
 #include "CuTest.h"
 #include "Hub.h"
 #include "Graph.h"
+#include "FileHandler.h"
 
 /* Runs all the CuTest suites */
 void RunAllTests(void);
@@ -18,6 +19,10 @@ void graphTestEdgeAmount(CuTest *ct);
 void graphTestTotalAmountBicycle(CuTest *ct);
 void graphTestCalcAllBalance(CuTest *ct);
 
+/* FileHandler */
+CuSuite *FHSuite();
+void FHTestReadFile(CuTest *ct);
+
 int main(void)
 {
     RunAllTests();
@@ -31,6 +36,7 @@ void RunAllTests(void)
 
     CuSuiteAddSuite(suite, HubSuite());
 	CuSuiteAddSuite(suite, GraphSuite());
+    CuSuiteAddSuite(suite, FHSuite());
 
     CuSuiteRun(suite);
     CuSuiteSummary(suite, output);
@@ -38,6 +44,9 @@ void RunAllTests(void)
     printf("%s\n", output->buffer);
 }
 
+
+
+/* Hubs */
 CuSuite *HubSuite() {
     CuSuite *suite = CuSuiteNew();
     SUITE_ADD_TEST(suite, hubTestCalcTargetInventory);
@@ -56,6 +65,9 @@ void hubTestCalcTargetInventory(CuTest *ct) {
     CuAssertIntEquals(ct, expected, hub.targetInventory);
 }
 
+
+
+/* Graph */
 CuSuite *GraphSuite(){
     CuSuite *suite = CuSuiteNew();
     SUITE_ADD_TEST(suite, graphTestInitGraph);
@@ -152,4 +164,23 @@ void graphTestCalcAllBalance(CuTest *ct){
 
     free(graph);
     free(hubs);
+}
+
+
+/* FileHandler */
+CuSuite *FHSuite() {
+    CuSuite *suite = CuSuiteNew();
+    SUITE_ADD_TEST(suite, FHTestReadFile);
+    return suite;
+}
+
+void FHTestReadFile(CuTest *ct) {
+    int expected = 1,
+        readFileSuccessfully;
+    Vehicle *vehicles = NULL;
+    Graph *graph = malloc(sizeof(Graph));
+    
+    readFileSuccessfully = readFile("DB/file.txt", &vehicles, graph);
+    free(graph);
+    CuAssertIntEquals(ct, expected, readFileSuccessfully);
 }
