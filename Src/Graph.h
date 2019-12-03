@@ -66,6 +66,7 @@ void addEdge(Graph *graph, int u, int v, Edge *edge);
 Edge *getEdge(Graph *graph, int u, int v);
 
 /**
+ * @returns the hub index of the highest weighted hub from a hub index.
  */
 int getBestHubIndex(Graph *graph, int from);
 
