@@ -65,11 +65,11 @@ int valueInCategory(char *category, FILE *DBFile, Vehicle *vehicles, Graph *grap
 		while(keepReading(&lineInFile[0], DBFile)) {
 			switch(cat) {
 				case VEHICLES:
-					sscanf(lineInFile, " %s %d", &name[0], &vehicles[indx].capacity);
+					sscanf(lineInFile, " %s %u", &name[0], &vehicles[indx].capacity);
 					/* Name is not used (Will be added) */
 					break;
 				case HUBS:
-					sscanf(lineInFile, " %s %d %d", &name[0], &graph->hubs[indx].inventory, &graph->hubs[indx].capacity);
+					sscanf(lineInFile, " %s %u %u", &name[0], &graph->hubs[indx].inventory, &graph->hubs[indx].capacity);
 					calcTargetInventory(&graph->hubs[indx]);
 					/* Name is not used (Will be added) */
 					break;
