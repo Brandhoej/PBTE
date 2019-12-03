@@ -73,8 +73,5 @@ int CalcAllBalance(Graph *graph){
         balance = getBalance(&graph->hubs[n]);
         n++;
     }while(balance == 0 && n < graph->hubAmount);
-    
-    printf("balance: %i == 0 ? %i\n", balance, balance == 0);
-
     return balance == 0;
 }
