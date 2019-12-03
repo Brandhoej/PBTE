@@ -4,7 +4,9 @@
 #include "Vehicle.h"
 
 int *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, int *seqLength);
+
 void calcEdgeWeights(Graph *graph, Vehicle *vehicle, int from);
+
 double calcEdgeWeight(Graph *graph, Vehicle *vehicle, int from, int to);
 
 int main(void) {
@@ -74,11 +76,22 @@ double calcEdgeWeight(Graph *graph, Vehicle *vehicle, int from, int to){
             weight += 1;
         }
         else{
-            
             weight = 0;
         }
         
+        /**
+         * Calculates the weight where distance is taking into account
+         * Distance is the factor that has the highest impact on the calculation on the weight
+         * Distance is divided by 10 which is a factor that has been chosen.
+         */
         weight /= (edge->distance/10);
+        /**
+         * Calculates the weight, but the distance has the highest impact 
+         * abs return the absolute value which is always positive 
+         * capcacity of the vechicle has been taking into account 
+         * inventory of the vechile has been taking into account
+         * getBalance which can be negative or positive has been taking into account
+         */
         weight /= abs(((double)vehicle->capacity) / 2.0 - (((double)vehicle->inventory) + abs(getBalance(toHub))));        
     }
 
