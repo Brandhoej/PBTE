@@ -6,11 +6,13 @@
 typedef enum Category {VEHICLES,HUBS,EDGES,ERROR} Category;
 
 /**
- * Checks if it is possible to read a file.
  * @param path is the path to the file
- * @return returns 0 if failed 1 if succes 
+ * @param vehicles is the array of vehicles read from the file
+ * @param graph is the graph containing data from the file
+ * @return returns 1 if file is found, otherwise 0
  */
 int readFile(char *path, Vehicle **vehicles, Graph *graph);
+
 void analyzeFile(FILE *DBFile, Vehicle **vehicles, Graph *graph);
 int amountInCategory(char *category, FILE *DBFile);
 int valueInCategory(char *category, FILE *DBFile, Vehicle *vehicles, Graph *graph);

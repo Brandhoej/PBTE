@@ -16,7 +16,7 @@ int main(void) {
     readFile("DB/file.txt", &vehicles, graph);
     /*createGraphTest(graph);*/
 
-    vehicles[0].inventory = 0;
+    vehicles[0].inventory = 2;
     printf("%lf\n", calcEdgeWeight(graph, vehicles, 0, 1));
     free(graph->hubs);
     free(graph);

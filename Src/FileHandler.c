@@ -50,6 +50,7 @@ int valueInCategory(char *category, FILE *DBFile, Vehicle *vehicles, Graph *grap
 	char lineInFile[30];
 	double edgeDistance;
 	Category cat = -1;
+	Edge edge;
 	
 	if (strcmp(category, "Vehicles") == 0)
 		cat = VEHICLES;
@@ -74,7 +75,8 @@ int valueInCategory(char *category, FILE *DBFile, Vehicle *vehicles, Graph *grap
 					break;
 				case EDGES:
 					sscanf(lineInFile, " %d %d %lf", &hubU, &hubV, &edgeDistance);
-					getEdge(graph, hubU, hubV)->distance = edgeDistance;
+					edge.distance = edgeDistance;
+					addEdge(graph, hubU, hubV, &edge);
 					break;
 				case ERROR:
 					printf("ERROR\n");
