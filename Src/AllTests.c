@@ -3,6 +3,7 @@
 #include "Hub.h"
 #include "Graph.h"
 #include "FileHandler.h"
+#include "Vehicle.h"
 
 /* Runs all the CuTest suites */
 void RunAllTests(void);
@@ -22,6 +23,14 @@ void graphTestCalcAllBalance(CuTest *ct);
 /* FileHandler */
 CuSuite *FHSuite();
 void FHTestReadFile(CuTest *ct);
+void FHTestAmountInCategory(CuTest *ct);
+void FHTestValueInCategory(CuTest *ct);
+
+/* Vechile */
+CuSuite *VeSuite();
+void vechicleTestgetVehicleActionAtHub(CuTest *ct);
+
+
 
 int main(void)
 {
@@ -37,6 +46,7 @@ void RunAllTests(void)
     CuSuiteAddSuite(suite, HubSuite());
 	CuSuiteAddSuite(suite, GraphSuite());
     CuSuiteAddSuite(suite, FHSuite());
+    CuSuiteAddSuite(suite, VeSuite());
 
     CuSuiteRun(suite);
     CuSuiteSummary(suite, output);
@@ -75,6 +85,13 @@ CuSuite *GraphSuite(){
     SUITE_ADD_TEST(suite, graphTestEdgeAmount);
     SUITE_ADD_TEST(suite, graphTestTotalAmountBicycle);
     SUITE_ADD_TEST(suite, graphTestCalcAllBalance);
+    return suite;
+}
+
+/* vehicle */
+CuSuite *VeSuite() {
+    CuSuite *suite = CuSuiteNew();
+    SUITE_ADD_TEST(suite, vechicleTestgetVehicleActionAtHub);
     return suite;
 }
 
@@ -171,6 +188,8 @@ void graphTestCalcAllBalance(CuTest *ct){
 CuSuite *FHSuite() {
     CuSuite *suite = CuSuiteNew();
     SUITE_ADD_TEST(suite, FHTestReadFile);
+	SUITE_ADD_TEST(suite, FHTestAmountInCategory);
+	SUITE_ADD_TEST(suite, FHTestValueInCategory);
     return suite;
 }
 
@@ -183,4 +202,37 @@ void FHTestReadFile(CuTest *ct) {
     readFileSuccessfully = readFile("DB/file.txt", &vehicles, graph);
     free(graph);
     CuAssertIntEquals(ct, expected, readFileSuccessfully);
+}
+
+void FHTestAmountInCategory(CuTest *ct){
+    int expected = 6, getAmountInCategory;
+	FILE *DBFile = fopen("DB/file.txt", "r");
+
+	getAmountInCategory = amountInCategory("Edges", DBFile);
+	CuAssertIntEquals(ct, expected, getAmountInCategory);
+}
+
+void FHTestValueInCategory(CuTest *ct){
+	int expected = 1, getValueInCategory;
+	Graph *graph = malloc(sizeof(Graph));
+	FILE *DBFile = fopen("DB/file.txt", "r");
+	int vehicleAmount = amountInCategory("Vehicles", DBFile);
+	int hubAmount = amountInCategory("Hubs", DBFile);
+	Hub *hubs = calloc(hubAmount, sizeof(Hub));
+	Vehicle *vehicles = calloc(vehicleAmount, sizeof(Vehicle));
+
+	initGraph(graph, hubs, hubAmount);
+	getValueInCategory = valueInCategory("Edges", DBFile, vehicles, graph);
+	free(graph);
+	CuAssertIntEquals(ct, expected, getValueInCategory);
+}
+
+
+/* Vechile */
+void vechicleTestgetVehicleActionAtHub(CuTest *ct){
+   int expected = -1;
+    Vehicle vehicle = {2, 10};
+    Hub hub = {0, 3, 1};
+ 
+    CuAssertIntEquals(ct, expected, getVehicleActionAtHub(&hub, &vehicle));
 }
