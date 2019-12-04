@@ -88,6 +88,13 @@ CuSuite *GraphSuite(){
     return suite;
 }
 
+/* vehicle */
+CuSuite *VeSuite() {
+    CuSuite *suite = CuSuiteNew();
+    SUITE_ADD_TEST(suite, vechicleTestgetVehicleActionAtHub);
+    return suite;
+}
+
 void graphTestInitGraph(CuTest *ct){
     Graph *graph = malloc(sizeof(Graph));
     Hub *hubs = calloc(5, sizeof(Hub));
@@ -218,4 +225,14 @@ void FHTestValueInCategory(CuTest *ct){
 	getValueInCategory = valueInCategory("Edges", DBFile, vehicles, graph);
 	free(graph);
 	CuAssertIntEquals(ct, expected, getValueInCategory);
+}
+
+
+/* Vechile */
+void vechicleTestgetVehicleActionAtHub(CuTest *ct){
+   int expected = -1;
+    Vehicle vehicle = {2, 10};
+    Hub hub = {0, 3, 1};
+ 
+    CuAssertIntEquals(ct, expected, getVehicleActionAtHub(&hub, &vehicle));
 }
