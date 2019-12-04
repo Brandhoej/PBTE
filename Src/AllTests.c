@@ -3,6 +3,7 @@
 #include "Hub.h"
 #include "Graph.h"
 #include "FileHandler.h"
+#include "Vehicle.h"
 
 /* Runs all the CuTest suites */
 void RunAllTests(void);
@@ -26,7 +27,11 @@ void FHTestAmountInCategory(CuTest *ct);
 void FHTestValueInCategory(CuTest *ct);
 void FHTestKeepReading(CuTest *ct);
 void FHTestGetLine(CuTest *ct);
-void FHTestReadNextLine(CuTest *ct);
+/*void FHTestReadNextLine(CuTest *ct);*/
+
+/* Vechile */
+CuSuite *VeSuite();
+void vechicleTestgetVehicleActionAtHub(CuTest *ct);
 
 int main(void)
 {
@@ -42,6 +47,7 @@ void RunAllTests(void)
     CuSuiteAddSuite(suite, HubSuite());
 	CuSuiteAddSuite(suite, GraphSuite());
     CuSuiteAddSuite(suite, FHSuite());
+	CuSuiteAddSuite(suite, VeSuite());
 
     CuSuiteRun(suite);
     CuSuiteSummary(suite, output);
@@ -180,7 +186,7 @@ CuSuite *FHSuite() {
 	SUITE_ADD_TEST(suite, FHTestValueInCategory);
 	SUITE_ADD_TEST(suite, FHTestKeepReading);
 	SUITE_ADD_TEST(suite, FHTestGetLine);
-	SUITE_ADD_TEST(suite, FHTestReadNextLine);
+	/*SUITE_ADD_TEST(suite, FHTestReadNextLine);*/
     return suite;
 }
 
@@ -245,3 +251,18 @@ void FHTestReadNextLine(CuTest *ct){
 	
 }
 */
+
+/* Vehicle */
+CuSuite *VeSuite() {
+    CuSuite *suite = CuSuiteNew();
+    SUITE_ADD_TEST(suite, vechicleTestgetVehicleActionAtHub);
+    return suite;
+}
+
+void vechicleTestgetVehicleActionAtHub(CuTest *ct){
+	int expected = -1;
+	Vehicle vehicle = {2, 10};
+	Hub hub = {0, 3, 1};
+
+	CuAssertIntEquals(ct, expected, getVehicleActionAtHub(&hub, &vehicle));
+}
