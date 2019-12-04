@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "CuTest.h"
 #include "Hub.h"
 #include "Graph.h"
@@ -27,11 +28,13 @@ void FHTestAmountInCategory(CuTest *ct);
 void FHTestValueInCategory(CuTest *ct);
 void FHTestKeepReading(CuTest *ct);
 void FHTestGetLine(CuTest *ct);
-/*void FHTestReadNextLine(CuTest *ct);*/
+void FHTestReadNextLine(CuTest *ct);
 
 /* Vechile */
 CuSuite *VeSuite();
+void vehicleTestavailableCapacity(CuTest *ct);
 void vechicleTestgetVehicleActionAtHub(CuTest *ct);
+void vehicleTestdoVehicleActionAtHub(CuTest *ct);
 
 int main(void)
 {
@@ -186,7 +189,7 @@ CuSuite *FHSuite() {
 	SUITE_ADD_TEST(suite, FHTestValueInCategory);
 	SUITE_ADD_TEST(suite, FHTestKeepReading);
 	SUITE_ADD_TEST(suite, FHTestGetLine);
-	/*SUITE_ADD_TEST(suite, FHTestReadNextLine);*/
+	SUITE_ADD_TEST(suite, FHTestReadNextLine);
     return suite;
 }
 
@@ -241,22 +244,33 @@ void FHTestGetLine(CuTest *ct){
 	gotLine = getLine("Hubs", DBFile);
 	CuAssertIntEquals(ct, expected, gotLine);
 }
-/*
+
 void FHTestReadNextLine(CuTest *ct){
-	char expected[30], lineInFile[30];
+	char testLine[30], lineInFile[30];
+	int expected = 0;
 	FILE *DBFile = fopen("DB/file.txt", "r");
 
-	fgets(expected, 30, DBFile);
+	fgets(testLine, 30, DBFile);
+	rewind(DBFile);
 	readNextLine(lineInFile, DBFile);
-	
+	CuAssertIntEquals(ct, expected, strcmp(testLine, lineInFile));
 }
-*/
+
 
 /* Vehicle */
 CuSuite *VeSuite() {
     CuSuite *suite = CuSuiteNew();
+	SUITE_ADD_TEST(suite, vehicleTestavailableCapacity);
     SUITE_ADD_TEST(suite, vechicleTestgetVehicleActionAtHub);
-    return suite;
+	SUITE_ADD_TEST(suite, vehicleTestdoVehicleActionAtHub);
+	return suite;
+}
+
+void vehicleTestavailableCapacity(CuTest *ct){
+	int expected = 8;
+	Vehicle vehicle = {2, 10};
+
+	CuAssertIntEquals(ct, expected, availableCapacity(&vehicle));
 }
 
 void vechicleTestgetVehicleActionAtHub(CuTest *ct){
@@ -265,4 +279,12 @@ void vechicleTestgetVehicleActionAtHub(CuTest *ct){
 	Hub hub = {0, 3, 1};
 
 	CuAssertIntEquals(ct, expected, getVehicleActionAtHub(&hub, &vehicle));
+}
+
+void vehicleTestdoVehicleActionAtHub(CuTest *ct){
+	int expected = -1;
+	Vehicle vehicle = {2, 10};
+	Hub hub = {0, 3, 1};
+
+	CuAssertIntEquals(ct, expected, doVehicleActionAtHub(&hub, &vehicle));
 }
