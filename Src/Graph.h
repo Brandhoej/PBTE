@@ -83,3 +83,9 @@ unsigned int totalAmountBicycle(Graph *graph);
  * @return returns 1 when balance and 0 when not balance 
 */
 int CalcAllBalance(Graph *graph);
+
+/**
+ * Frees the allocated memtory of the graph (hubs, edges)
+ * @param graph the graph that will be freed
+ */
+void freeGraph(Graph *graph);

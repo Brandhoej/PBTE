@@ -1,5 +1,7 @@
 #include "Vehicle.h"
 
+#pragma once
+
 /**
  * @struct this struct contains data for a vehicle action at a hub on the graph stored by index.
  */
@@ -15,3 +17,6 @@ typedef struct VehicleAction
      */
     int hubIndex;
 } VehicleAction;
+
+void printVehicleActions(VehicleAction *action, int amount);
+void printVehicleAction(VehicleAction *action);
