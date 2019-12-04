@@ -28,9 +28,9 @@ int readFile(char *path, Vehicle **vehicles, Graph *graph, int *vehicleAmount) {
 }
 
 void analyzeFile(FILE *DBFile, Vehicle **vehicles, Graph *graph, int *vehicleAmount) {
-	int hubAmount = amountInCategory(CategoryToStr(HUBS), DBFile);
+	int hubAmount = amountInCategory(categoryToStr(HUBS), DBFile);
 	Hub *hubs = calloc(hubAmount, sizeof(Hub));
-	*vehicleAmount = amountInCategory(CategoryToStr(VEHICLES), DBFile);
+	*vehicleAmount = amountInCategory(categoryToStr(VEHICLES), DBFile);
 	*vehicles = calloc(*vehicleAmount, sizeof(Vehicle));
 
 	initGraph(graph, hubs, hubAmount);
