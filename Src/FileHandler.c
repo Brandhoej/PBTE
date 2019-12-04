@@ -13,26 +13,25 @@ char *categoryToStr(Category category){
 	return "";
 }
 
-int readFile(char *path, Vehicle **vehicles, Graph *graph) {
+int readFile(char *path, Vehicle **vehicles, Graph *graph, int *vehicleAmount) {
     int succes = 0;
 
     FILE *DBFile = fopen(path, "r");
     if(DBFile != NULL) {
 		succes = 1;
 
-		analyzeFile(DBFile, vehicles, graph);
+		analyzeFile(DBFile, vehicles, graph, vehicleAmount);
 	}
 
     fclose(DBFile);
     return succes;
 }
 
-void analyzeFile(FILE *DBFile, Vehicle **vehicles, Graph *graph) {
-	int vehicleAmount = amountInCategory(categoryToStr(VEHICLES), DBFile);
+void analyzeFile(FILE *DBFile, Vehicle **vehicles, Graph *graph, int *vehicleAmount) {
 	int hubAmount = amountInCategory(categoryToStr(HUBS), DBFile);
-
 	Hub *hubs = calloc(hubAmount, sizeof(Hub));
-	*vehicles = calloc(vehicleAmount, sizeof(Vehicle));
+	*vehicleAmount = amountInCategory(categoryToStr(VEHICLES), DBFile);
+	*vehicles = calloc(*vehicleAmount, sizeof(Vehicle));
 
 	initGraph(graph, hubs, hubAmount);
 	valueInCategory(categoryToStr(VEHICLES), DBFile, *vehicles, graph);
