@@ -9,7 +9,7 @@ typedef enum Category {VEHICLES,HUBS,EDGES,ERROR} Category;
  * @param category is the enum which will be converted
  * @returns a string representation of the category enum. 
  */
-char *CategoryToStr(Category category);
+char *categoryToStr(Category category);
 
 /**
  * @param path is the path to the file
