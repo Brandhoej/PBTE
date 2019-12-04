@@ -3,6 +3,7 @@
 #include "Hub.h"
 #include "Graph.h"
 #include "FileHandler.h"
+#include "Vehicle.h"
 
 /* Runs all the CuTest suites */
 void RunAllTests(void);
@@ -23,6 +24,12 @@ void graphTestCalcAllBalance(CuTest *ct);
 CuSuite *FHSuite();
 void FHTestReadFile(CuTest *ct);
 
+/* Vechile */
+CuSuite *VeSuite();
+void vechicleTestgetVehicleActionAtHub(CuTest *ct);
+
+
+
 int main(void)
 {
     RunAllTests();
@@ -37,6 +44,7 @@ void RunAllTests(void)
     CuSuiteAddSuite(suite, HubSuite());
 	CuSuiteAddSuite(suite, GraphSuite());
     CuSuiteAddSuite(suite, FHSuite());
+    CuSuiteAddSuite(suite, VeSuite());
 
     CuSuiteRun(suite);
     CuSuiteSummary(suite, output);
@@ -183,4 +191,22 @@ void FHTestReadFile(CuTest *ct) {
     readFileSuccessfully = readFile("DB/file.txt", &vehicles, graph);
     free(graph);
     CuAssertIntEquals(ct, expected, readFileSuccessfully);
+}
+
+/* vechile */
+CuSuite *VeSuite() {
+    CuSuite *suite = CuSuiteNew();
+    SUITE_ADD_TEST(suite, vechicleTestgetVehicleActionAtHub);
+    return suite;
+}
+
+/* vechicle.c */
+void graphTestCalcAllBalance(CuTest *ct){
+
+    int expected = -1;
+    Hub h = {1, 2, 1};
+    Vehicle v = {0, 2};
+    int actual = getVehicleActionAtHub(&h, &v);
+
+    CuAssertIntEquals(ct, expected, actual);
 }
