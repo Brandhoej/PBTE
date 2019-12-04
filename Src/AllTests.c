@@ -24,6 +24,9 @@ CuSuite *FHSuite();
 void FHTestReadFile(CuTest *ct);
 void FHTestAmountInCategory(CuTest *ct);
 void FHTestValueInCategory(CuTest *ct);
+void FHTestKeepReading(CuTest *ct);
+void FHTestGetLine(CuTest *ct);
+void FHTestReadNextLine(CuTest *ct);
 
 int main(void)
 {
@@ -175,6 +178,9 @@ CuSuite *FHSuite() {
     SUITE_ADD_TEST(suite, FHTestReadFile);
 	SUITE_ADD_TEST(suite, FHTestAmountInCategory);
 	SUITE_ADD_TEST(suite, FHTestValueInCategory);
+	SUITE_ADD_TEST(suite, FHTestKeepReading);
+	SUITE_ADD_TEST(suite, FHTestGetLine);
+	SUITE_ADD_TEST(suite, FHTestReadNextLine);
     return suite;
 }
 
@@ -190,7 +196,7 @@ void FHTestReadFile(CuTest *ct) {
 }
 
 void FHTestAmountInCategory(CuTest *ct){
-    int expected = 6, getAmountInCategory;
+    int expected = 36, getAmountInCategory;
 	FILE *DBFile = fopen("DB/file.txt", "r");
 
 	getAmountInCategory = amountInCategory("Edges", DBFile);
@@ -211,3 +217,31 @@ void FHTestValueInCategory(CuTest *ct){
 	free(graph);
 	CuAssertIntEquals(ct, expected, getValueInCategory);
 }
+
+void FHTestKeepReading(CuTest *ct){
+    int expected = 1, keptReading;
+	char lineInFile[30];
+	FILE *DBFile = fopen("DB/file.txt", "r");
+	
+	readNextLine(lineInFile, DBFile);
+	keptReading = keepReading(lineInFile, DBFile);
+	CuAssertIntEquals(ct, expected, keptReading);
+}
+
+void FHTestGetLine(CuTest *ct){
+	int expected = 1, gotLine;
+	FILE *DBFile = fopen("DB/file.txt", "r");
+
+	gotLine = getLine("Hubs", DBFile);
+	CuAssertIntEquals(ct, expected, gotLine);
+}
+/*
+void FHTestReadNextLine(CuTest *ct){
+	char expected[30], lineInFile[30];
+	FILE *DBFile = fopen("DB/file.txt", "r");
+
+	fgets(expected, 30, DBFile);
+	readNextLine(lineInFile, DBFile);
+	
+}
+*/
