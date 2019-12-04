@@ -95,7 +95,7 @@ Sequence *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, int *seqLen
         
         /* Weight edges */
         calcEdgeWeights(graph, vehicle, location, getEdgeWeight);
-        
+
         /* Find most optimal hub */
         nextLocation = getBestHubIndex(graph, location);
         
@@ -107,7 +107,7 @@ Sequence *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, int *seqLen
         
         /* Choose action at hub */
         action = doVehicleActionAtHub(&graph->hubs[location], vehicle);
-        
+
         /* Save action and location */
         actions[*seqLength].action = action;
         actions[*seqLength].hubIndex = location;
@@ -133,19 +133,18 @@ void calcEdgeWeights(Graph *graph, Vehicle *vehicle, int from, getEdgeWeight get
 }
 
 double calcEdgeWeight1(Graph *graph, Vehicle *vehicle, int from, int to){
-    double weight = getVehicleActionAtHub(&graph->hubs[to], vehicle);
-    Hub 
-        *toHub = &graph->hubs[to];
+    double weight = 0;
+    Hub *toHub = &graph->hubs[to];
     Edge *edge = getEdge(graph, from, to);
     
     if(from == to){
         weight = 0;
     }
     else{
-        if(getBalance(toHub) < 0 && vehicle->inventory + getBalance(toHub) >= 0) {        
+        if(getBalance(toHub) < 0 && (int)(vehicle->inventory + getBalance(toHub)) >= 0) {       
             weight += 1;
         }
-        else if(getBalance(toHub) > 0 && availableCapacity(vehicle) - getBalance(toHub) >= 0){
+        else if(getBalance(toHub) > 0 && (int)(availableCapacity(vehicle) - getBalance(toHub)) >= 0){
             weight += 1;
         }
         else{
