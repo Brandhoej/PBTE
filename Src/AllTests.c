@@ -23,6 +23,7 @@ void graphTestCalcAllBalance(CuTest *ct);
 
 /* FileHandler */
 CuSuite *FHSuite();
+void FHTestCategoryToStr(CuTest *ct);
 void FHTestReadFile(CuTest *ct);
 void FHTestAmountInCategory(CuTest *ct);
 void FHTestValueInCategory(CuTest *ct);
@@ -184,6 +185,7 @@ void graphTestCalcAllBalance(CuTest *ct){
 /* FileHandler */
 CuSuite *FHSuite() {
     CuSuite *suite = CuSuiteNew();
+	SUITE_ADD_TEST(suite, FHTestCategoryToStr);
     SUITE_ADD_TEST(suite, FHTestReadFile);
 	SUITE_ADD_TEST(suite, FHTestAmountInCategory);
 	SUITE_ADD_TEST(suite, FHTestValueInCategory);
@@ -191,6 +193,15 @@ CuSuite *FHSuite() {
 	SUITE_ADD_TEST(suite, FHTestGetLine);
 	SUITE_ADD_TEST(suite, FHTestReadNextLine);
     return suite;
+}
+
+void FHTestCategoryToStr(CuTest *ct){
+	int expected = 0;
+	
+	CuAssertIntEquals(ct, expected, strcmp("Vehicles", categoryToStr(VEHICLES)));
+	CuAssertIntEquals(ct, expected, strcmp("Hubs", categoryToStr(HUBS)));
+	CuAssertIntEquals(ct, expected, strcmp("Edges", categoryToStr(EDGES)));
+	CuAssertIntEquals(ct, expected, strcmp("Errors", categoryToStr(ERROR)));
 }
 
 void FHTestReadFile(CuTest *ct) {
