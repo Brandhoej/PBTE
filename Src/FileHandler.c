@@ -3,7 +3,7 @@
 #include <string.h>
 #include "FileHandler.h"
 
-char *CategoryToStr(Category category){
+char *categoryToStr(Category category){
 	switch(category){
 		case(VEHICLES): return "Vehicles"; break;
 		case(HUBS):     return "Hubs"; break;
@@ -28,16 +28,16 @@ int readFile(char *path, Vehicle **vehicles, Graph *graph) {
 }
 
 void analyzeFile(FILE *DBFile, Vehicle **vehicles, Graph *graph) {
-	int vehicleAmount = amountInCategory(CategoryToStr(VEHICLES), DBFile);
-	int hubAmount = amountInCategory(CategoryToStr(HUBS), DBFile);
+	int vehicleAmount = amountInCategory(categoryToStr(VEHICLES), DBFile);
+	int hubAmount = amountInCategory(categoryToStr(HUBS), DBFile);
 
 	Hub *hubs = calloc(hubAmount, sizeof(Hub));
 	*vehicles = calloc(vehicleAmount, sizeof(Vehicle));
 
 	initGraph(graph, hubs, hubAmount);
-	valueInCategory(CategoryToStr(VEHICLES), DBFile, *vehicles, graph);
-	valueInCategory(CategoryToStr(HUBS), DBFile, *vehicles, graph);
-	valueInCategory(CategoryToStr(EDGES), DBFile, *vehicles, graph);
+	valueInCategory(categoryToStr(VEHICLES), DBFile, *vehicles, graph);
+	valueInCategory(categoryToStr(HUBS), DBFile, *vehicles, graph);
+	valueInCategory(categoryToStr(EDGES), DBFile, *vehicles, graph);
 }
 
 int amountInCategory(char *category, FILE *DBFile) {
@@ -62,11 +62,11 @@ int valueInCategory(char *category, FILE *DBFile, Vehicle *vehicles, Graph *grap
 	Category cat = -1;
 	Edge edge;
 	
-	if (strcmp(category, CategoryToStr(VEHICLES)) == 0)
+	if (strcmp(category, categoryToStr(VEHICLES)) == 0)
 		cat = VEHICLES;
-	else if (strcmp(category, CategoryToStr(HUBS)) == 0)
+	else if (strcmp(category, categoryToStr(HUBS)) == 0)
 		cat = HUBS;
-	else if (strcmp(category, CategoryToStr(EDGES)) == 0)
+	else if (strcmp(category, categoryToStr(EDGES)) == 0)
 		cat = EDGES;
 	else
 		cat = ERROR;
