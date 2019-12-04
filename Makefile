@@ -28,7 +28,7 @@
 #If the VAR name is single character it is possible to use $V. 
 #For this brackets are not nessecary
 CC=gcc
-DEPS=Filehandler.o Graph.o Hub.o Vehicle.o
+DEPS=Filehandler.o Graph.o Hub.o Vehicle.o VehicleAction.o
 APPFLAGS=Main.o
 TFLAGS=AllTests.o CuTest.o
 
@@ -62,6 +62,9 @@ Hub.o: Src/Hub.c
 	$(CC) -c $^ $(CFLAGS)
 
 Vehicle.o: Src/Vehicle.c
+	$(CC) -c $^ $(CFLAGS)
+
+VehicleAction.o: Src/VehicleAction.c
 	$(CC) -c $^ $(CFLAGS)
 
 AllTests.o: Src/AllTests.c
