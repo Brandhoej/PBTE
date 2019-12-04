@@ -1,5 +1,7 @@
 #include "Vehicle.h"
 
+#pragma once
+
 /**
  * @struct this struct contains data for a vehicle action at a hub on the graph stored by index.
  */

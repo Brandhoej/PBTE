@@ -73,3 +73,9 @@ int CalcAllBalance(Graph *graph){
     }while(balance == 0 && n < graph->hubAmount);
     return balance == 0;
 }
+
+void freeGraph(Graph *graph){
+    free(graph->edges);
+    free(graph->hubs);
+    free(graph);    
+}

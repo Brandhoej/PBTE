@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "FileHandler.h"
 #include "Vehicle.h"
+#include "Sequence.h"
 #include "VehicleAction.h"
 
 /**
@@ -24,7 +25,7 @@ typedef double (getEdgeWeight)(Graph *graph, Vehicle *vehicle, int from, int to)
  * @param getEdgeWeight is the function used by the algorithm to calculate the edge weights
  * @returns the sequence of hubs to visit with the vehicle
  */
-VehicleAction *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, int *seqLength, getEdgeWeight getWedgeWeights);
+Sequence *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, int *seqLength, getEdgeWeight getWedgeWeights);
 
 /**
  * Calculates the weight from a point in a graph to all the neighbours using the getEdgeWeight function.
@@ -44,8 +45,8 @@ int main(void) {
     Vehicle *vehicles;
     
     /* Make variables fot the sequence returned by the algorithm */
-    int seqLength = 0;
-    VehicleAction *seq = NULL;
+    int sequenceLength = 0;
+    Sequence *sequence = NULL;
     
     /* Read file.txt data */
     readFile("DB/file.txt", &vehicles, graph);
@@ -53,21 +54,22 @@ int main(void) {
     /* Ask user for vehicle type */
     
     /* Get the sequence from the algorithm */
-    seq = PBTE412(graph, &vehicles[0], 0, &seqLength, calcEdgeWeight2);
-    printf("Length: %i   Dist:???\n", seqLength);
-    printVehicleActions(seq, seqLength);
+    sequence = PBTE412(graph, &vehicles[0], 0, &sequenceLength, calcEdgeWeight2);
+    printSequence(sequence);
     
     /* Clean up */
-    free(graph->hubs);
-    free(graph);
+    freeGraph(graph);
     
     return EXIT_SUCCESS;
 }
 
-VehicleAction *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, int *seqLength, getEdgeWeight getEdgeWeight){
-    VehicleAction *seq = calloc(1000, sizeof(VehicleAction));
+Sequence *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, int *seqLength, getEdgeWeight getEdgeWeight){
+    Sequence *sequence = malloc(sizeof(Sequence));
+    VehicleAction *actions = calloc(1000, sizeof(VehicleAction));
+    Edge *edge = NULL;
+    
     int location = startHubIndex, nextLocation, action;
-    (*seqLength) = 1; /* We count the starting location */
+    (*seqLength) = 1; /* We count the action at the starting location */
     
     while(CalcAllBalance(graph) == 0){
         /* Weight edges */
@@ -76,6 +78,9 @@ VehicleAction *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, int *s
         /* Find most optimal hub */
         nextLocation = getBestHubIndex(graph, location);
         
+        /* Store edge */
+        edge = getEdge(graph, location, nextLocation);
+        
         /* Go to best hub */
         location = nextLocation;
         
@@ -83,12 +88,16 @@ VehicleAction *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, int *s
         action = doVehicleActionAtHub(&graph->hubs[location], vehicle);
         
         /* Save action and location */
-        seq[*seqLength].action = action;
-        seq[*seqLength].hubIndex = location;
+        actions[*seqLength].action = action;
+        actions[*seqLength].hubIndex = location;
+        sequence->totalDistance += edge->distance;
         (*seqLength)++;
     }
     
-    return seq;
+    sequence->actions = actions;
+    sequence->actionsLength = *seqLength;
+    
+    return sequence;
 }
 
 void calcEdgeWeights(Graph *graph, Vehicle *vehicle, int from, getEdgeWeight getEdgeWeight){
@@ -99,7 +108,7 @@ void calcEdgeWeights(Graph *graph, Vehicle *vehicle, int from, getEdgeWeight get
 }
 
 double calcEdgeWeight1(Graph *graph, Vehicle *vehicle, int from, int to){
-    double weight = 0;
+    double weight = getVehicleActionAtHub(&graph->hubs[to], vehicle);
     Hub 
         *toHub = &graph->hubs[to];
     Edge *edge = getEdge(graph, from, to);
@@ -123,7 +132,7 @@ double calcEdgeWeight1(Graph *graph, Vehicle *vehicle, int from, int to){
          * Distance is the factor that has the highest impact on the calculation on the weight
          * Distance is divided by 10 which is a factor that has been chosen.
          */
-        weight /= (edge->distance/10);
+        weight = (edge->distance/10);
         /**
          * Calculates the weight, but the distance has the highest impact 
          * abs return the absolute value which is always positive 
@@ -131,9 +140,9 @@ double calcEdgeWeight1(Graph *graph, Vehicle *vehicle, int from, int to){
          * inventory of the vechile has been taking into account
          * getBalance which can be negative or positive has been taking into account
          */
-        weight /= abs(((double)vehicle->capacity) / 2.0 - (((double)vehicle->inventory) + abs(getBalance(toHub))));        
+        weight = abs(((double)vehicle->capacity) / 2.0 - (((double)vehicle->inventory) + abs(getBalance(toHub))));        
     }
-
+    
     return weight;
 }
 
