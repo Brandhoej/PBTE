@@ -5,6 +5,8 @@
 #include "Sequence.h"
 #include "VehicleAction.h"
 
+#define MAX_SEQ_SIZE (1000)
+
 /**
  * This function is ued by the algorithm to calculate all the edge weights.
  * The higher the weight the better.
@@ -54,7 +56,7 @@ int main(void) {
     
     /* Print vehicles and their indicies */
     for(i = 0; i < vehicleAmount; ++i){
-        printf("%2i :: %2i/%-2i\n", i, vehicles[i].inventory,  vehicles[i].capacity);
+        printf("%1i :: %2i/%-2i\n", i, vehicles[i].inventory,  vehicles[i].capacity);
     }
     
     /* Read user vehicle input */
@@ -73,9 +75,8 @@ int main(void) {
 }
 
 Sequence *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, int *seqLength, getEdgeWeight getEdgeWeight){
-    int currentActionSize = graph->hubAmount;
     Sequence *sequence = malloc(sizeof(Sequence));
-    VehicleAction *actions = calloc(currentActionSize, sizeof(VehicleAction));
+    VehicleAction *actions = calloc(MAX_SEQ_SIZE, sizeof(VehicleAction)), *temp = NULL;
     Edge *edge = NULL;
     int location = startHubIndex, nextLocation, action;
     (*seqLength) = 0;
@@ -85,20 +86,14 @@ Sequence *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, int *seqLen
     actions[*seqLength].action = action;
     actions[*seqLength].hubIndex = location;
     (*seqLength)++;
-        
-    while(CalcAllBalance(graph) == 0){
-        /* If the sequence length now extends the array then resize */
-        if(*seqLength >= currentActionSize){
-            currentActionSize = *seqLength + graph->hubAmount;
-            actions = realloc(actions, currentActionSize * sizeof(VehicleAction));
-        }
-        
+    
+    while(CalcAllBalance(graph) == 0){        
         /* Weight edges */
         calcEdgeWeights(graph, vehicle, location, getEdgeWeight);
 
         /* Find most optimal hub */
         nextLocation = getBestHubIndex(graph, location);
-        printf("GOING TO %d\n", nextLocation);
+        
         /* Store edge */
         edge = getEdge(graph, location, nextLocation);
         
@@ -115,8 +110,9 @@ Sequence *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, int *seqLen
         (*seqLength)++;
     }
     
-    if(*seqLength != currentActionSize){
-        actions = realloc(actions, *seqLength * sizeof(VehicleAction));
+    /* Free unused VehicleActions */
+    if((temp = realloc(actions, *seqLength * sizeof(VehicleAction))) != NULL) {
+        actions = temp;
     }
     
     sequence->actions = actions;

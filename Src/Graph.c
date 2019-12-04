@@ -66,7 +66,6 @@ unsigned int totalAmountBicycle(Graph *graph){
 
 int CalcAllBalance(Graph *graph){
     int n = 0, balance = 0;
-
     do{
         balance = getBalance(&graph->hubs[n]);
         n++;
