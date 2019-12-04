@@ -52,16 +52,16 @@ int main(void) {
     /* Read file.txt data */
     readFile("DB/file.txt", &vehicles, graph, &vehicleAmount);
     
-    /* Ask user for vehicle type */
     /* Print vehicles and their indicies */
     for(i = 0; i < vehicleAmount; ++i){
         printf("%2i :: %2i/%-2i\n", i, vehicles[i].inventory,  vehicles[i].capacity);
     }
+    
     /* Read user vehicle input */
     printf("Which vehicle do you want?> ");
     if(scanf(" %i", &vehicleIndex) == 1){
         /* Get the sequence from the algorithm */
-        sequence = PBTE412(graph, &vehicles[vehicleIndex], 0, &sequenceLength, calcEdgeWeight2);
+        sequence = PBTE412(graph, &vehicles[vehicleIndex], 0, &sequenceLength, calcEdgeWeight1);
         printSequence(sequence);
     }
     
