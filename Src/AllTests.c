@@ -206,11 +206,12 @@ void FHTestCategoryToStr(CuTest *ct){
 
 void FHTestReadFile(CuTest *ct) {
     int expected = 1,
-        readFileSuccessfully;
+        readFileSuccessfully,
+        vehicleAmount;
     Vehicle *vehicles = NULL;
     Graph *graph = malloc(sizeof(Graph));
     
-    readFileSuccessfully = readFile("DB/file.txt", &vehicles, graph);
+    readFileSuccessfully = readFile("DB/file.txt", &vehicles, graph, &vehicleAmount);
     free(graph);
     CuAssertIntEquals(ct, expected, readFileSuccessfully);
 }
