@@ -10,7 +10,6 @@
 typedef struct Graph {
     /**
      * The amount of hubs in this graph
-     * @TODO make more generic
     */
     unsigned int hubAmount;
 
@@ -20,25 +19,12 @@ typedef struct Graph {
     Hub *hubs;
 
     /**
-     * This is the 1d hub array with hub pointers.
+     * This is the 1d hub array.
      * The size of this array is equal to hubAmount.
     */
     Edge *edges;
 
 } Graph;
-
-/**
- * This function calculates the total amount of edges
- * @param n is the number of hubs
-*/
-int edgeAmount(int n);
-
-/**
- * This function gets the index in the graph array for the edge between two hubs (vertices)
- * @param u is one of the vertices
- * @param v is one of the vertices
-*/
-int getEdgeIndex(int u, int v);
 
 /**
  * This function initializes a graph with hubs and creates the adjacency matrix
@@ -47,6 +33,19 @@ int getEdgeIndex(int u, int v);
  * @param hubAmount an unsigned amount of hubs in the hubs
 */
 void initGraph(Graph *graph, Hub *hubs, unsigned int hubAmount);
+
+/**
+ * This function calculates the total amount of edges needed for n hubs
+ * @param n is the number of hubs
+*/
+unsigned int getEdgeAmount(unsigned int n);
+
+/**
+ * This function gets the index in the graph array for the edge between two hubs (vertices)
+ * @param u is one of the vertices
+ * @param v is one of the vertices
+*/
+int getEdgeIndex(unsigned int u, unsigned int v);
 
 /**
  * Function prototype, adds edge to the graph using parameters
@@ -58,17 +57,23 @@ void initGraph(Graph *graph, Hub *hubs, unsigned int hubAmount);
 void addEdge(Graph *graph, int u, int v, Edge *edge);
 
 /**
- * Returns the edge connecting these verticies in an undirected graph.
  * @param u is one of the verticies
  * @param v is one of the verticies
- * @return edge output
+ * @returns the edge connecting these verticies in an undirected graph.
  */
 Edge *getEdge(Graph *graph, int u, int v);
 
 /**
+ * @param graph is pointer to a graph with the hubs
+ * @param index the index of the hub in the graph
+ * @returns a hub pointer for the hub at that index. If out of bounds the NULL is returnd
+ */
+Hub *getHub(Graph *graph, int index);
+
+/**
  * @returns the hub index of the highest weighted hub from a hub index.
  */
-int getBestHubIndex(Graph *graph, int from);
+unsigned int getBestHubIndex(Graph *graph, unsigned int from);
 
  /**
  * Returns the total amount of bicycles in the graph
