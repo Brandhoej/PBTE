@@ -63,7 +63,7 @@ int main(void) {
     printf("Which vehicle do you want?> ");
     if(scanf(" %i", &vehicleIndex) == 1){
         /* Get the sequence from the algorithm */
-        sequence = PBTE412(graph, &vehicles[vehicleIndex], 0, &sequenceLength, calcEdgeWeight1);
+        sequence = PBTE412(graph, &vehicles[vehicleIndex], 0, &sequenceLength, calcEdgeWeight2);
         printSequence(sequence);
     }
     
@@ -78,7 +78,7 @@ Sequence *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, int *seqLen
     Sequence *sequence = malloc(sizeof(Sequence));
     VehicleAction *actions = calloc(MAX_ACT_SIZE, sizeof(VehicleAction)), *temp = NULL;
     Edge *edge = NULL;
-    int location = startHubIndex, nextLocation, action;
+    int location = startHubIndex, nextLocation, action, allBalance;
     (*seqLength) = 0;
     
     do{
@@ -91,18 +91,21 @@ Sequence *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, int *seqLen
         sequence->totalDistance += (edge == NULL) ? 0 : edge->distance;
         (*seqLength)++;
         
-        /* Weight edges */
-        calcEdgeWeights(graph, vehicle, location, getEdgeWeight);
+        allBalance=CalcAllBalance(graph);
+        if(allBalance == 0){
+            /* Weight edges */
+            calcEdgeWeights(graph, vehicle, location, getEdgeWeight);
 
-        /* Find most optimal hub */
-        nextLocation = getBestHubIndex(graph, location);
+            /* Find most optimal hub */
+            nextLocation = getBestHubIndex(graph, location);
 
-        /* Store edge */
-        edge = getEdge(graph, location, nextLocation);
-        
-        /* Go to best hub */
-        location = nextLocation;
-    }while(CalcAllBalance(graph) == 0);
+            /* Store edge */
+            edge = getEdge(graph, location, nextLocation);
+            
+            /* Go to best hub */
+            location = nextLocation;
+        }
+    }while(allBalance == 0);
     
     /* Free unused VehicleActions */
     if((temp = realloc(actions, *seqLength * sizeof(VehicleAction))) != NULL) {
