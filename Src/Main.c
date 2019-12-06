@@ -91,7 +91,9 @@ Sequence *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, int *seqLen
         sequence->totalDistance += (edge == NULL) ? 0 : edge->distance;
         (*seqLength)++;
         
+        /* Calculate balances after action is performed */
         allBalance=CalcAllBalance(graph);
+        
         if(allBalance == 0){
             /* Weight edges */
             calcEdgeWeights(graph, vehicle, location, getEdgeWeight);
@@ -172,25 +174,27 @@ double calcEdgeWeight1(Graph *graph, Vehicle *vehicle, int from, int to){
 double calcEdgeWeight2(Graph *graph, Vehicle *vehicle, int from, int to){
     /* TODO: Maybe prioritize getting rid of the complete inventory of the vehicle if it is possible near by
      * and to fill the inventory to the capacity if close by higher */
-    int bestActionAtHub = getVehicleActionAtHub(getHub(graph, to), vehicle);
+    int bestActionAtHub = getVehicleActionAtHub(getHub(graph, to), vehicle),
+        balanceAtDestination = 0;
     double weight = 0;
     /* If zero the hub is either in balance or the vehicle cant perform an action 
      * at the hub such as delivering and picking up inventory. If positive the vehicle picks up inventory */
     if(bestActionAtHub != 0)
     {
         weight += abs(bestActionAtHub);
+        balanceAtDestination = getBalance(getHub(graph, to));
         
         /* Best action is to pick up */
         if(bestActionAtHub > 0){
             /* Weight creating balance at the hub higher */
-            if(availableCapacity(vehicle) >= abs(getBalance(getHub(graph, to)))){
+            if(availableCapacity(vehicle) >= abs(balanceAtDestination)){
                weight += abs(bestActionAtHub);
             }
         }
         /* Best action is to deliver */
         else{
             /* Weight creating balance at the hub higher */
-            if(vehicle->inventory >= abs(getBalance(getHub(graph, to)))){
+            if(vehicle->inventory >= abs(balanceAtDestination)){
                weight += abs(bestActionAtHub);
             }
         }
