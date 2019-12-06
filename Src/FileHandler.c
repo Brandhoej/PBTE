@@ -107,7 +107,6 @@ int keepReading(char *lineInFile, FILE *DBFile) {
 		returnState = 0;
 	else
 		sscanf(lineInFile, "%c%c", &firstChar, &secondChar);
-
 	return returnState ? (firstChar == ' ' && secondChar == ' ') : returnState;
 }
 
@@ -117,7 +116,6 @@ int getLine(char *category, FILE *DBFile) {
 	char lineInFile[30];
 
 	rewind(DBFile);
-
 	do {
 		if (readNextLine(lineInFile, DBFile) == NULL) {
 			returnState = 0;
@@ -126,7 +124,6 @@ int getLine(char *category, FILE *DBFile) {
 			sscanf(lineInFile, " %s", firstString);	
 		}
 	} while (strcmp(firstString, category) != 0 && returnState);
-
 	return returnState;
 }
 
