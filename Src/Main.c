@@ -63,7 +63,7 @@ int main(void) {
     printf("Which vehicle do you want?> ");
     if(scanf(" %i", &vehicleIndex) == 1){
         /* Get the sequence from the algorithm */
-        sequence = PBTE412(graph, &vehicles[vehicleIndex], 0, &sequenceLength, calcEdgeWeight2);
+        sequence = PBTE412(graph, &vehicles[vehicleIndex], 0, &sequenceLength, calcEdgeWeight1);
         printSequence(sequence);
     }
     
@@ -96,7 +96,7 @@ Sequence *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, int *seqLen
 
         /* Find most optimal hub */
         nextLocation = getBestHubIndex(graph, location);
-        
+
         /* Store edge */
         edge = getEdge(graph, location, nextLocation);
         
@@ -132,16 +132,15 @@ double calcEdgeWeight1(Graph *graph, Vehicle *vehicle, int from, int to){
     }
     else{
         if(getBalance(toHub) < 0 && vehicle->inventory > 0) { 
-            if ((int)(vehicle->inventory + getBalance(toHub)) >= 0)
-                weight += 0.5;
-            else     
-                weight += 1;
+            weight = 10;
+            if (getBalance(toHub) + vehicle->inventory >= 0) {
+                weight += 25;
+            }
         }
         else if(getBalance(toHub) > 0 && availableCapacity(vehicle) > 0){
-            if ((int)(availableCapacity(vehicle) - getBalance(toHub)) >= 0)
-                weight += 0.5;
-            else     
-                weight += 1;
+            weight = 10;
+            if (availableCapacity(vehicle) - getBalance(toHub) >= 0)
+                weight += 25;
         }
         else{
             weight = 0;
@@ -152,7 +151,7 @@ double calcEdgeWeight1(Graph *graph, Vehicle *vehicle, int from, int to){
          * Distance is the factor that has the highest impact on the calculation on the weight
          * Distance is divided by 10 which is a factor that has been chosen.
          */
-        weight /= (edge->distance/6);
+        weight /= (edge->distance/10);
         
         /**
          * Calculates the weight, but the distance has the highest impact 
