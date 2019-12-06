@@ -14,17 +14,16 @@ char *categoryToStr(Category category){
 }
 
 int readFile(char *path, Vehicle **vehicles, Graph *graph, int *vehicleAmount) {
-    int succes = 0;
+    int success = 0;
 
     FILE *DBFile = fopen(path, "r");
     if(DBFile != NULL) {
-		succes = 1;
+		success = 1;
 
 		analyzeFile(DBFile, vehicles, graph, vehicleAmount);
 	}
-
     fclose(DBFile);
-    return succes;
+    return success;
 }
 
 void analyzeFile(FILE *DBFile, Vehicle **vehicles, Graph *graph, int *vehicleAmount) {
@@ -44,7 +43,7 @@ int amountInCategory(char *category, FILE *DBFile) {
 	char lineInFile[30];
 
 	if (getLine(category, DBFile)) {
-		while (keepReading(&lineInFile[0], DBFile))
+		while (keepReading(lineInFile, DBFile))
 			++amountCount;
 	}
 	else
