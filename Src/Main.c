@@ -20,15 +20,17 @@
 typedef double (getEdgeWeight)(Graph *graph, Vehicle *vehicle, int from, int to);
 
 /**
- * This is the "Probaly Better Than Experience 412" algorithm that returns a sequence of hubs to visit which will create "balance"
- * @param graph is the graph the vehicle traverses on the edges
- * @param vehicle is the vehicle used to rebalance the graph network of hubs
- * @param startHubIndex is the index of the first hub
- * @param seqLength is the length of the sequence returned
- * @param getEdgeWeight is the function used by the algorithm to calculate the edge weights
- * @returns the sequence of hubs to visit with the vehicle
+ * This is the "Probaly Better Than Experience 412" algorithm that returns a sequence of hubs to visit which will make eveyr hub meets its target inventory if possible.
+ * If it is not possible to reach the target inventory of every hub then there are two outcomes.
+ * It is possible that there are leftover bicycles but if this amount is lower or equal to the current capacity of the vehicle then the system still van reach balance
+ * Else if there are too few bicycles unpredicted behaviour will happen
+ * @param graph is the graph the vehicle traverses on the edges. Balance in relation to the hubs target inventory should be achiveable.
+ * @param vehicle is the vehicle used to rebalance the graph network of hubs. This vehicle can have leftover in the inventory bicycles when PBTE412 is done.
+ * @param startHubIndex is the index of the first hub. Must be a hub in graph.
+ * @param getEdgeWeight is the function used by the algorithm to calculate the edge weights.
+ * @returns the sequence of hubs to visit with the vehicle which creates balance.
  */
-Sequence *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, int *seqLength, getEdgeWeight getWedgeWeights);
+Sequence *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, getEdgeWeight getWedgeWeights);
 
 /**
  * Calculates the weight from a point in a graph to all its connecting hubs using the getEdgeWeight function.
@@ -43,13 +45,12 @@ double calcEdgeWeight1(Graph *graph, Vehicle *vehicle, int from, int to);
 double calcEdgeWeight2(Graph *graph, Vehicle *vehicle, int from, int to);
 
 int main(void) {
-    int vehicleAmount = 0, vehicleIndex = 0, i = 0;
+    int vehicleAmount = 0, vehicleIndex = 0, startingHub = 0, i = 0;
     /* Allocate for graph and vehicle */
     Graph *graph = malloc(sizeof(Graph));
     Vehicle *vehicles = NULL;
     
     /* Make variables fot the sequence returned by the algorithm */
-    int sequenceLength = 0;
     Sequence *sequence = NULL;
     
     /* Read file.txt data */
@@ -63,30 +64,36 @@ int main(void) {
     /* Read user vehicle input */
     printf("Which vehicle do you want?> ");
     if(scanf(" %i", &vehicleIndex) == 1){
-        /* Get the sequence from the algorithm */
-        sequence = PBTE412(graph, &vehicles[vehicleIndex], 1, &sequenceLength, calcEdgeWeight2);
-        printSequence(sequence);
+        printf("At which hub should the vehicle start [%i; %i]?>", 0, graph->hubAmount - 1);
+        if(scanf(" %i", &startingHub)){
+            /* Get the sequence from the algorithm */
+            sequence = PBTE412(graph, &vehicles[vehicleIndex], startingHub, calcEdgeWeight2);
+            printSequence(sequence);
+        }
     }
+    
+    freeGraph(graph);
+    free(vehicles);
     
     return EXIT_SUCCESS;
 }
 
-Sequence *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, int *seqLength, getEdgeWeight getEdgeWeight){
-    Sequence *sequence = calloc(1, sizeof(Sequence));
+Sequence *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, getEdgeWeight getEdgeWeight){
+    Sequence *sequence = malloc(sizeof(Sequence));
     VehicleAction *actions = calloc(MAX_ACT_SIZE, sizeof(VehicleAction)), *temp = NULL;
     Edge *edge = NULL;
     int location = startHubIndex, nextLocation, action, allBalance;
-    (*seqLength) = 0;
+    int seqLength = 0;
     
     do{
         /* Choose action at hub */
         action = doVehicleActionAtHub(getHub(graph, location), vehicle);
 
         /* Save action and location */
-        actions[*seqLength].action = action;
-        actions[*seqLength].hubIndex = location;
+        actions[seqLength].action = action;
+        actions[seqLength].hubIndex = location;
         sequence->totalDistance += (edge == NULL) ? 0 : edge->distance;
-        (*seqLength)++;
+        seqLength++;
         
         /* Calculate balances after action is performed */
         allBalance = CalcAllBalance(graph);
@@ -107,12 +114,12 @@ Sequence *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, int *seqLen
     }while(allBalance == 0);
     
     /* Free unused VehicleActions */
-    if((temp = realloc(actions, *seqLength * sizeof(VehicleAction))) != NULL) {
+    if((temp = realloc(actions, seqLength * sizeof(VehicleAction))) != NULL) {
         actions = temp;
     }
     
     sequence->actions = actions;
-    sequence->actionsLength = *seqLength;
+    sequence->actionsLength = seqLength;
     
     return sequence;
 }
