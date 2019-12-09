@@ -82,10 +82,11 @@ Sequence *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, getEdgeWeig
     Sequence *sequence = malloc(sizeof(Sequence));
     VehicleAction *actions = calloc(MAX_ACT_SIZE, sizeof(VehicleAction)), *temp = NULL;
     Edge *edge = NULL;
-    int location = startHubIndex, nextLocation, action, allBalance;
+    int location = startHubIndex, nextLocation, action, 
+        allBalance = CalcAllBalance(graph);
     int seqLength = 0;
     
-    do{
+    while(allBalance == 0){
         /* Choose action at hub */
         action = doVehicleActionAtHub(getHub(graph, location), vehicle);
 
@@ -94,24 +95,22 @@ Sequence *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, getEdgeWeig
         actions[seqLength].hubIndex = location;
         sequence->totalDistance += (edge == NULL) ? 0 : edge->distance;
         seqLength++;
+    
+        /* Weight edges */
+        calcEdgeWeights(graph, vehicle, location, getEdgeWeight);
+
+        /* Find most optimal hub */
+        nextLocation = getBestHubIndex(graph, location);
+
+        /* Store edge */
+        edge = getEdge(graph, location, nextLocation);
+        
+        /* Go to best hub */
+        location = nextLocation;
         
         /* Calculate balances after action is performed */
         allBalance = CalcAllBalance(graph);
-        
-        if(allBalance == 0){
-            /* Weight edges */
-            calcEdgeWeights(graph, vehicle, location, getEdgeWeight);
-
-            /* Find most optimal hub */
-            nextLocation = getBestHubIndex(graph, location);
-
-            /* Store edge */
-            edge = getEdge(graph, location, nextLocation);
-            
-            /* Go to best hub */
-            location = nextLocation;
-        }
-    }while(allBalance == 0);
+    }
     
     /* Free unused VehicleActions */
     if((temp = realloc(actions, seqLength * sizeof(VehicleAction))) != NULL) {
