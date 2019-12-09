@@ -105,6 +105,7 @@ Sequence *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, int *seqLen
         action = doVehicleActionAtHub(&graph->hubs[location], vehicle);
 
         /* Save action and location */
+        printf("SeqLen=%i\n", *seqLength);
         actions[*seqLength].action = action;
         actions[*seqLength].hubIndex = location;
         sequence->totalDistance += edge->distance;
