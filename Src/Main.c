@@ -6,6 +6,7 @@
 #include "VehicleAction.h"
 
 #define MAX_ACT_SIZE (100)
+#define FILE_PATH "DB/file4.txt"
 
 /**
  * This function is ued by the algorithm to calculate all the edge weights.
@@ -52,7 +53,7 @@ int main(void) {
     Sequence *sequence = NULL;
     
     /* Read file.txt data */
-    readFile("DB/file.txt", &vehicles, graph, &vehicleAmount);
+    readFile(FILE_PATH, &vehicles, graph, &vehicleAmount);
     
     /* Print vehicles and their indicies */
     for(i = 0; i < vehicleAmount; ++i){
@@ -63,7 +64,7 @@ int main(void) {
     printf("Which vehicle do you want?> ");
     if(scanf(" %i", &vehicleIndex) == 1){
         /* Get the sequence from the algorithm */
-        sequence = PBTE412(graph, &vehicles[vehicleIndex], 0, &sequenceLength, calcEdgeWeight1);
+        sequence = PBTE412(graph, &vehicles[vehicleIndex], 0, &sequenceLength, calcEdgeWeight2);
         printSequence(sequence);
     }
     
@@ -75,7 +76,7 @@ int main(void) {
 }
 
 Sequence *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, int *seqLength, getEdgeWeight getEdgeWeight){
-    Sequence *sequence = malloc(sizeof(Sequence));
+    Sequence *sequence = calloc(1, sizeof(Sequence));
     VehicleAction *actions = calloc(MAX_ACT_SIZE, sizeof(VehicleAction)), *temp = NULL;
     Edge *edge = NULL;
     int location = startHubIndex, nextLocation, action;
