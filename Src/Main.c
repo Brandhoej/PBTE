@@ -6,6 +6,7 @@
 #include "VehicleAction.h"
 
 #define MAX_ACT_SIZE (100)
+#define FILE_PATH "DB/file4.txt"
 
 /**
  * This function is ued by the algorithm to calculate all the edge weights.
@@ -52,7 +53,7 @@ int main(void) {
     Sequence *sequence = NULL;
     
     /* Read file.txt data */
-    readFile("DB/file.txt", &vehicles, graph, &vehicleAmount);
+    readFile(FILE_PATH, &vehicles, graph, &vehicleAmount);
     
     /* Print vehicles and their indicies */
     for(i = 0; i < vehicleAmount; ++i){
