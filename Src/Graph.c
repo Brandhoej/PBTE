@@ -75,7 +75,6 @@ unsigned int totalAmountBicycle(Graph *graph){
 int CalcAllBalance(Graph *graph){
     int n = 0, balance = 0;
     do{
-        printf("Hub*=%i\n", &graph->hubs[n]);
         balance = getBalance(&graph->hubs[n]);
         n++;
     }while(balance == 0 && n < graph->hubAmount);
@@ -85,5 +84,5 @@ int CalcAllBalance(Graph *graph){
 void freeGraph(Graph *graph){
     free(graph->edges);
     free(graph->hubs);
-    free(graph);    
+    free(graph);
 }

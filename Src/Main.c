@@ -5,8 +5,8 @@
 #include "Sequence.h"
 #include "VehicleAction.h"
 
-#define MAX_ACT_SIZE (100)
-#define FILE_PATH "DB/file4.txt"
+#define MAX_ACT_SIZE (1000)
+#define FILE_PATH "DB/file.txt"
 
 /**
  * This function is ued by the algorithm to calculate all the edge weights.
@@ -64,13 +64,9 @@ int main(void) {
     printf("Which vehicle do you want?> ");
     if(scanf(" %i", &vehicleIndex) == 1){
         /* Get the sequence from the algorithm */
-        sequence = PBTE412(graph, &vehicles[vehicleIndex], 0, &sequenceLength, calcEdgeWeight2);
+        sequence = PBTE412(graph, &vehicles[vehicleIndex], 2, &sequenceLength, calcEdgeWeight2);
         printSequence(sequence);
     }
-    
-    /* Clean up */
-    freeGraph(graph);
-    freeSequence(sequence);
     
     return EXIT_SUCCESS;
 }
@@ -89,14 +85,13 @@ Sequence *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, int *seqLen
         action = doVehicleActionAtHub(getHub(graph, location), vehicle);
 
         /* Save action and location */
-        printf("SeqLen=%i\n", *seqLength);
         actions[*seqLength].action = action;
         actions[*seqLength].hubIndex = location;
         sequence->totalDistance += (edge == NULL) ? 0 : edge->distance;
         (*seqLength)++;
         
         /* Calculate balances after action is performed */
-        allBalance=CalcAllBalance(graph);
+        allBalance = CalcAllBalance(graph);
         
         if(allBalance == 0){
             /* Weight edges */
