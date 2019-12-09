@@ -64,7 +64,7 @@ int main(void) {
     printf("Which vehicle do you want?> ");
     if(scanf(" %i", &vehicleIndex) == 1){
         /* Get the sequence from the algorithm */
-        sequence = PBTE412(graph, &vehicles[vehicleIndex], 2, &sequenceLength, calcEdgeWeight2);
+        sequence = PBTE412(graph, &vehicles[vehicleIndex], 1, &sequenceLength, calcEdgeWeight2);
         printSequence(sequence);
     }
     
@@ -77,8 +77,6 @@ Sequence *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, int *seqLen
     Edge *edge = NULL;
     int location = startHubIndex, nextLocation, action, allBalance;
     (*seqLength) = 0;
-    
-    /* Måske tjekke om der er balance */
     
     do{
         /* Choose action at hub */
