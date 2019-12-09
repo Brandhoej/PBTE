@@ -33,7 +33,7 @@ typedef double (getEdgeWeight)(Graph *graph, Vehicle *vehicle, int from, int to)
 Sequence *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, getEdgeWeight getWedgeWeights);
 
 /**
- * Calculates the weight from a point in a graph to all the neighbours using the getEdgeWeight function.
+ * Calculates the weight from a point in a graph to all its connecting hubs using the getEdgeWeight function.
  * @param graph is the graph the vehicle traverses on the edges
  * @param vehicle is the vehicle used to rebalance the graph network of hubs
  * @param from is the location of the vehicle
