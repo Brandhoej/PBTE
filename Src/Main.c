@@ -82,11 +82,10 @@ Sequence *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, getEdgeWeig
     Sequence *sequence = malloc(sizeof(Sequence));
     VehicleAction *actions = calloc(MAX_ACT_SIZE, sizeof(VehicleAction)), *temp = NULL;
     Edge *edge = NULL;
-    int location = startHubIndex, nextLocation, action, 
-        allBalance = CalcAllBalance(graph);
+    int location = startHubIndex, nextLocation, action, allBalance;
     int seqLength = 0;
     
-    while(allBalance == 0){
+    while((allBalance = CalcAllBalance(graph)) == 0){
         /* Choose action at hub */
         action = doVehicleActionAtHub(getHub(graph, location), vehicle);
 
