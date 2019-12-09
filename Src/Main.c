@@ -75,17 +75,20 @@ int main(void) {
 }
 
 Sequence *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, int *seqLength, getEdgeWeight getEdgeWeight){
-    Sequence *sequence = malloc(sizeof(Sequence));
+    Sequence *sequence = calloc(1, sizeof(Sequence));
     VehicleAction *actions = calloc(MAX_ACT_SIZE, sizeof(VehicleAction)), *temp = NULL;
     Edge *edge = NULL;
     int location = startHubIndex, nextLocation, action, allBalance;
     (*seqLength) = 0;
+    
+    /* Måske tjekke om der er balance */
     
     do{
         /* Choose action at hub */
         action = doVehicleActionAtHub(getHub(graph, location), vehicle);
 
         /* Save action and location */
+        printf("SeqLen=%i\n", *seqLength);
         actions[*seqLength].action = action;
         actions[*seqLength].hubIndex = location;
         sequence->totalDistance += (edge == NULL) ? 0 : edge->distance;
