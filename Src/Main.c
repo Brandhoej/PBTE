@@ -43,7 +43,7 @@ double calcEdgeWeight1(Graph *graph, Vehicle *vehicle, int from, int to);
 double calcEdgeWeight2(Graph *graph, Vehicle *vehicle, int from, int to);
 
 int main(void) {
-    int vehicleAmount = 0, vehicleIndex = 0, i = 0;
+    int vehicleAmount = 0, vehicleIndex = 0, startingHub = 0, i = 0;
     /* Allocate for graph and vehicle */
     Graph *graph = malloc(sizeof(Graph));
     Vehicle *vehicles = NULL;
@@ -63,10 +63,16 @@ int main(void) {
     /* Read user vehicle input */
     printf("Which vehicle do you want?> ");
     if(scanf(" %i", &vehicleIndex) == 1){
-        /* Get the sequence from the algorithm */
-        sequence = PBTE412(graph, &vehicles[vehicleIndex], 1, &sequenceLength, calcEdgeWeight2);
-        printSequence(sequence);
+        printf("At which hub should the vehicle start [%i; %i]?>", 0, graph->hubAmount - 1);
+        if(scanf(" %i", &startingHub)){
+            /* Get the sequence from the algorithm */
+            sequence = PBTE412(graph, &vehicles[vehicleIndex], startingHub  , &sequenceLength, calcEdgeWeight2);
+            printSequence(sequence);
+        }
     }
+    
+    freeGraph(graph);
+    free(vehicles);
     
     return EXIT_SUCCESS;
 }
