@@ -85,7 +85,7 @@ Sequence *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, getEdgeWeig
     int location = startHubIndex, nextLocation, action;
     int seqLength = 0;
     
-    while(CalcAllBalance(graph) == 0){
+    while(calcAllBalance(graph) == 0){
         /* Choose action at hub */
         action = doVehicleActionAtHub(getHub(graph, location), vehicle);
 

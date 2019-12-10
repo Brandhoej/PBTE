@@ -87,7 +87,7 @@ unsigned int totalAmountBicycle(Graph *graph);
  * @param graph point to the graph to get the values from hubs and the amount of hubs
  * @return returns 1 when balance and 0 when not balance 
 */
-int CalcAllBalance(Graph *graph);
+int calcAllBalance(Graph *graph);
 
 /**
  * Frees the allocated memtory of the graph (hubs, edges)

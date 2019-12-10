@@ -175,7 +175,7 @@ void graphTestCalcAllBalance(CuTest *ct){
     calcTargetInventory(&hubs[3]);
     calcTargetInventory(&hubs[4]);
 
-    CuAssertIntEquals(ct, expected, CalcAllBalance(graph));
+    CuAssertIntEquals(ct, expected, calcAllBalance(graph));
 
     free(graph);
     free(hubs);
