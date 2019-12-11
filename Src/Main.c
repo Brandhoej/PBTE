@@ -67,6 +67,9 @@ int main(void) {
         sequence = PBTE412(graph, &vehicles[vehicleIndex], 1, &sequenceLength, calcEdgeWeight2);
         printSequence(sequence);
     }
+
+    freeGraph(graph);
+    free(vehicles);
     
     return EXIT_SUCCESS;
 }
