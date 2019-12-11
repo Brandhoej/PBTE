@@ -71,6 +71,9 @@ int main(void) {
             printSequence(sequence);
         }
     }
+
+    freeGraph(graph);
+    free(vehicles);
     
     freeGraph(graph);
     free(vehicles);

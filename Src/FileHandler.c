@@ -3,8 +3,8 @@
 #include <string.h>
 #include "FileHandler.h"
 
-char *categoryToStr(Category category){
-    switch(category){
+char *listToStr(List list){
+    switch(list){
         case(VEHICLES): return "Vehicles"; break;
         case(HUBS):     return "Hubs"; break;
         case(EDGES):    return "Edges"; break;
@@ -27,22 +27,22 @@ int readFile(char *path, Vehicle **vehicles, Graph *graph, int *vehicleAmount) {
 }
 
 void analyzeFile(FILE *DBFile, Vehicle **vehicles, Graph *graph, int *vehicleAmount) {
-    int hubAmount = amountInCategory(categoryToStr(HUBS), DBFile);
+    int hubAmount = amountInList(listToStr(HUBS), DBFile);
     Hub *hubs = calloc(hubAmount, sizeof(Hub));
-    *vehicleAmount = amountInCategory(categoryToStr(VEHICLES), DBFile);
+    *vehicleAmount = amountInList(listToStr(VEHICLES), DBFile);
     *vehicles = calloc(*vehicleAmount, sizeof(Vehicle));
 
     initGraph(graph, hubs, hubAmount);
-    valueInCategory(categoryToStr(VEHICLES), DBFile, *vehicles, graph);
-    valueInCategory(categoryToStr(HUBS), DBFile, *vehicles, graph);
-    valueInCategory(categoryToStr(EDGES), DBFile, *vehicles, graph);
+    valueInList(listToStr(VEHICLES), DBFile, *vehicles, graph);
+    valueInList(listToStr(HUBS), DBFile, *vehicles, graph);
+    valueInList(listToStr(EDGES), DBFile, *vehicles, graph);
 }
 
-int amountInCategory(char *category, FILE *DBFile) {
+int amountInList(char *list, FILE *DBFile) {
     int amountCount = 0;
     char lineInFile[30];
 
-    if (getLine(category, DBFile)) {
+    if (getLine(list, DBFile)) {
         while (keepReading(lineInFile, DBFile))
             ++amountCount;
     }
@@ -51,25 +51,25 @@ int amountInCategory(char *category, FILE *DBFile) {
     return amountCount;
 }
 
-int valueInCategory(char *category, FILE *DBFile, Vehicle *vehicles, Graph *graph) {
+int valueInList(char *list, FILE *DBFile, Vehicle *vehicles, Graph *graph) {
     int returnState = 1, indx = 0;
     int hubU, hubV;
     char name[10];
     char lineInFile[30];
     double edgeDistance;
-    Category cat = -1;
+    List cat = -1;
     Edge edge;
     
-    if (strcmp(category, categoryToStr(VEHICLES)) == 0)
+    if (strcmp(list, listToStr(VEHICLES)) == 0)
         cat = VEHICLES;
-    else if (strcmp(category, categoryToStr(HUBS)) == 0)
+    else if (strcmp(list, listToStr(HUBS)) == 0)
         cat = HUBS;
-    else if (strcmp(category, categoryToStr(EDGES)) == 0)
+    else if (strcmp(list, listToStr(EDGES)) == 0)
         cat = EDGES;
     else
         cat = ERROR;
 
-    if (getLine(category, DBFile)) {
+    if (getLine(list, DBFile)) {
         while(keepReading(&lineInFile[0], DBFile)) {
             switch(cat) {
                 case VEHICLES:
@@ -110,7 +110,7 @@ int keepReading(char *lineInFile, FILE *DBFile) {
     return returnState ? (firstChar == ' ' && secondChar == ' ') : returnState;
 }
 
-int getLine(char *category, FILE *DBFile) {
+int getLine(char *list, FILE *DBFile) {
     int returnState = 1;
     char firstString[10];
     char lineInFile[30];
@@ -123,7 +123,7 @@ int getLine(char *category, FILE *DBFile) {
         else {
             sscanf(lineInFile, " %s", firstString);	
         }
-    } while (strcmp(firstString, category) != 0 && returnState);
+    } while (strcmp(firstString, list) != 0 && returnState);
     return returnState;
 }
 
