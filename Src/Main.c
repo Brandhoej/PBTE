@@ -78,7 +78,7 @@ int main(void) {
     return EXIT_SUCCESS;
 }
 
-Sequence *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, getEdgeWeight getEdgeWeight){
+Sequence *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, getEdgeWeight getWeight){
     Sequence *sequence = malloc(sizeof(Sequence));
     VehicleAction *actions = calloc(MAX_ACT_SIZE, sizeof(VehicleAction)), *temp = NULL;
     Edge *edge = NULL;
@@ -86,7 +86,7 @@ Sequence *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, getEdgeWeig
     int seqLength = 0;
     
     while(calcAllBalance(graph) == 0){
-        /* Choose action at hub */
+        /* Perform action */
         action = doVehicleActionAtHub(getHub(graph, location), vehicle);
 
         /* Save action and location */
@@ -94,11 +94,11 @@ Sequence *PBTE412(Graph *graph, Vehicle *vehicle, int startHubIndex, getEdgeWeig
         actions[seqLength].hubIndex = location;
         sequence->totalDistance += (edge == NULL) ? 0 : edge->distance;
         seqLength++;
-    
-        /* Weight edges */
-        calcEdgeWeights(graph, vehicle, location, getEdgeWeight);
 
-        /* Find most optimal hub */
+        /* Weight edges */
+        calcEdgeWeights(graph, vehicle, location, getWeight);
+
+        /* Find optimal hub */
         nextLocation = getBestHubIndex(graph, location);
 
         /* Store edge */

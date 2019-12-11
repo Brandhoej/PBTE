@@ -1,6 +1,6 @@
 Vehicles
     Bicycle 4
-    Truck 20
+    Truck 17
     SpaceShip 100
 Hubs
     H0 1 2
