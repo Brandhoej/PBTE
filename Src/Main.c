@@ -44,6 +44,11 @@ void calcEdgeWeights(Graph *graph, Vehicle *vehicle, int from, getEdgeWeight get
 double calcEdgeWeight1(Graph *graph, Vehicle *vehicle, int from, int to);
 double calcEdgeWeight2(Graph *graph, Vehicle *vehicle, int from, int to);
 
+/**
+ * A weight function which just picks the nearest negihbour where the vehicle can perform an action.
+ */
+double calcEdgeWeight3(Graph *graph, Vehicle *vehicle, int from, int to);
+
 int main(void) {
     int vehicleAmount = 0, vehicleIndex = 0, startingHub = 0, i = 0;
     /* Allocate for graph and vehicle */
@@ -67,7 +72,7 @@ int main(void) {
         printf("At which hub should the vehicle start [%i; %i]?>", 0, graph->hubAmount - 1);
         if(scanf(" %i", &startingHub)){
             /* Get the sequence from the algorithm */
-            sequence = PBTE412(graph, &vehicles[vehicleIndex], startingHub, calcEdgeWeight2);
+            sequence = PBTE412(graph, &vehicles[vehicleIndex], startingHub, calcEdgeWeight3);
             printSequence(sequence);
         }
     }
@@ -201,6 +206,15 @@ double calcEdgeWeight2(Graph *graph, Vehicle *vehicle, int from, int to){
             }
         }
         weight /= getEdge(graph, from, to)->distance;
+    }
+    return weight;
+}
+
+double calcEdgeWeight3(Graph *graph, Vehicle *vehicle, int from, int to){
+    double distance = getEdge(graph, from, to)->distance, weight = 0;
+    int bestActionAtHub = getVehicleActionAtHub(getHub(graph, to), vehicle);
+    if(bestActionAtHub != 0){
+        weight = 1 / (distance + 1);
     }
     return weight;
 }
