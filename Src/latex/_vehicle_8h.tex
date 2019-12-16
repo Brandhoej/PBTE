@@ -1,0 +1,66 @@
+\hypertarget{_vehicle_8h}{}\doxysection{Vehicle.\+h File Reference}
+\label{_vehicle_8h}\index{Vehicle.h@{Vehicle.h}}
+{\ttfamily \#include \char`\"{}Hub.\+h\char`\"{}}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_vehicle}{Vehicle}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{struct_vehicle}{Vehicle}} \mbox{\hyperlink{_vehicle_8h_af3fb0c301cb1242a7f7214b9c1d73aaa}{Vehicle}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+unsigned int \mbox{\hyperlink{_vehicle_8h_a64a70e811451579b0b6a0b8b9ad0fca3}{available\+Capacity}} (\mbox{\hyperlink{struct_vehicle}{Vehicle}} $\ast$v)
+\item 
+int \mbox{\hyperlink{_vehicle_8h_a1c10b2e5fa76f83f6efd216f0081a060}{get\+Vehicle\+Action\+At\+Hub}} (\mbox{\hyperlink{struct_hub}{Hub}} $\ast$\mbox{\hyperlink{structhub}{hub}}, \mbox{\hyperlink{struct_vehicle}{Vehicle}} $\ast$\mbox{\hyperlink{structvehicle}{vehicle}})
+\item 
+int \mbox{\hyperlink{_vehicle_8h_a465e1c554465e3e48feb9581c59de3ea}{do\+Vehicle\+Action\+At\+Hub}} (\mbox{\hyperlink{struct_hub}{Hub}} $\ast$\mbox{\hyperlink{structhub}{hub}}, \mbox{\hyperlink{struct_vehicle}{Vehicle}} $\ast$\mbox{\hyperlink{structvehicle}{vehicle}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{_vehicle_8h_af3fb0c301cb1242a7f7214b9c1d73aaa}\label{_vehicle_8h_af3fb0c301cb1242a7f7214b9c1d73aaa}} 
+\index{Vehicle.h@{Vehicle.h}!Vehicle@{Vehicle}}
+\index{Vehicle@{Vehicle}!Vehicle.h@{Vehicle.h}}
+\doxysubsubsection{\texorpdfstring{Vehicle}{Vehicle}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{struct_vehicle}{Vehicle}}  \mbox{\hyperlink{struct_vehicle}{Vehicle}}}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_vehicle_8h_a64a70e811451579b0b6a0b8b9ad0fca3}\label{_vehicle_8h_a64a70e811451579b0b6a0b8b9ad0fca3}} 
+\index{Vehicle.h@{Vehicle.h}!availableCapacity@{availableCapacity}}
+\index{availableCapacity@{availableCapacity}!Vehicle.h@{Vehicle.h}}
+\doxysubsubsection{\texorpdfstring{availableCapacity()}{availableCapacity()}}
+{\footnotesize\ttfamily unsigned int available\+Capacity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_vehicle}{Vehicle}} $\ast$}]{v }\end{DoxyParamCaption})}
+
+calculates the available capcity (free space) 
+\begin{DoxyParams}{Parameters}
+{\em the} & vehicle to calculate the available capacity for \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the available capacity for the vehicle 
+\end{DoxyReturn}
+\mbox{\Hypertarget{_vehicle_8h_a465e1c554465e3e48feb9581c59de3ea}\label{_vehicle_8h_a465e1c554465e3e48feb9581c59de3ea}} 
+\index{Vehicle.h@{Vehicle.h}!doVehicleActionAtHub@{doVehicleActionAtHub}}
+\index{doVehicleActionAtHub@{doVehicleActionAtHub}!Vehicle.h@{Vehicle.h}}
+\doxysubsubsection{\texorpdfstring{doVehicleActionAtHub()}{doVehicleActionAtHub()}}
+{\footnotesize\ttfamily int do\+Vehicle\+Action\+At\+Hub (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_hub}{Hub}} $\ast$}]{hub,  }\item[{\mbox{\hyperlink{struct_vehicle}{Vehicle}} $\ast$}]{vehicle }\end{DoxyParamCaption})}
+
+Performs an action on a hub. This action is calculated with get\+Vehicle\+Action\+At\+Hub. \begin{DoxyReturn}{Returns}
+the action performed at the hub. If negative the vehicle delivered inventory. If positive the vehicle gained inventory. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{_vehicle_8h_a1c10b2e5fa76f83f6efd216f0081a060}\label{_vehicle_8h_a1c10b2e5fa76f83f6efd216f0081a060}} 
+\index{Vehicle.h@{Vehicle.h}!getVehicleActionAtHub@{getVehicleActionAtHub}}
+\index{getVehicleActionAtHub@{getVehicleActionAtHub}!Vehicle.h@{Vehicle.h}}
+\doxysubsubsection{\texorpdfstring{getVehicleActionAtHub()}{getVehicleActionAtHub()}}
+{\footnotesize\ttfamily int get\+Vehicle\+Action\+At\+Hub (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_hub}{Hub}} $\ast$}]{hub,  }\item[{\mbox{\hyperlink{struct_vehicle}{Vehicle}} $\ast$}]{vehicle }\end{DoxyParamCaption})}
+
+Calculates the optimal action to perform at a hub by a vehicle. \begin{DoxyReturn}{Returns}
+a negative number if the vehicle must deliver at the hub. If positive the vehicle takes inventory from the hub. 
+\end{DoxyReturn}

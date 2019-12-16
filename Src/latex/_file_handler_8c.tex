@@ -1,0 +1,180 @@
+\hypertarget{_file_handler_8c}{}\doxysection{File\+Handler.\+c File Reference}
+\label{_file_handler_8c}\index{FileHandler.c@{FileHandler.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}File\+Handler.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \mbox{\hyperlink{_file_handler_8c_a7d075176d90011fa6f9b838f0322da53}{list\+To\+Str}} (\mbox{\hyperlink{_file_handler_8h_a17b4022430bcb8cf112cada5d768cdd4}{List}} list)
+\item 
+int \mbox{\hyperlink{_file_handler_8c_ac98778b80c1b745f478979691a2e2ca4}{read\+File}} (char $\ast$path, \mbox{\hyperlink{struct_vehicle}{Vehicle}} $\ast$$\ast$vehicles, \mbox{\hyperlink{struct_graph}{Graph}} $\ast$\mbox{\hyperlink{structgraph}{graph}}, int $\ast$vehicle\+Amount)
+\item 
+void \mbox{\hyperlink{_file_handler_8c_a0173c0c3534022cf64fbcb8e018c406b}{analyze\+File}} (F\+I\+LE $\ast$D\+B\+File, \mbox{\hyperlink{struct_vehicle}{Vehicle}} $\ast$$\ast$vehicles, \mbox{\hyperlink{struct_graph}{Graph}} $\ast$\mbox{\hyperlink{structgraph}{graph}}, int $\ast$vehicle\+Amount)
+\item 
+int \mbox{\hyperlink{_file_handler_8c_a7e9bedf816d452e80186fedfef0afe88}{amount\+In\+List}} (char $\ast$list, F\+I\+LE $\ast$D\+B\+File)
+\item 
+int \mbox{\hyperlink{_file_handler_8c_a44bf8ce880083ad55b49c925fa8aa184}{value\+In\+List}} (char $\ast$list, F\+I\+LE $\ast$D\+B\+File, \mbox{\hyperlink{struct_vehicle}{Vehicle}} $\ast$vehicles, \mbox{\hyperlink{struct_graph}{Graph}} $\ast$\mbox{\hyperlink{structgraph}{graph}})
+\item 
+int \mbox{\hyperlink{_file_handler_8c_ac5a2e8637436efd748f17f6bb47e5044}{keep\+Reading}} (char $\ast$line\+In\+File, F\+I\+LE $\ast$D\+B\+File)
+\item 
+int \mbox{\hyperlink{_file_handler_8c_a743849b1cf8fedb6979d7361f39ec58e}{get\+Line}} (char $\ast$list, F\+I\+LE $\ast$D\+B\+File)
+\item 
+char $\ast$ \mbox{\hyperlink{_file_handler_8c_ae1adab50b4728714ad60ff59143dcbc9}{read\+Next\+Line}} (char $\ast$line\+In\+File, F\+I\+LE $\ast$D\+B\+File)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_file_handler_8c_a7e9bedf816d452e80186fedfef0afe88}\label{_file_handler_8c_a7e9bedf816d452e80186fedfef0afe88}} 
+\index{FileHandler.c@{FileHandler.c}!amountInList@{amountInList}}
+\index{amountInList@{amountInList}!FileHandler.c@{FileHandler.c}}
+\doxysubsubsection{\texorpdfstring{amountInList()}{amountInList()}}
+{\footnotesize\ttfamily int amount\+In\+List (\begin{DoxyParamCaption}\item[{char $\ast$}]{list,  }\item[{F\+I\+LE $\ast$}]{D\+B\+File }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & the list containing information (Vehicles, Hubs, Edges) \\
+\hline
+{\em D\+B\+File} & the file containing all the graph and vehicle information \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+returns the amount of lines belonging to
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em list} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{_file_handler_8c_a0173c0c3534022cf64fbcb8e018c406b}\label{_file_handler_8c_a0173c0c3534022cf64fbcb8e018c406b}} 
+\index{FileHandler.c@{FileHandler.c}!analyzeFile@{analyzeFile}}
+\index{analyzeFile@{analyzeFile}!FileHandler.c@{FileHandler.c}}
+\doxysubsubsection{\texorpdfstring{analyzeFile()}{analyzeFile()}}
+{\footnotesize\ttfamily void analyze\+File (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{D\+B\+File,  }\item[{\mbox{\hyperlink{struct_vehicle}{Vehicle}} $\ast$$\ast$}]{vehicles,  }\item[{\mbox{\hyperlink{struct_graph}{Graph}} $\ast$}]{graph,  }\item[{int $\ast$}]{vehicle\+Amount }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em D\+Bfile} & the file containing all the graph and vehicle information \\
+\hline
+{\em vehicles} & stores information about the different vehicles \\
+\hline
+{\em vehicle\+Amount} & is an output parameter that will be set to the amount of vehicles read in the list \\
+\hline
+{\em graph} & stores information about the graph \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{_file_handler_8c_a743849b1cf8fedb6979d7361f39ec58e}\label{_file_handler_8c_a743849b1cf8fedb6979d7361f39ec58e}} 
+\index{FileHandler.c@{FileHandler.c}!getLine@{getLine}}
+\index{getLine@{getLine}!FileHandler.c@{FileHandler.c}}
+\doxysubsubsection{\texorpdfstring{getLine()}{getLine()}}
+{\footnotesize\ttfamily int get\+Line (\begin{DoxyParamCaption}\item[{char $\ast$}]{list,  }\item[{F\+I\+LE $\ast$}]{D\+B\+File }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & the list containing information (Vehicles, Hubs, Edges) \\
+\hline
+{\em D\+B\+File} & the file \char`\"{}cursor\char`\"{} is positioned at where the\\
+\hline
+{\em list} & is \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+returns 1 if the
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em list} & was found in the file, otherwise returns 0 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{_file_handler_8c_ac5a2e8637436efd748f17f6bb47e5044}\label{_file_handler_8c_ac5a2e8637436efd748f17f6bb47e5044}} 
+\index{FileHandler.c@{FileHandler.c}!keepReading@{keepReading}}
+\index{keepReading@{keepReading}!FileHandler.c@{FileHandler.c}}
+\doxysubsubsection{\texorpdfstring{keepReading()}{keepReading()}}
+{\footnotesize\ttfamily int keep\+Reading (\begin{DoxyParamCaption}\item[{char $\ast$}]{line\+In\+File,  }\item[{F\+I\+LE $\ast$}]{D\+B\+File }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em line\+In\+File} & the current line that is read from function\+: get\+Line \\
+\hline
+{\em D\+B\+File} & the file containing all the graph and vehicle information \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+returns 1 if the line belongs to the list, otherwise returns 0 
+\end{DoxyReturn}
+\mbox{\Hypertarget{_file_handler_8c_a7d075176d90011fa6f9b838f0322da53}\label{_file_handler_8c_a7d075176d90011fa6f9b838f0322da53}} 
+\index{FileHandler.c@{FileHandler.c}!listToStr@{listToStr}}
+\index{listToStr@{listToStr}!FileHandler.c@{FileHandler.c}}
+\doxysubsubsection{\texorpdfstring{listToStr()}{listToStr()}}
+{\footnotesize\ttfamily char$\ast$ list\+To\+Str (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_file_handler_8h_a17b4022430bcb8cf112cada5d768cdd4}{List}}}]{list }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & is the enum which will be converted \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a string representation of the list enum. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{_file_handler_8c_ac98778b80c1b745f478979691a2e2ca4}\label{_file_handler_8c_ac98778b80c1b745f478979691a2e2ca4}} 
+\index{FileHandler.c@{FileHandler.c}!readFile@{readFile}}
+\index{readFile@{readFile}!FileHandler.c@{FileHandler.c}}
+\doxysubsubsection{\texorpdfstring{readFile()}{readFile()}}
+{\footnotesize\ttfamily int read\+File (\begin{DoxyParamCaption}\item[{char $\ast$}]{path,  }\item[{\mbox{\hyperlink{struct_vehicle}{Vehicle}} $\ast$$\ast$}]{vehicles,  }\item[{\mbox{\hyperlink{struct_graph}{Graph}} $\ast$}]{graph,  }\item[{int $\ast$}]{vehicle\+Amount }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & is the path to the file \\
+\hline
+{\em vehicles} & is the array of vehicles read from the file \\
+\hline
+{\em graph} & is the graph containing data from the file \\
+\hline
+{\em vehicle\+Amount} & is an output parameter that will be set to the amount of vehicles by analyze\+File \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+returns 1 if file is found, otherwise 0 
+\end{DoxyReturn}
+\mbox{\Hypertarget{_file_handler_8c_ae1adab50b4728714ad60ff59143dcbc9}\label{_file_handler_8c_ae1adab50b4728714ad60ff59143dcbc9}} 
+\index{FileHandler.c@{FileHandler.c}!readNextLine@{readNextLine}}
+\index{readNextLine@{readNextLine}!FileHandler.c@{FileHandler.c}}
+\doxysubsubsection{\texorpdfstring{readNextLine()}{readNextLine()}}
+{\footnotesize\ttfamily char$\ast$ read\+Next\+Line (\begin{DoxyParamCaption}\item[{char $\ast$}]{line\+In\+File,  }\item[{F\+I\+LE $\ast$}]{D\+B\+File }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em line\+In\+File} & the current line that is read from function\+: get\+Line \\
+\hline
+{\em D\+B\+File} & the file containing all the graph and vehicle information \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+returns the line that was read 
+\end{DoxyReturn}
+\mbox{\Hypertarget{_file_handler_8c_a44bf8ce880083ad55b49c925fa8aa184}\label{_file_handler_8c_a44bf8ce880083ad55b49c925fa8aa184}} 
+\index{FileHandler.c@{FileHandler.c}!valueInList@{valueInList}}
+\index{valueInList@{valueInList}!FileHandler.c@{FileHandler.c}}
+\doxysubsubsection{\texorpdfstring{valueInList()}{valueInList()}}
+{\footnotesize\ttfamily int value\+In\+List (\begin{DoxyParamCaption}\item[{char $\ast$}]{list,  }\item[{F\+I\+LE $\ast$}]{D\+B\+File,  }\item[{\mbox{\hyperlink{struct_vehicle}{Vehicle}} $\ast$}]{vehicles,  }\item[{\mbox{\hyperlink{struct_graph}{Graph}} $\ast$}]{graph }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & the list containing information (Vehicles, Hubs, Edges) \\
+\hline
+{\em D\+B\+File} & the file containing all the graph and vehicle information \\
+\hline
+{\em vehicles} & stores information about the different vehicles \\
+\hline
+{\em graph} & stores information about the graph \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+returns the amount of lines belonging to
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em list} & \\
+\hline
+\end{DoxyParams}

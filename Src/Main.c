@@ -72,7 +72,7 @@ int main(void) {
         printf("At which hub should the vehicle start [%i; %i]?>", 0, graph->hubAmount - 1);
         if(scanf(" %i", &startingHub)){
             /* Get the sequence from the algorithm */
-            sequence = PBTE412(graph, &vehicles[vehicleIndex], startingHub, calcEdgeWeight3);
+            sequence = PBTE412(graph, &vehicles[vehicleIndex], startingHub, calcEdgeWeight2);
             printSequence(sequence);
         }
     }

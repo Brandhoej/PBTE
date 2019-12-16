@@ -14,14 +14,11 @@ unsigned int getEdgeAmount(unsigned int n){
 int getEdgeIndex(unsigned int u, unsigned int v){
     int index = -1;
     if(u != v && u >= 0 && v >= 0){
-        int min, max;
+        /* An assumption of the min and max values */
+        int min = u, max = v;
         if (u > v){
             min = v;
             max = u;
-        }
-        else {
-            min = u;
-            max = v;
         }
         index = getEdgeAmount(max) + min;
     }

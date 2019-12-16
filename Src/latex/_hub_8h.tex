@@ -1,0 +1,56 @@
+\hypertarget{_hub_8h}{}\doxysection{Hub.\+h File Reference}
+\label{_hub_8h}\index{Hub.h@{Hub.h}}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_hub}{Hub}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{struct_hub}{Hub}} \mbox{\hyperlink{_hub_8h_aaec1a3a00e2799af290b58ddb9dfb739}{Hub}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_hub_8h_aa8625af5db68c33e64ef96d6ff447f9c}{calc\+Target\+Inventory}} (\mbox{\hyperlink{struct_hub}{Hub}} $\ast$\mbox{\hyperlink{structhub}{hub}})
+\item 
+int \mbox{\hyperlink{_hub_8h_a009762ab40c5b68ed05118f311eef668}{get\+Balance}} (\mbox{\hyperlink{struct_hub}{Hub}} $\ast$\mbox{\hyperlink{structhub}{hub}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{_hub_8h_aaec1a3a00e2799af290b58ddb9dfb739}\label{_hub_8h_aaec1a3a00e2799af290b58ddb9dfb739}} 
+\index{Hub.h@{Hub.h}!Hub@{Hub}}
+\index{Hub@{Hub}!Hub.h@{Hub.h}}
+\doxysubsubsection{\texorpdfstring{Hub}{Hub}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{struct_hub}{Hub}}  \mbox{\hyperlink{struct_hub}{Hub}}}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_hub_8h_aa8625af5db68c33e64ef96d6ff447f9c}\label{_hub_8h_aa8625af5db68c33e64ef96d6ff447f9c}} 
+\index{Hub.h@{Hub.h}!calcTargetInventory@{calcTargetInventory}}
+\index{calcTargetInventory@{calcTargetInventory}!Hub.h@{Hub.h}}
+\doxysubsubsection{\texorpdfstring{calcTargetInventory()}{calcTargetInventory()}}
+{\footnotesize\ttfamily void calc\+Target\+Inventory (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_hub}{Hub}} $\ast$}]{hub }\end{DoxyParamCaption})}
+
+sets the target inventory of a hub. 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$hub} & the hub pointer to the hub which needs to have the target inventory calculated and set @\+T\+O\+DO this should also depend on the graph and not just the information from the hub \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{_hub_8h_a009762ab40c5b68ed05118f311eef668}\label{_hub_8h_a009762ab40c5b68ed05118f311eef668}} 
+\index{Hub.h@{Hub.h}!getBalance@{getBalance}}
+\index{getBalance@{getBalance}!Hub.h@{Hub.h}}
+\doxysubsubsection{\texorpdfstring{getBalance()}{getBalance()}}
+{\footnotesize\ttfamily int get\+Balance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_hub}{Hub}} $\ast$}]{hub }\end{DoxyParamCaption})}
+
+calculates the balance within the hub. 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$hub} & points the hub to needed elements for calculating the balance \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If 0, there is balance in the hub. Negative, too few. Positive, too many bikes. 
+\end{DoxyReturn}

@@ -1,0 +1,452 @@
+\hypertarget{_cu_test_8h}{}\doxysection{Cu\+Test.\+h File Reference}
+\label{_cu_test_8h}\index{CuTest.h@{CuTest.h}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$setjmp.\+h$>$}\newline
+{\ttfamily \#include $<$stdarg.\+h$>$}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_cu_string}{Cu\+String}}
+\item 
+struct \mbox{\hyperlink{struct_cu_test}{Cu\+Test}}
+\item 
+struct \mbox{\hyperlink{struct_cu_suite}{Cu\+Suite}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_cu_test_8h_a750c80704b536371005af2162e33cc2a}{C\+U\+\_\+\+T\+E\+S\+T\+\_\+H}}
+\item 
+\#define \mbox{\hyperlink{_cu_test_8h_a7c28733d482a1c9f1804be12d86f7fcc}{C\+U\+T\+E\+S\+T\+\_\+\+V\+E\+R\+S\+I\+ON}}~\char`\"{}Cu\+Test 1.\+5\char`\"{}
+\item 
+\#define \mbox{\hyperlink{_cu_test_8h_a4e7a4d4424c33cd0371ef1cb358dfc94}{C\+U\+\_\+\+A\+L\+L\+OC}}(T\+Y\+PE)~((T\+Y\+PE$\ast$) malloc(sizeof(T\+Y\+PE)))
+\item 
+\#define \mbox{\hyperlink{_cu_test_8h_a0c9dd98f46b90b5bcd4cbf75e252d0da}{H\+U\+G\+E\+\_\+\+S\+T\+R\+I\+N\+G\+\_\+\+L\+EN}}~8192
+\item 
+\#define \mbox{\hyperlink{_cu_test_8h_a41f16f17393bc7dfd8c3a44a6ba595ba}{S\+T\+R\+I\+N\+G\+\_\+\+M\+AX}}~256
+\item 
+\#define \mbox{\hyperlink{_cu_test_8h_aebbf25c57ad1257fe25ae880888213df}{S\+T\+R\+I\+N\+G\+\_\+\+I\+NC}}~256
+\item 
+\#define \mbox{\hyperlink{_cu_test_8h_abe230fa35d29e6d37a1bbf8cac427cfe}{Cu\+Fail}}(tc,  ms)~\mbox{\hyperlink{_cu_test_8h_a20ac8bd60bdb8aae384a8c673f27a70c}{Cu\+Fail\+\_\+\+Line}}(  (tc), \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+, N\+U\+LL, (ms))
+\item 
+\#define \mbox{\hyperlink{_cu_test_8h_ad689dd51401784ce5f619933bcdfeb42}{Cu\+Assert}}(tc,  ms,  cond)~\mbox{\hyperlink{_cu_test_8h_a6516555a02b63914c05926b8be16ee7d}{Cu\+Assert\+\_\+\+Line}}((tc), \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+, (ms), (cond))
+\item 
+\#define \mbox{\hyperlink{_cu_test_8h_ab2e04be35f9e4b0285f76c1e373d0877}{Cu\+Assert\+True}}(tc,  cond)~\mbox{\hyperlink{_cu_test_8h_a6516555a02b63914c05926b8be16ee7d}{Cu\+Assert\+\_\+\+Line}}((tc), \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+, \char`\"{}assert failed\char`\"{}, (cond))
+\item 
+\#define \mbox{\hyperlink{_cu_test_8h_a482b84b3fa056db1225d698f40e4c2ab}{Cu\+Assert\+Str\+Equals}}(tc,  ex,  ac)~\mbox{\hyperlink{_cu_test_8h_a735c044efbed668cd0cadc5758eed39b}{Cu\+Assert\+Str\+Equals\+\_\+\+Line\+Msg}}((tc),\+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+,\+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+,N\+U\+LL,(ex),(ac))
+\item 
+\#define \mbox{\hyperlink{_cu_test_8h_ae408da02054d7486ef9f94db37c54af7}{Cu\+Assert\+Str\+Equals\+\_\+\+Msg}}(tc,  ms,  ex,  ac)~\mbox{\hyperlink{_cu_test_8h_a735c044efbed668cd0cadc5758eed39b}{Cu\+Assert\+Str\+Equals\+\_\+\+Line\+Msg}}((tc),\+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+,\+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+,(ms),(ex),(ac))
+\item 
+\#define \mbox{\hyperlink{_cu_test_8h_a074a195c72599070a59fafa8b6cc93fe}{Cu\+Assert\+Int\+Equals}}(tc,  ex,  ac)~\mbox{\hyperlink{_cu_test_8h_a0c7eef12cc27fdf3c2d45171c9f0b78c}{Cu\+Assert\+Int\+Equals\+\_\+\+Line\+Msg}}((tc),\+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+,\+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+,N\+U\+LL,(ex),(ac))
+\item 
+\#define \mbox{\hyperlink{_cu_test_8h_acda7789e927fdea0cfaa3add1abd8d2c}{Cu\+Assert\+Int\+Equals\+\_\+\+Msg}}(tc,  ms,  ex,  ac)~\mbox{\hyperlink{_cu_test_8h_a0c7eef12cc27fdf3c2d45171c9f0b78c}{Cu\+Assert\+Int\+Equals\+\_\+\+Line\+Msg}}((tc),\+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+,\+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+,(ms),(ex),(ac))
+\item 
+\#define \mbox{\hyperlink{_cu_test_8h_ab1609dd8039e8a8d2c0d28f1a69259eb}{Cu\+Assert\+Dbl\+Equals}}(tc,  ex,  ac,  dl)~\mbox{\hyperlink{_cu_test_8h_a2d802a1b0e030f521d319bfd35de434c}{Cu\+Assert\+Dbl\+Equals\+\_\+\+Line\+Msg}}((tc),\+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+,\+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+,N\+U\+LL,(ex),(ac),(dl))
+\item 
+\#define \mbox{\hyperlink{_cu_test_8h_a9b308defccf78cf6451be0dbabc82f20}{Cu\+Assert\+Dbl\+Equals\+\_\+\+Msg}}(tc,  ms,  ex,  ac,  dl)~\mbox{\hyperlink{_cu_test_8h_a2d802a1b0e030f521d319bfd35de434c}{Cu\+Assert\+Dbl\+Equals\+\_\+\+Line\+Msg}}((tc),\+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+,\+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+,(ms),(ex),(ac),(dl))
+\item 
+\#define \mbox{\hyperlink{_cu_test_8h_ac32d1bae8e68aa2cb4b04a388d01bfa9}{Cu\+Assert\+Ptr\+Equals}}(tc,  ex,  ac)~\mbox{\hyperlink{_cu_test_8h_ae02f3aa740f67d22d525edec69d3447c}{Cu\+Assert\+Ptr\+Equals\+\_\+\+Line\+Msg}}((tc),\+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+,\+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+,N\+U\+LL,(ex),(ac))
+\item 
+\#define \mbox{\hyperlink{_cu_test_8h_a995fc783f7adcc54780ec327339acee9}{Cu\+Assert\+Ptr\+Equals\+\_\+\+Msg}}(tc,  ms,  ex,  ac)~\mbox{\hyperlink{_cu_test_8h_ae02f3aa740f67d22d525edec69d3447c}{Cu\+Assert\+Ptr\+Equals\+\_\+\+Line\+Msg}}((tc),\+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+,\+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+,(ms),(ex),(ac))
+\item 
+\#define \mbox{\hyperlink{_cu_test_8h_a76ab32db07bcd2bf7ee0857f557824ff}{Cu\+Assert\+Ptr\+Not\+Null}}(tc,  p)~\mbox{\hyperlink{_cu_test_8h_a6516555a02b63914c05926b8be16ee7d}{Cu\+Assert\+\_\+\+Line}}((tc),\+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+,\+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+,\char`\"{}null pointer unexpected\char`\"{},(p != N\+U\+LL))
+\item 
+\#define \mbox{\hyperlink{_cu_test_8h_af59363bc71bedd17cd2b15bc00895630}{Cu\+Assert\+Ptr\+Not\+Null\+Msg}}(tc,  msg,  p)~\mbox{\hyperlink{_cu_test_8h_a6516555a02b63914c05926b8be16ee7d}{Cu\+Assert\+\_\+\+Line}}((tc),\+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+,\+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+,(msg),(p != N\+U\+LL))
+\item 
+\#define \mbox{\hyperlink{_cu_test_8h_a4c86bc0fe1ca1bfdabdbc9ce2f06bf3d}{M\+A\+X\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+ES}}~1024
+\item 
+\#define \mbox{\hyperlink{_cu_test_8h_a9d9dfb4e9970c9a775ae3ff1aff9da92}{S\+U\+I\+T\+E\+\_\+\+A\+D\+D\+\_\+\+T\+E\+ST}}(S\+U\+I\+TE,  T\+E\+ST)~\mbox{\hyperlink{_cu_test_8h_a5094269f70ecff9ae52bfccf28ae9aab}{Cu\+Suite\+Add}}(S\+U\+I\+TE, \mbox{\hyperlink{_cu_test_8h_abfe77e67b5fab8fc24c63192b95167c9}{Cu\+Test\+New}}(\#T\+E\+ST, T\+E\+ST))
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{struct_cu_test}{Cu\+Test}} \mbox{\hyperlink{_cu_test_8h_ae9daa291ae2b96233e2e0d80082d45aa}{Cu\+Test}}
+\item 
+typedef void($\ast$ \mbox{\hyperlink{_cu_test_8h_ad8f061077e9c04c0c6d09051c7c828a6}{Test\+Function}}) (\mbox{\hyperlink{struct_cu_test}{Cu\+Test}} $\ast$)
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \mbox{\hyperlink{_cu_test_8h_a47f78d7d0870ca387da239404f667f51}{Cu\+Str\+Alloc}} (int size)
+\item 
+char $\ast$ \mbox{\hyperlink{_cu_test_8h_ada3eafe4379d5e838c00f4512b0853a1}{Cu\+Str\+Copy}} (const char $\ast$old)
+\item 
+void \mbox{\hyperlink{_cu_test_8h_a14fb27a206438e3d576c4d4ef900e4de}{Cu\+String\+Init}} (\mbox{\hyperlink{struct_cu_string}{Cu\+String}} $\ast$str)
+\item 
+\mbox{\hyperlink{struct_cu_string}{Cu\+String}} $\ast$ \mbox{\hyperlink{_cu_test_8h_addad5bd8d537b005f88131b660b1d988}{Cu\+String\+New}} (void)
+\item 
+void \mbox{\hyperlink{_cu_test_8h_a79bc571b7482a50daad10aaf7183cf47}{Cu\+String\+Read}} (\mbox{\hyperlink{struct_cu_string}{Cu\+String}} $\ast$str, const char $\ast$path)
+\item 
+void \mbox{\hyperlink{_cu_test_8h_a8a8236bdc8e67aef0eaa76d3774a9746}{Cu\+String\+Append}} (\mbox{\hyperlink{struct_cu_string}{Cu\+String}} $\ast$str, const char $\ast$text)
+\item 
+void \mbox{\hyperlink{_cu_test_8h_aaaf58226c641a630fdd3133a6f7329b1}{Cu\+String\+Append\+Char}} (\mbox{\hyperlink{struct_cu_string}{Cu\+String}} $\ast$str, char ch)
+\item 
+void \mbox{\hyperlink{_cu_test_8h_af38755c5e147eda7e40d686204591d5c}{Cu\+String\+Append\+Format}} (\mbox{\hyperlink{struct_cu_string}{Cu\+String}} $\ast$str, const char $\ast$format,...)
+\item 
+void \mbox{\hyperlink{_cu_test_8h_a0fb039ab02c0d7e1a05b4770a45ad22f}{Cu\+String\+Insert}} (\mbox{\hyperlink{struct_cu_string}{Cu\+String}} $\ast$str, const char $\ast$text, int pos)
+\item 
+void \mbox{\hyperlink{_cu_test_8h_a5a96ea47c6f08721d609afd04351bedd}{Cu\+String\+Resize}} (\mbox{\hyperlink{struct_cu_string}{Cu\+String}} $\ast$str, int new\+Size)
+\item 
+void \mbox{\hyperlink{_cu_test_8h_af1c0464de180ce55cddab465f8272956}{Cu\+String\+Delete}} (\mbox{\hyperlink{struct_cu_string}{Cu\+String}} $\ast$str)
+\item 
+void \mbox{\hyperlink{_cu_test_8h_a9e68d16c690d6e350b7f855123e4e709}{Cu\+Test\+Init}} (\mbox{\hyperlink{struct_cu_test}{Cu\+Test}} $\ast$t, const char $\ast$name, \mbox{\hyperlink{_cu_test_8h_ad8f061077e9c04c0c6d09051c7c828a6}{Test\+Function}} function)
+\item 
+\mbox{\hyperlink{struct_cu_test}{Cu\+Test}} $\ast$ \mbox{\hyperlink{_cu_test_8h_abfe77e67b5fab8fc24c63192b95167c9}{Cu\+Test\+New}} (const char $\ast$name, \mbox{\hyperlink{_cu_test_8h_ad8f061077e9c04c0c6d09051c7c828a6}{Test\+Function}} function)
+\item 
+void \mbox{\hyperlink{_cu_test_8h_a5a2e94f837202a65f08c7de5e9ef57d9}{Cu\+Test\+Run}} (\mbox{\hyperlink{struct_cu_test}{Cu\+Test}} $\ast$tc)
+\item 
+void \mbox{\hyperlink{_cu_test_8h_a6a0c37c6a3879d2852cb82299cf490ad}{Cu\+Test\+Delete}} (\mbox{\hyperlink{struct_cu_test}{Cu\+Test}} $\ast$t)
+\item 
+void \mbox{\hyperlink{_cu_test_8h_a20ac8bd60bdb8aae384a8c673f27a70c}{Cu\+Fail\+\_\+\+Line}} (\mbox{\hyperlink{struct_cu_test}{Cu\+Test}} $\ast$tc, const char $\ast$file, int line, const char $\ast$message2, const char $\ast$message)
+\item 
+void \mbox{\hyperlink{_cu_test_8h_a6516555a02b63914c05926b8be16ee7d}{Cu\+Assert\+\_\+\+Line}} (\mbox{\hyperlink{struct_cu_test}{Cu\+Test}} $\ast$tc, const char $\ast$file, int line, const char $\ast$message, int condition)
+\item 
+void \mbox{\hyperlink{_cu_test_8h_a735c044efbed668cd0cadc5758eed39b}{Cu\+Assert\+Str\+Equals\+\_\+\+Line\+Msg}} (\mbox{\hyperlink{struct_cu_test}{Cu\+Test}} $\ast$tc, const char $\ast$file, int line, const char $\ast$message, const char $\ast$expected, const char $\ast$actual)
+\item 
+void \mbox{\hyperlink{_cu_test_8h_a0c7eef12cc27fdf3c2d45171c9f0b78c}{Cu\+Assert\+Int\+Equals\+\_\+\+Line\+Msg}} (\mbox{\hyperlink{struct_cu_test}{Cu\+Test}} $\ast$tc, const char $\ast$file, int line, const char $\ast$message, int expected, int actual)
+\item 
+void \mbox{\hyperlink{_cu_test_8h_a2d802a1b0e030f521d319bfd35de434c}{Cu\+Assert\+Dbl\+Equals\+\_\+\+Line\+Msg}} (\mbox{\hyperlink{struct_cu_test}{Cu\+Test}} $\ast$tc, const char $\ast$file, int line, const char $\ast$message, double expected, double actual, double delta)
+\item 
+void \mbox{\hyperlink{_cu_test_8h_ae02f3aa740f67d22d525edec69d3447c}{Cu\+Assert\+Ptr\+Equals\+\_\+\+Line\+Msg}} (\mbox{\hyperlink{struct_cu_test}{Cu\+Test}} $\ast$tc, const char $\ast$file, int line, const char $\ast$message, void $\ast$expected, void $\ast$actual)
+\item 
+void \mbox{\hyperlink{_cu_test_8h_aa5854c4974e2ef1b56006e3729bec299}{Cu\+Suite\+Init}} (\mbox{\hyperlink{struct_cu_suite}{Cu\+Suite}} $\ast$test\+Suite)
+\item 
+\mbox{\hyperlink{struct_cu_suite}{Cu\+Suite}} $\ast$ \mbox{\hyperlink{_cu_test_8h_a3a0f28baade11a6bc457acf2ac1b5341}{Cu\+Suite\+New}} (void)
+\item 
+void \mbox{\hyperlink{_cu_test_8h_a90c4f9afcd05efe5b18db2b4cf1ceb76}{Cu\+Suite\+Delete}} (\mbox{\hyperlink{struct_cu_suite}{Cu\+Suite}} $\ast$test\+Suite)
+\item 
+void \mbox{\hyperlink{_cu_test_8h_a5094269f70ecff9ae52bfccf28ae9aab}{Cu\+Suite\+Add}} (\mbox{\hyperlink{struct_cu_suite}{Cu\+Suite}} $\ast$test\+Suite, \mbox{\hyperlink{struct_cu_test}{Cu\+Test}} $\ast$test\+Case)
+\item 
+void \mbox{\hyperlink{_cu_test_8h_a3d815933350df88d053bb27049898de6}{Cu\+Suite\+Add\+Suite}} (\mbox{\hyperlink{struct_cu_suite}{Cu\+Suite}} $\ast$test\+Suite, \mbox{\hyperlink{struct_cu_suite}{Cu\+Suite}} $\ast$test\+Suite2)
+\item 
+void \mbox{\hyperlink{_cu_test_8h_a4cc0e2d27f2fd499b0477477cf2b6b0b}{Cu\+Suite\+Run}} (\mbox{\hyperlink{struct_cu_suite}{Cu\+Suite}} $\ast$test\+Suite)
+\item 
+void \mbox{\hyperlink{_cu_test_8h_a6413759f6fa99345e150ed61fffa8ae2}{Cu\+Suite\+Summary}} (\mbox{\hyperlink{struct_cu_suite}{Cu\+Suite}} $\ast$test\+Suite, \mbox{\hyperlink{struct_cu_string}{Cu\+String}} $\ast$summary)
+\item 
+void \mbox{\hyperlink{_cu_test_8h_ae37002665a4bb477fddd808fb427fd5a}{Cu\+Suite\+Details}} (\mbox{\hyperlink{struct_cu_suite}{Cu\+Suite}} $\ast$test\+Suite, \mbox{\hyperlink{struct_cu_string}{Cu\+String}} $\ast$details)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_cu_test_8h_a4e7a4d4424c33cd0371ef1cb358dfc94}\label{_cu_test_8h_a4e7a4d4424c33cd0371ef1cb358dfc94}} 
+\index{CuTest.h@{CuTest.h}!CU\_ALLOC@{CU\_ALLOC}}
+\index{CU\_ALLOC@{CU\_ALLOC}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CU\_ALLOC}{CU\_ALLOC}}
+{\footnotesize\ttfamily \#define C\+U\+\_\+\+A\+L\+L\+OC(\begin{DoxyParamCaption}\item[{}]{T\+Y\+PE }\end{DoxyParamCaption})~((T\+Y\+PE$\ast$) malloc(sizeof(T\+Y\+PE)))}
+
+\mbox{\Hypertarget{_cu_test_8h_a750c80704b536371005af2162e33cc2a}\label{_cu_test_8h_a750c80704b536371005af2162e33cc2a}} 
+\index{CuTest.h@{CuTest.h}!CU\_TEST\_H@{CU\_TEST\_H}}
+\index{CU\_TEST\_H@{CU\_TEST\_H}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CU\_TEST\_H}{CU\_TEST\_H}}
+{\footnotesize\ttfamily \#define C\+U\+\_\+\+T\+E\+S\+T\+\_\+H}
+
+\mbox{\Hypertarget{_cu_test_8h_ad689dd51401784ce5f619933bcdfeb42}\label{_cu_test_8h_ad689dd51401784ce5f619933bcdfeb42}} 
+\index{CuTest.h@{CuTest.h}!CuAssert@{CuAssert}}
+\index{CuAssert@{CuAssert}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuAssert}{CuAssert}}
+{\footnotesize\ttfamily \#define Cu\+Assert(\begin{DoxyParamCaption}\item[{}]{tc,  }\item[{}]{ms,  }\item[{}]{cond }\end{DoxyParamCaption})~\mbox{\hyperlink{_cu_test_8h_a6516555a02b63914c05926b8be16ee7d}{Cu\+Assert\+\_\+\+Line}}((tc), \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+, (ms), (cond))}
+
+\mbox{\Hypertarget{_cu_test_8h_ab1609dd8039e8a8d2c0d28f1a69259eb}\label{_cu_test_8h_ab1609dd8039e8a8d2c0d28f1a69259eb}} 
+\index{CuTest.h@{CuTest.h}!CuAssertDblEquals@{CuAssertDblEquals}}
+\index{CuAssertDblEquals@{CuAssertDblEquals}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuAssertDblEquals}{CuAssertDblEquals}}
+{\footnotesize\ttfamily \#define Cu\+Assert\+Dbl\+Equals(\begin{DoxyParamCaption}\item[{}]{tc,  }\item[{}]{ex,  }\item[{}]{ac,  }\item[{}]{dl }\end{DoxyParamCaption})~\mbox{\hyperlink{_cu_test_8h_a2d802a1b0e030f521d319bfd35de434c}{Cu\+Assert\+Dbl\+Equals\+\_\+\+Line\+Msg}}((tc),\+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+,\+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+,N\+U\+LL,(ex),(ac),(dl))}
+
+\mbox{\Hypertarget{_cu_test_8h_a9b308defccf78cf6451be0dbabc82f20}\label{_cu_test_8h_a9b308defccf78cf6451be0dbabc82f20}} 
+\index{CuTest.h@{CuTest.h}!CuAssertDblEquals\_Msg@{CuAssertDblEquals\_Msg}}
+\index{CuAssertDblEquals\_Msg@{CuAssertDblEquals\_Msg}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuAssertDblEquals\_Msg}{CuAssertDblEquals\_Msg}}
+{\footnotesize\ttfamily \#define Cu\+Assert\+Dbl\+Equals\+\_\+\+Msg(\begin{DoxyParamCaption}\item[{}]{tc,  }\item[{}]{ms,  }\item[{}]{ex,  }\item[{}]{ac,  }\item[{}]{dl }\end{DoxyParamCaption})~\mbox{\hyperlink{_cu_test_8h_a2d802a1b0e030f521d319bfd35de434c}{Cu\+Assert\+Dbl\+Equals\+\_\+\+Line\+Msg}}((tc),\+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+,\+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+,(ms),(ex),(ac),(dl))}
+
+\mbox{\Hypertarget{_cu_test_8h_a074a195c72599070a59fafa8b6cc93fe}\label{_cu_test_8h_a074a195c72599070a59fafa8b6cc93fe}} 
+\index{CuTest.h@{CuTest.h}!CuAssertIntEquals@{CuAssertIntEquals}}
+\index{CuAssertIntEquals@{CuAssertIntEquals}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuAssertIntEquals}{CuAssertIntEquals}}
+{\footnotesize\ttfamily \#define Cu\+Assert\+Int\+Equals(\begin{DoxyParamCaption}\item[{}]{tc,  }\item[{}]{ex,  }\item[{}]{ac }\end{DoxyParamCaption})~\mbox{\hyperlink{_cu_test_8h_a0c7eef12cc27fdf3c2d45171c9f0b78c}{Cu\+Assert\+Int\+Equals\+\_\+\+Line\+Msg}}((tc),\+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+,\+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+,N\+U\+LL,(ex),(ac))}
+
+\mbox{\Hypertarget{_cu_test_8h_acda7789e927fdea0cfaa3add1abd8d2c}\label{_cu_test_8h_acda7789e927fdea0cfaa3add1abd8d2c}} 
+\index{CuTest.h@{CuTest.h}!CuAssertIntEquals\_Msg@{CuAssertIntEquals\_Msg}}
+\index{CuAssertIntEquals\_Msg@{CuAssertIntEquals\_Msg}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuAssertIntEquals\_Msg}{CuAssertIntEquals\_Msg}}
+{\footnotesize\ttfamily \#define Cu\+Assert\+Int\+Equals\+\_\+\+Msg(\begin{DoxyParamCaption}\item[{}]{tc,  }\item[{}]{ms,  }\item[{}]{ex,  }\item[{}]{ac }\end{DoxyParamCaption})~\mbox{\hyperlink{_cu_test_8h_a0c7eef12cc27fdf3c2d45171c9f0b78c}{Cu\+Assert\+Int\+Equals\+\_\+\+Line\+Msg}}((tc),\+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+,\+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+,(ms),(ex),(ac))}
+
+\mbox{\Hypertarget{_cu_test_8h_ac32d1bae8e68aa2cb4b04a388d01bfa9}\label{_cu_test_8h_ac32d1bae8e68aa2cb4b04a388d01bfa9}} 
+\index{CuTest.h@{CuTest.h}!CuAssertPtrEquals@{CuAssertPtrEquals}}
+\index{CuAssertPtrEquals@{CuAssertPtrEquals}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuAssertPtrEquals}{CuAssertPtrEquals}}
+{\footnotesize\ttfamily \#define Cu\+Assert\+Ptr\+Equals(\begin{DoxyParamCaption}\item[{}]{tc,  }\item[{}]{ex,  }\item[{}]{ac }\end{DoxyParamCaption})~\mbox{\hyperlink{_cu_test_8h_ae02f3aa740f67d22d525edec69d3447c}{Cu\+Assert\+Ptr\+Equals\+\_\+\+Line\+Msg}}((tc),\+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+,\+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+,N\+U\+LL,(ex),(ac))}
+
+\mbox{\Hypertarget{_cu_test_8h_a995fc783f7adcc54780ec327339acee9}\label{_cu_test_8h_a995fc783f7adcc54780ec327339acee9}} 
+\index{CuTest.h@{CuTest.h}!CuAssertPtrEquals\_Msg@{CuAssertPtrEquals\_Msg}}
+\index{CuAssertPtrEquals\_Msg@{CuAssertPtrEquals\_Msg}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuAssertPtrEquals\_Msg}{CuAssertPtrEquals\_Msg}}
+{\footnotesize\ttfamily \#define Cu\+Assert\+Ptr\+Equals\+\_\+\+Msg(\begin{DoxyParamCaption}\item[{}]{tc,  }\item[{}]{ms,  }\item[{}]{ex,  }\item[{}]{ac }\end{DoxyParamCaption})~\mbox{\hyperlink{_cu_test_8h_ae02f3aa740f67d22d525edec69d3447c}{Cu\+Assert\+Ptr\+Equals\+\_\+\+Line\+Msg}}((tc),\+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+,\+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+,(ms),(ex),(ac))}
+
+\mbox{\Hypertarget{_cu_test_8h_a76ab32db07bcd2bf7ee0857f557824ff}\label{_cu_test_8h_a76ab32db07bcd2bf7ee0857f557824ff}} 
+\index{CuTest.h@{CuTest.h}!CuAssertPtrNotNull@{CuAssertPtrNotNull}}
+\index{CuAssertPtrNotNull@{CuAssertPtrNotNull}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuAssertPtrNotNull}{CuAssertPtrNotNull}}
+{\footnotesize\ttfamily \#define Cu\+Assert\+Ptr\+Not\+Null(\begin{DoxyParamCaption}\item[{}]{tc,  }\item[{}]{p }\end{DoxyParamCaption})~\mbox{\hyperlink{_cu_test_8h_a6516555a02b63914c05926b8be16ee7d}{Cu\+Assert\+\_\+\+Line}}((tc),\+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+,\+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+,\char`\"{}null pointer unexpected\char`\"{},(p != N\+U\+LL))}
+
+\mbox{\Hypertarget{_cu_test_8h_af59363bc71bedd17cd2b15bc00895630}\label{_cu_test_8h_af59363bc71bedd17cd2b15bc00895630}} 
+\index{CuTest.h@{CuTest.h}!CuAssertPtrNotNullMsg@{CuAssertPtrNotNullMsg}}
+\index{CuAssertPtrNotNullMsg@{CuAssertPtrNotNullMsg}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuAssertPtrNotNullMsg}{CuAssertPtrNotNullMsg}}
+{\footnotesize\ttfamily \#define Cu\+Assert\+Ptr\+Not\+Null\+Msg(\begin{DoxyParamCaption}\item[{}]{tc,  }\item[{}]{msg,  }\item[{}]{p }\end{DoxyParamCaption})~\mbox{\hyperlink{_cu_test_8h_a6516555a02b63914c05926b8be16ee7d}{Cu\+Assert\+\_\+\+Line}}((tc),\+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+,\+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+,(msg),(p != N\+U\+LL))}
+
+\mbox{\Hypertarget{_cu_test_8h_a482b84b3fa056db1225d698f40e4c2ab}\label{_cu_test_8h_a482b84b3fa056db1225d698f40e4c2ab}} 
+\index{CuTest.h@{CuTest.h}!CuAssertStrEquals@{CuAssertStrEquals}}
+\index{CuAssertStrEquals@{CuAssertStrEquals}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuAssertStrEquals}{CuAssertStrEquals}}
+{\footnotesize\ttfamily \#define Cu\+Assert\+Str\+Equals(\begin{DoxyParamCaption}\item[{}]{tc,  }\item[{}]{ex,  }\item[{}]{ac }\end{DoxyParamCaption})~\mbox{\hyperlink{_cu_test_8h_a735c044efbed668cd0cadc5758eed39b}{Cu\+Assert\+Str\+Equals\+\_\+\+Line\+Msg}}((tc),\+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+,\+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+,N\+U\+LL,(ex),(ac))}
+
+\mbox{\Hypertarget{_cu_test_8h_ae408da02054d7486ef9f94db37c54af7}\label{_cu_test_8h_ae408da02054d7486ef9f94db37c54af7}} 
+\index{CuTest.h@{CuTest.h}!CuAssertStrEquals\_Msg@{CuAssertStrEquals\_Msg}}
+\index{CuAssertStrEquals\_Msg@{CuAssertStrEquals\_Msg}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuAssertStrEquals\_Msg}{CuAssertStrEquals\_Msg}}
+{\footnotesize\ttfamily \#define Cu\+Assert\+Str\+Equals\+\_\+\+Msg(\begin{DoxyParamCaption}\item[{}]{tc,  }\item[{}]{ms,  }\item[{}]{ex,  }\item[{}]{ac }\end{DoxyParamCaption})~\mbox{\hyperlink{_cu_test_8h_a735c044efbed668cd0cadc5758eed39b}{Cu\+Assert\+Str\+Equals\+\_\+\+Line\+Msg}}((tc),\+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+,\+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+,(ms),(ex),(ac))}
+
+\mbox{\Hypertarget{_cu_test_8h_ab2e04be35f9e4b0285f76c1e373d0877}\label{_cu_test_8h_ab2e04be35f9e4b0285f76c1e373d0877}} 
+\index{CuTest.h@{CuTest.h}!CuAssertTrue@{CuAssertTrue}}
+\index{CuAssertTrue@{CuAssertTrue}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuAssertTrue}{CuAssertTrue}}
+{\footnotesize\ttfamily \#define Cu\+Assert\+True(\begin{DoxyParamCaption}\item[{}]{tc,  }\item[{}]{cond }\end{DoxyParamCaption})~\mbox{\hyperlink{_cu_test_8h_a6516555a02b63914c05926b8be16ee7d}{Cu\+Assert\+\_\+\+Line}}((tc), \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+, \char`\"{}assert failed\char`\"{}, (cond))}
+
+\mbox{\Hypertarget{_cu_test_8h_abe230fa35d29e6d37a1bbf8cac427cfe}\label{_cu_test_8h_abe230fa35d29e6d37a1bbf8cac427cfe}} 
+\index{CuTest.h@{CuTest.h}!CuFail@{CuFail}}
+\index{CuFail@{CuFail}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuFail}{CuFail}}
+{\footnotesize\ttfamily \#define Cu\+Fail(\begin{DoxyParamCaption}\item[{}]{tc,  }\item[{}]{ms }\end{DoxyParamCaption})~\mbox{\hyperlink{_cu_test_8h_a20ac8bd60bdb8aae384a8c673f27a70c}{Cu\+Fail\+\_\+\+Line}}(  (tc), \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+, N\+U\+LL, (ms))}
+
+\mbox{\Hypertarget{_cu_test_8h_a7c28733d482a1c9f1804be12d86f7fcc}\label{_cu_test_8h_a7c28733d482a1c9f1804be12d86f7fcc}} 
+\index{CuTest.h@{CuTest.h}!CUTEST\_VERSION@{CUTEST\_VERSION}}
+\index{CUTEST\_VERSION@{CUTEST\_VERSION}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CUTEST\_VERSION}{CUTEST\_VERSION}}
+{\footnotesize\ttfamily \#define C\+U\+T\+E\+S\+T\+\_\+\+V\+E\+R\+S\+I\+ON~\char`\"{}Cu\+Test 1.\+5\char`\"{}}
+
+\mbox{\Hypertarget{_cu_test_8h_a0c9dd98f46b90b5bcd4cbf75e252d0da}\label{_cu_test_8h_a0c9dd98f46b90b5bcd4cbf75e252d0da}} 
+\index{CuTest.h@{CuTest.h}!HUGE\_STRING\_LEN@{HUGE\_STRING\_LEN}}
+\index{HUGE\_STRING\_LEN@{HUGE\_STRING\_LEN}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{HUGE\_STRING\_LEN}{HUGE\_STRING\_LEN}}
+{\footnotesize\ttfamily \#define H\+U\+G\+E\+\_\+\+S\+T\+R\+I\+N\+G\+\_\+\+L\+EN~8192}
+
+\mbox{\Hypertarget{_cu_test_8h_a4c86bc0fe1ca1bfdabdbc9ce2f06bf3d}\label{_cu_test_8h_a4c86bc0fe1ca1bfdabdbc9ce2f06bf3d}} 
+\index{CuTest.h@{CuTest.h}!MAX\_TEST\_CASES@{MAX\_TEST\_CASES}}
+\index{MAX\_TEST\_CASES@{MAX\_TEST\_CASES}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_TEST\_CASES}{MAX\_TEST\_CASES}}
+{\footnotesize\ttfamily \#define M\+A\+X\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+ES~1024}
+
+\mbox{\Hypertarget{_cu_test_8h_aebbf25c57ad1257fe25ae880888213df}\label{_cu_test_8h_aebbf25c57ad1257fe25ae880888213df}} 
+\index{CuTest.h@{CuTest.h}!STRING\_INC@{STRING\_INC}}
+\index{STRING\_INC@{STRING\_INC}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{STRING\_INC}{STRING\_INC}}
+{\footnotesize\ttfamily \#define S\+T\+R\+I\+N\+G\+\_\+\+I\+NC~256}
+
+\mbox{\Hypertarget{_cu_test_8h_a41f16f17393bc7dfd8c3a44a6ba595ba}\label{_cu_test_8h_a41f16f17393bc7dfd8c3a44a6ba595ba}} 
+\index{CuTest.h@{CuTest.h}!STRING\_MAX@{STRING\_MAX}}
+\index{STRING\_MAX@{STRING\_MAX}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{STRING\_MAX}{STRING\_MAX}}
+{\footnotesize\ttfamily \#define S\+T\+R\+I\+N\+G\+\_\+\+M\+AX~256}
+
+\mbox{\Hypertarget{_cu_test_8h_a9d9dfb4e9970c9a775ae3ff1aff9da92}\label{_cu_test_8h_a9d9dfb4e9970c9a775ae3ff1aff9da92}} 
+\index{CuTest.h@{CuTest.h}!SUITE\_ADD\_TEST@{SUITE\_ADD\_TEST}}
+\index{SUITE\_ADD\_TEST@{SUITE\_ADD\_TEST}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{SUITE\_ADD\_TEST}{SUITE\_ADD\_TEST}}
+{\footnotesize\ttfamily \#define S\+U\+I\+T\+E\+\_\+\+A\+D\+D\+\_\+\+T\+E\+ST(\begin{DoxyParamCaption}\item[{}]{S\+U\+I\+TE,  }\item[{}]{T\+E\+ST }\end{DoxyParamCaption})~\mbox{\hyperlink{_cu_test_8h_a5094269f70ecff9ae52bfccf28ae9aab}{Cu\+Suite\+Add}}(S\+U\+I\+TE, \mbox{\hyperlink{_cu_test_8h_abfe77e67b5fab8fc24c63192b95167c9}{Cu\+Test\+New}}(\#T\+E\+ST, T\+E\+ST))}
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{_cu_test_8h_ae9daa291ae2b96233e2e0d80082d45aa}\label{_cu_test_8h_ae9daa291ae2b96233e2e0d80082d45aa}} 
+\index{CuTest.h@{CuTest.h}!CuTest@{CuTest}}
+\index{CuTest@{CuTest}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuTest}{CuTest}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{struct_cu_test}{Cu\+Test}} \mbox{\hyperlink{struct_cu_test}{Cu\+Test}}}
+
+\mbox{\Hypertarget{_cu_test_8h_ad8f061077e9c04c0c6d09051c7c828a6}\label{_cu_test_8h_ad8f061077e9c04c0c6d09051c7c828a6}} 
+\index{CuTest.h@{CuTest.h}!TestFunction@{TestFunction}}
+\index{TestFunction@{TestFunction}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{TestFunction}{TestFunction}}
+{\footnotesize\ttfamily typedef void($\ast$ Test\+Function) (\mbox{\hyperlink{struct_cu_test}{Cu\+Test}} $\ast$)}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_cu_test_8h_a6516555a02b63914c05926b8be16ee7d}\label{_cu_test_8h_a6516555a02b63914c05926b8be16ee7d}} 
+\index{CuTest.h@{CuTest.h}!CuAssert\_Line@{CuAssert\_Line}}
+\index{CuAssert\_Line@{CuAssert\_Line}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuAssert\_Line()}{CuAssert\_Line()}}
+{\footnotesize\ttfamily void Cu\+Assert\+\_\+\+Line (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_cu_test}{Cu\+Test}} $\ast$}]{tc,  }\item[{const char $\ast$}]{file,  }\item[{int}]{line,  }\item[{const char $\ast$}]{message,  }\item[{int}]{condition }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_cu_test_8h_a2d802a1b0e030f521d319bfd35de434c}\label{_cu_test_8h_a2d802a1b0e030f521d319bfd35de434c}} 
+\index{CuTest.h@{CuTest.h}!CuAssertDblEquals\_LineMsg@{CuAssertDblEquals\_LineMsg}}
+\index{CuAssertDblEquals\_LineMsg@{CuAssertDblEquals\_LineMsg}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuAssertDblEquals\_LineMsg()}{CuAssertDblEquals\_LineMsg()}}
+{\footnotesize\ttfamily void Cu\+Assert\+Dbl\+Equals\+\_\+\+Line\+Msg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_cu_test}{Cu\+Test}} $\ast$}]{tc,  }\item[{const char $\ast$}]{file,  }\item[{int}]{line,  }\item[{const char $\ast$}]{message,  }\item[{double}]{expected,  }\item[{double}]{actual,  }\item[{double}]{delta }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_cu_test_8h_a0c7eef12cc27fdf3c2d45171c9f0b78c}\label{_cu_test_8h_a0c7eef12cc27fdf3c2d45171c9f0b78c}} 
+\index{CuTest.h@{CuTest.h}!CuAssertIntEquals\_LineMsg@{CuAssertIntEquals\_LineMsg}}
+\index{CuAssertIntEquals\_LineMsg@{CuAssertIntEquals\_LineMsg}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuAssertIntEquals\_LineMsg()}{CuAssertIntEquals\_LineMsg()}}
+{\footnotesize\ttfamily void Cu\+Assert\+Int\+Equals\+\_\+\+Line\+Msg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_cu_test}{Cu\+Test}} $\ast$}]{tc,  }\item[{const char $\ast$}]{file,  }\item[{int}]{line,  }\item[{const char $\ast$}]{message,  }\item[{int}]{expected,  }\item[{int}]{actual }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_cu_test_8h_ae02f3aa740f67d22d525edec69d3447c}\label{_cu_test_8h_ae02f3aa740f67d22d525edec69d3447c}} 
+\index{CuTest.h@{CuTest.h}!CuAssertPtrEquals\_LineMsg@{CuAssertPtrEquals\_LineMsg}}
+\index{CuAssertPtrEquals\_LineMsg@{CuAssertPtrEquals\_LineMsg}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuAssertPtrEquals\_LineMsg()}{CuAssertPtrEquals\_LineMsg()}}
+{\footnotesize\ttfamily void Cu\+Assert\+Ptr\+Equals\+\_\+\+Line\+Msg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_cu_test}{Cu\+Test}} $\ast$}]{tc,  }\item[{const char $\ast$}]{file,  }\item[{int}]{line,  }\item[{const char $\ast$}]{message,  }\item[{void $\ast$}]{expected,  }\item[{void $\ast$}]{actual }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_cu_test_8h_a735c044efbed668cd0cadc5758eed39b}\label{_cu_test_8h_a735c044efbed668cd0cadc5758eed39b}} 
+\index{CuTest.h@{CuTest.h}!CuAssertStrEquals\_LineMsg@{CuAssertStrEquals\_LineMsg}}
+\index{CuAssertStrEquals\_LineMsg@{CuAssertStrEquals\_LineMsg}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuAssertStrEquals\_LineMsg()}{CuAssertStrEquals\_LineMsg()}}
+{\footnotesize\ttfamily void Cu\+Assert\+Str\+Equals\+\_\+\+Line\+Msg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_cu_test}{Cu\+Test}} $\ast$}]{tc,  }\item[{const char $\ast$}]{file,  }\item[{int}]{line,  }\item[{const char $\ast$}]{message,  }\item[{const char $\ast$}]{expected,  }\item[{const char $\ast$}]{actual }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_cu_test_8h_a20ac8bd60bdb8aae384a8c673f27a70c}\label{_cu_test_8h_a20ac8bd60bdb8aae384a8c673f27a70c}} 
+\index{CuTest.h@{CuTest.h}!CuFail\_Line@{CuFail\_Line}}
+\index{CuFail\_Line@{CuFail\_Line}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuFail\_Line()}{CuFail\_Line()}}
+{\footnotesize\ttfamily void Cu\+Fail\+\_\+\+Line (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_cu_test}{Cu\+Test}} $\ast$}]{tc,  }\item[{const char $\ast$}]{file,  }\item[{int}]{line,  }\item[{const char $\ast$}]{message2,  }\item[{const char $\ast$}]{message }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_cu_test_8h_a47f78d7d0870ca387da239404f667f51}\label{_cu_test_8h_a47f78d7d0870ca387da239404f667f51}} 
+\index{CuTest.h@{CuTest.h}!CuStrAlloc@{CuStrAlloc}}
+\index{CuStrAlloc@{CuStrAlloc}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuStrAlloc()}{CuStrAlloc()}}
+{\footnotesize\ttfamily char$\ast$ Cu\+Str\+Alloc (\begin{DoxyParamCaption}\item[{int}]{size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_cu_test_8h_ada3eafe4379d5e838c00f4512b0853a1}\label{_cu_test_8h_ada3eafe4379d5e838c00f4512b0853a1}} 
+\index{CuTest.h@{CuTest.h}!CuStrCopy@{CuStrCopy}}
+\index{CuStrCopy@{CuStrCopy}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuStrCopy()}{CuStrCopy()}}
+{\footnotesize\ttfamily char$\ast$ Cu\+Str\+Copy (\begin{DoxyParamCaption}\item[{const char $\ast$}]{old }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_cu_test_8h_a8a8236bdc8e67aef0eaa76d3774a9746}\label{_cu_test_8h_a8a8236bdc8e67aef0eaa76d3774a9746}} 
+\index{CuTest.h@{CuTest.h}!CuStringAppend@{CuStringAppend}}
+\index{CuStringAppend@{CuStringAppend}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuStringAppend()}{CuStringAppend()}}
+{\footnotesize\ttfamily void Cu\+String\+Append (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_cu_string}{Cu\+String}} $\ast$}]{str,  }\item[{const char $\ast$}]{text }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_cu_test_8h_aaaf58226c641a630fdd3133a6f7329b1}\label{_cu_test_8h_aaaf58226c641a630fdd3133a6f7329b1}} 
+\index{CuTest.h@{CuTest.h}!CuStringAppendChar@{CuStringAppendChar}}
+\index{CuStringAppendChar@{CuStringAppendChar}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuStringAppendChar()}{CuStringAppendChar()}}
+{\footnotesize\ttfamily void Cu\+String\+Append\+Char (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_cu_string}{Cu\+String}} $\ast$}]{str,  }\item[{char}]{ch }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_cu_test_8h_af38755c5e147eda7e40d686204591d5c}\label{_cu_test_8h_af38755c5e147eda7e40d686204591d5c}} 
+\index{CuTest.h@{CuTest.h}!CuStringAppendFormat@{CuStringAppendFormat}}
+\index{CuStringAppendFormat@{CuStringAppendFormat}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuStringAppendFormat()}{CuStringAppendFormat()}}
+{\footnotesize\ttfamily void Cu\+String\+Append\+Format (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_cu_string}{Cu\+String}} $\ast$}]{str,  }\item[{const char $\ast$}]{format,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_cu_test_8h_af1c0464de180ce55cddab465f8272956}\label{_cu_test_8h_af1c0464de180ce55cddab465f8272956}} 
+\index{CuTest.h@{CuTest.h}!CuStringDelete@{CuStringDelete}}
+\index{CuStringDelete@{CuStringDelete}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuStringDelete()}{CuStringDelete()}}
+{\footnotesize\ttfamily void Cu\+String\+Delete (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_cu_string}{Cu\+String}} $\ast$}]{str }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_cu_test_8h_a14fb27a206438e3d576c4d4ef900e4de}\label{_cu_test_8h_a14fb27a206438e3d576c4d4ef900e4de}} 
+\index{CuTest.h@{CuTest.h}!CuStringInit@{CuStringInit}}
+\index{CuStringInit@{CuStringInit}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuStringInit()}{CuStringInit()}}
+{\footnotesize\ttfamily void Cu\+String\+Init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_cu_string}{Cu\+String}} $\ast$}]{str }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_cu_test_8h_a0fb039ab02c0d7e1a05b4770a45ad22f}\label{_cu_test_8h_a0fb039ab02c0d7e1a05b4770a45ad22f}} 
+\index{CuTest.h@{CuTest.h}!CuStringInsert@{CuStringInsert}}
+\index{CuStringInsert@{CuStringInsert}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuStringInsert()}{CuStringInsert()}}
+{\footnotesize\ttfamily void Cu\+String\+Insert (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_cu_string}{Cu\+String}} $\ast$}]{str,  }\item[{const char $\ast$}]{text,  }\item[{int}]{pos }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_cu_test_8h_addad5bd8d537b005f88131b660b1d988}\label{_cu_test_8h_addad5bd8d537b005f88131b660b1d988}} 
+\index{CuTest.h@{CuTest.h}!CuStringNew@{CuStringNew}}
+\index{CuStringNew@{CuStringNew}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuStringNew()}{CuStringNew()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_cu_string}{Cu\+String}}$\ast$ Cu\+String\+New (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_cu_test_8h_a79bc571b7482a50daad10aaf7183cf47}\label{_cu_test_8h_a79bc571b7482a50daad10aaf7183cf47}} 
+\index{CuTest.h@{CuTest.h}!CuStringRead@{CuStringRead}}
+\index{CuStringRead@{CuStringRead}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuStringRead()}{CuStringRead()}}
+{\footnotesize\ttfamily void Cu\+String\+Read (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_cu_string}{Cu\+String}} $\ast$}]{str,  }\item[{const char $\ast$}]{path }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_cu_test_8h_a5a96ea47c6f08721d609afd04351bedd}\label{_cu_test_8h_a5a96ea47c6f08721d609afd04351bedd}} 
+\index{CuTest.h@{CuTest.h}!CuStringResize@{CuStringResize}}
+\index{CuStringResize@{CuStringResize}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuStringResize()}{CuStringResize()}}
+{\footnotesize\ttfamily void Cu\+String\+Resize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_cu_string}{Cu\+String}} $\ast$}]{str,  }\item[{int}]{new\+Size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_cu_test_8h_a5094269f70ecff9ae52bfccf28ae9aab}\label{_cu_test_8h_a5094269f70ecff9ae52bfccf28ae9aab}} 
+\index{CuTest.h@{CuTest.h}!CuSuiteAdd@{CuSuiteAdd}}
+\index{CuSuiteAdd@{CuSuiteAdd}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuSuiteAdd()}{CuSuiteAdd()}}
+{\footnotesize\ttfamily void Cu\+Suite\+Add (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_cu_suite}{Cu\+Suite}} $\ast$}]{test\+Suite,  }\item[{\mbox{\hyperlink{struct_cu_test}{Cu\+Test}} $\ast$}]{test\+Case }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_cu_test_8h_a3d815933350df88d053bb27049898de6}\label{_cu_test_8h_a3d815933350df88d053bb27049898de6}} 
+\index{CuTest.h@{CuTest.h}!CuSuiteAddSuite@{CuSuiteAddSuite}}
+\index{CuSuiteAddSuite@{CuSuiteAddSuite}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuSuiteAddSuite()}{CuSuiteAddSuite()}}
+{\footnotesize\ttfamily void Cu\+Suite\+Add\+Suite (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_cu_suite}{Cu\+Suite}} $\ast$}]{test\+Suite,  }\item[{\mbox{\hyperlink{struct_cu_suite}{Cu\+Suite}} $\ast$}]{test\+Suite2 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_cu_test_8h_a90c4f9afcd05efe5b18db2b4cf1ceb76}\label{_cu_test_8h_a90c4f9afcd05efe5b18db2b4cf1ceb76}} 
+\index{CuTest.h@{CuTest.h}!CuSuiteDelete@{CuSuiteDelete}}
+\index{CuSuiteDelete@{CuSuiteDelete}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuSuiteDelete()}{CuSuiteDelete()}}
+{\footnotesize\ttfamily void Cu\+Suite\+Delete (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_cu_suite}{Cu\+Suite}} $\ast$}]{test\+Suite }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_cu_test_8h_ae37002665a4bb477fddd808fb427fd5a}\label{_cu_test_8h_ae37002665a4bb477fddd808fb427fd5a}} 
+\index{CuTest.h@{CuTest.h}!CuSuiteDetails@{CuSuiteDetails}}
+\index{CuSuiteDetails@{CuSuiteDetails}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuSuiteDetails()}{CuSuiteDetails()}}
+{\footnotesize\ttfamily void Cu\+Suite\+Details (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_cu_suite}{Cu\+Suite}} $\ast$}]{test\+Suite,  }\item[{\mbox{\hyperlink{struct_cu_string}{Cu\+String}} $\ast$}]{details }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_cu_test_8h_aa5854c4974e2ef1b56006e3729bec299}\label{_cu_test_8h_aa5854c4974e2ef1b56006e3729bec299}} 
+\index{CuTest.h@{CuTest.h}!CuSuiteInit@{CuSuiteInit}}
+\index{CuSuiteInit@{CuSuiteInit}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuSuiteInit()}{CuSuiteInit()}}
+{\footnotesize\ttfamily void Cu\+Suite\+Init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_cu_suite}{Cu\+Suite}} $\ast$}]{test\+Suite }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_cu_test_8h_a3a0f28baade11a6bc457acf2ac1b5341}\label{_cu_test_8h_a3a0f28baade11a6bc457acf2ac1b5341}} 
+\index{CuTest.h@{CuTest.h}!CuSuiteNew@{CuSuiteNew}}
+\index{CuSuiteNew@{CuSuiteNew}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuSuiteNew()}{CuSuiteNew()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_cu_suite}{Cu\+Suite}}$\ast$ Cu\+Suite\+New (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_cu_test_8h_a4cc0e2d27f2fd499b0477477cf2b6b0b}\label{_cu_test_8h_a4cc0e2d27f2fd499b0477477cf2b6b0b}} 
+\index{CuTest.h@{CuTest.h}!CuSuiteRun@{CuSuiteRun}}
+\index{CuSuiteRun@{CuSuiteRun}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuSuiteRun()}{CuSuiteRun()}}
+{\footnotesize\ttfamily void Cu\+Suite\+Run (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_cu_suite}{Cu\+Suite}} $\ast$}]{test\+Suite }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_cu_test_8h_a6413759f6fa99345e150ed61fffa8ae2}\label{_cu_test_8h_a6413759f6fa99345e150ed61fffa8ae2}} 
+\index{CuTest.h@{CuTest.h}!CuSuiteSummary@{CuSuiteSummary}}
+\index{CuSuiteSummary@{CuSuiteSummary}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuSuiteSummary()}{CuSuiteSummary()}}
+{\footnotesize\ttfamily void Cu\+Suite\+Summary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_cu_suite}{Cu\+Suite}} $\ast$}]{test\+Suite,  }\item[{\mbox{\hyperlink{struct_cu_string}{Cu\+String}} $\ast$}]{summary }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_cu_test_8h_a6a0c37c6a3879d2852cb82299cf490ad}\label{_cu_test_8h_a6a0c37c6a3879d2852cb82299cf490ad}} 
+\index{CuTest.h@{CuTest.h}!CuTestDelete@{CuTestDelete}}
+\index{CuTestDelete@{CuTestDelete}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuTestDelete()}{CuTestDelete()}}
+{\footnotesize\ttfamily void Cu\+Test\+Delete (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_cu_test}{Cu\+Test}} $\ast$}]{t }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_cu_test_8h_a9e68d16c690d6e350b7f855123e4e709}\label{_cu_test_8h_a9e68d16c690d6e350b7f855123e4e709}} 
+\index{CuTest.h@{CuTest.h}!CuTestInit@{CuTestInit}}
+\index{CuTestInit@{CuTestInit}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuTestInit()}{CuTestInit()}}
+{\footnotesize\ttfamily void Cu\+Test\+Init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_cu_test}{Cu\+Test}} $\ast$}]{t,  }\item[{const char $\ast$}]{name,  }\item[{\mbox{\hyperlink{_cu_test_8h_ad8f061077e9c04c0c6d09051c7c828a6}{Test\+Function}}}]{function }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_cu_test_8h_abfe77e67b5fab8fc24c63192b95167c9}\label{_cu_test_8h_abfe77e67b5fab8fc24c63192b95167c9}} 
+\index{CuTest.h@{CuTest.h}!CuTestNew@{CuTestNew}}
+\index{CuTestNew@{CuTestNew}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuTestNew()}{CuTestNew()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_cu_test}{Cu\+Test}}$\ast$ Cu\+Test\+New (\begin{DoxyParamCaption}\item[{const char $\ast$}]{name,  }\item[{\mbox{\hyperlink{_cu_test_8h_ad8f061077e9c04c0c6d09051c7c828a6}{Test\+Function}}}]{function }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_cu_test_8h_a5a2e94f837202a65f08c7de5e9ef57d9}\label{_cu_test_8h_a5a2e94f837202a65f08c7de5e9ef57d9}} 
+\index{CuTest.h@{CuTest.h}!CuTestRun@{CuTestRun}}
+\index{CuTestRun@{CuTestRun}!CuTest.h@{CuTest.h}}
+\doxysubsubsection{\texorpdfstring{CuTestRun()}{CuTestRun()}}
+{\footnotesize\ttfamily void Cu\+Test\+Run (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_cu_test}{Cu\+Test}} $\ast$}]{tc }\end{DoxyParamCaption})}
+
