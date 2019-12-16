@@ -15,7 +15,7 @@ char *listToStr(List list);
  * @param path is the path to the file
  * @param vehicles is the array of vehicles read from the file
  * @param graph is the graph containing data from the file
- * @param vehicleAmount is an output parameter that will be set to the amount of vehicles by analyzeFile
+ * @param vehicleAmount is an output parameter that will be set to the amount of vehicles by analyseFile
  * @return returns 1 if file is found, otherwise 0
  */
 int readFile(char *path, Vehicle **vehicles, Graph *graph, int *vehicleAmount);
@@ -26,7 +26,7 @@ int readFile(char *path, Vehicle **vehicles, Graph *graph, int *vehicleAmount);
  * @param vehicleAmount is an output parameter that will be set to the amount of vehicles read in the list
  * @param graph stores information about the graph
  */
-void analyzeFile(FILE *DBFile, Vehicle **vehicles, Graph *graph, int *vehicleAmount);
+void analyseFile(FILE *DBFile, Vehicle **vehicles, Graph *graph, int *vehicleAmount);
 
 /**
  * @param list the list containing information (Vehicles, Hubs, Edges)

@@ -20,13 +20,13 @@ int readFile(char *path, Vehicle **vehicles, Graph *graph, int *vehicleAmount) {
     if(DBFile != NULL) {
         success = 1;
 
-        analyzeFile(DBFile, vehicles, graph, vehicleAmount);
+        analyseFile(DBFile, vehicles, graph, vehicleAmount);
     }
     fclose(DBFile);
     return success;
 }
 
-void analyzeFile(FILE *DBFile, Vehicle **vehicles, Graph *graph, int *vehicleAmount) {
+void analyseFile(FILE *DBFile, Vehicle **vehicles, Graph *graph, int *vehicleAmount) {
     int hubAmount = amountInList(listToStr(HUBS), DBFile);
     Hub *hubs = calloc(hubAmount, sizeof(Hub));
     *vehicleAmount = amountInList(listToStr(VEHICLES), DBFile);
