@@ -109,7 +109,7 @@ void graphTestInitGraph(CuTest *ct){
     calcTargetInventory(&hubs[3]);
     calcTargetInventory(&hubs[4]); 
 
-    CuAssertIntEquals(ct, 10, edgeAmount(5));
+    CuAssertIntEquals(ct, 10, getEdgeAmount(5));
     initGraph(graph, hubs, 5);
     
     CuAssertIntEquals(ct, 9, graph->hubs[0].inventory);
@@ -130,11 +130,11 @@ void graphTestGetEdgeIndex(CuTest *ct){
 }
 
 void graphTestEdgeAmount(CuTest *ct){
-    CuAssertIntEquals(ct, -1, edgeAmount(-5));
-    CuAssertIntEquals(ct, -1, edgeAmount(-1));
-    CuAssertIntEquals(ct, 0, edgeAmount(1));
-    CuAssertIntEquals(ct, 10, edgeAmount(5));
-    CuAssertIntEquals(ct, 36, edgeAmount(9));
+    CuAssertIntEquals(ct, -1, getEdgeAmount(-5));
+    CuAssertIntEquals(ct, -1, getEdgeAmount(-1));
+    CuAssertIntEquals(ct, 0, getEdgeAmount(1));
+    CuAssertIntEquals(ct, 10, getEdgeAmount(5));
+    CuAssertIntEquals(ct, 36, getEdgeAmount(9));
 }
 
 void graphTestTotalAmountBicycle(CuTest *ct){
@@ -175,7 +175,7 @@ void graphTestCalcAllBalance(CuTest *ct){
     calcTargetInventory(&hubs[3]);
     calcTargetInventory(&hubs[4]);
 
-    CuAssertIntEquals(ct, expected, CalcAllBalance(graph));
+    CuAssertIntEquals(ct, expected, calcAllBalance(graph));
 
     free(graph);
     free(hubs);
