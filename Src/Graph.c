@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include "Graph.h"
 
-unsigned int getEdgeAmount(unsigned int n){
-    unsigned int amount = 0;
+int getEdgeAmount(int n){
+    unsigned int amount = -1;
     if(n > 0){
         /* This is the gauss sum formula */
         amount = n * (n - 1) / 2;
@@ -11,7 +11,7 @@ unsigned int getEdgeAmount(unsigned int n){
     return amount;
 }
 
-int getEdgeIndex(unsigned int u, unsigned int v){
+int getEdgeIndex(int u, int v){
     int index = -1;
     if(u != v && u >= 0 && v >= 0){
         /* An assumption of the min and max values */
