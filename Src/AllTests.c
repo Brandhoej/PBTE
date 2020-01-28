@@ -31,7 +31,7 @@ void FHTestKeepReading(CuTest *ct);
 void FHTestGetLine(CuTest *ct);
 void FHTestReadNextLine(CuTest *ct);
 
-/* Vechile */
+/* Vehicle */
 CuSuite *VeSuite();
 void vehicleTestavailableCapacity(CuTest *ct);
 void vechicleTestgetVehicleActionAtHub(CuTest *ct);
@@ -198,10 +198,10 @@ CuSuite *FHSuite() {
 void FHTestCategoryToStr(CuTest *ct){
 	int expected = 0;
 	
-	CuAssertIntEquals(ct, expected, strcmp("Vehicles", categoryToStr(VEHICLES)));
-	CuAssertIntEquals(ct, expected, strcmp("Hubs", categoryToStr(HUBS)));
-	CuAssertIntEquals(ct, expected, strcmp("Edges", categoryToStr(EDGES)));
-	CuAssertIntEquals(ct, expected, strcmp("Errors", categoryToStr(ERROR)));
+	CuAssertIntEquals(ct, expected, strcmp("Vehicles", listToStr(VEHICLES)));
+	CuAssertIntEquals(ct, expected, strcmp("Hubs", listToStr(HUBS)));
+	CuAssertIntEquals(ct, expected, strcmp("Edges", listToStr(EDGES)));
+	CuAssertIntEquals(ct, expected, strcmp("Errors", listToStr(ERROR)));
 }
 
 void FHTestReadFile(CuTest *ct) {
@@ -220,7 +220,7 @@ void FHTestAmountInCategory(CuTest *ct){
     int expected = 36, getAmountInCategory;
 	FILE *DBFile = fopen("DB/file.txt", "r");
 
-	getAmountInCategory = amountInCategory("Edges", DBFile);
+	getAmountInCategory = amountInList("Edges", DBFile);
 	CuAssertIntEquals(ct, expected, getAmountInCategory);
 }
 
@@ -228,13 +228,13 @@ void FHTestValueInCategory(CuTest *ct){
 	int expected = 1, getValueInCategory;
 	Graph *graph = malloc(sizeof(Graph));
 	FILE *DBFile = fopen("DB/file.txt", "r");
-	int vehicleAmount = amountInCategory("Vehicles", DBFile);
-	int hubAmount = amountInCategory("Hubs", DBFile);
+	int vehicleAmount = amountInList("Vehicles", DBFile);
+	int hubAmount = amountInList("Hubs", DBFile);
 	Hub *hubs = calloc(hubAmount, sizeof(Hub));
 	Vehicle *vehicles = calloc(vehicleAmount, sizeof(Vehicle));
 
 	initGraph(graph, hubs, hubAmount);
-	getValueInCategory = valueInCategory("Edges", DBFile, vehicles, graph);
+	getValueInCategory = valueInList("Edges", DBFile, vehicles, graph);
 	free(graph);
 	CuAssertIntEquals(ct, expected, getValueInCategory);
 }

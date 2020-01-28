@@ -38,14 +38,14 @@ void initGraph(Graph *graph, Hub *hubs, unsigned int hubAmount);
  * This function calculates the total amount of edges needed for n hubs
  * @param n is the number of hubs
 */
-unsigned int getEdgeAmount(unsigned int n);
+int getEdgeAmount(int n);
 
 /**
  * This function gets the index in the graph array for the edge between two hubs (vertices)
  * @param u is one of the vertices
  * @param v is one of the vertices
 */
-int getEdgeIndex(unsigned int u, unsigned int v);
+int getEdgeIndex(int u, int v);
 
 /**
  * Function prototype, adds edge to the graph using parameters
